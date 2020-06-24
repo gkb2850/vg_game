@@ -5,7 +5,7 @@
         </div>
         <div class="nav_box">
             <div class="l_box">
-                <img src="" alt="">
+                <img src="../assets/images/logo@2x.png" alt="">
             </div>
             <div class="c_box">
                 <div class="nav_txt" v-for="(item, index) in navData" :key="index">
@@ -35,7 +35,7 @@ export default {
                 },
                 {
                     txt: '设备与设置',
-                    path: '/index'
+                    path: '/deviceOrSet'
                 },
                 {
                     txt: '玩家们',
@@ -144,6 +144,7 @@ export default {
                         color:rgba(242,244,245,1);
                         background: transparent;
                         border: none;
+                        outline: none;
                     }
                     img {
                         height: 16px;

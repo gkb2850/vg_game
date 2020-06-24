@@ -1,0 +1,101 @@
+.gamePlayer_container {
+    .main_cont_box {
+        padding: 93px 150px 0;
+        box-sizing: border-box;
+        background: #EFE3C4;
+        .people_box {
+            display: flex;
+            flex-wrap: wrap;
+            .trem_box {
+                flex: 1;
+                margin-right: 29px;
+                background:#EFE3C4;
+                box-shadow:0px 2px 20px 0px rgba(106,87,35,0.45);
+                margin-bottom: 30px;
+                .img_header {
+                    height: 230px;
+                    position: relative;
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        display: block;
+                    }
+                    .top_name {
+                        position: absolute;
+                        top: 12px;
+                        right: 12px;
+                        background:rgba(189,157,102,1);
+                        border-radius:1px;
+                        padding: 3px 6px;
+                        height: 18px;
+                        line-height: 18px;
+                        font-size:13px;
+                        font-family:PingFangSC-Medium,PingFang SC;
+                        font-weight:500;
+                        color:rgba(255,255,255,1);
+                    }
+                }
+                .c_box {
+                    padding: 18px 14px 10px;
+                    box-sizing: border-box;
+                    border-bottom: 1px solid #B49155;
+                    .zd_name {
+                        height: 22px;
+                        line-height: 22px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        font-size:16px;
+                        font-family:PingFangSC-Semibold,PingFang SC;
+                        font-weight:600;
+                        color:rgba(208,122,14,1);
+                        margin-bottom: 22px;
+                    }
+                    .other_box {
+                        height: 22px;
+                        display: flex;
+                        align-items: center;
+                        div {
+                            height: 22px;
+                            line-height: 22px;
+                            margin-right: 2px;
+                            font-size:13px;
+                            font-family:PingFangSC-Regular,PingFang SC;
+                            font-weight:400;
+                            color:rgba(180,145,85,1);
+                        }
+                        img {
+                           height: 12px;
+                           width: 12px; 
+                        }
+                    }
+                }
+                .bot_box {
+                    height: 37px;
+                    display: flex;
+                    overflow: hidden;
+                    justify-content: center;
+                    align-items: center;
+                    .txt {
+                        height: 18px;
+                        line-height: 18px;
+                        font-size:13px;
+                        font-family:PingFangSC-Regular,PingFang SC;
+                        font-weight:400;
+                        color:rgba(180,145,85,1);
+                        
+                    }
+                    .line {
+                        height: 14px;
+                        width: 1px;
+                        background: #B49155;
+                        margin: 0 5px;
+                    }
+                }
+            }
+            .trem_box:nth-child(5n + 5) {
+                margin-right: 0;
+            }
+        }
+    }
+}

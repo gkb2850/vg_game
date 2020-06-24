@@ -1,4 +1,11 @@
 @charset "UTF-8";
 
+
+//字体样式
+@import './iconfont.scss';
 // 首页样式
 @import './index.scss';
+//设备与设置样式
+@import './deviceOrSet.scss';
+//玩家们样式
+@import './gamePlayer.scss';
