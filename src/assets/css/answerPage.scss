@@ -1,0 +1,63 @@
+.answerPage_container {
+    background: #F7F7F7;
+    .main_cont_box {
+        padding: 90px 150px 0;
+        box-sizing: border-box;
+        background: #F7F7F7;
+        .product_box {
+            .trem_box {
+                margin-bottom: 30px;
+                .title {
+                    padding-left: 20px;
+                    box-sizing: border-box;
+                    background: #EDEBEF;
+                    height: 59px;
+                    line-height: 59px;
+                    font-size:21px;
+                    font-family:PingFangSC-Medium,PingFang SC;
+                    font-weight:500;
+                    color:rgba(77,54,98,1);
+                }
+                .c_box {
+                    padding: 15px 20px;
+                    box-sizing: border-box;
+                    background: #fff;
+                    .c_txt {
+                        font-size:14px;
+                        font-family:PingFangSC-Regular,PingFang SC;
+                        font-weight:400;
+                        color:rgba(77,54,98,1);
+                        line-height:25px;
+                        margin-bottom: 8px;
+                    }
+                    .bot_box {
+                        height: 18px;
+                        display: flex;
+                        align-items: center;
+                        .txt {
+                            height: 18px;
+                            line-height: 18px;
+                            font-size:14px;
+                            font-family:PingFangSC-Regular,PingFang SC;
+                            font-weight:400;
+                            color:rgba(140,111,154,1);
+                            line-height:18px;
+                        }
+                        .line {
+                            margin: 0 5px;
+                            height: 14px;
+                            width: 1px;
+                            background: #8C6F9A;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .page_big_box {
+        display: flex;
+        justify-content: center;
+        padding: 50px 0;
+        background: #F7F7F7;
+    }
+}

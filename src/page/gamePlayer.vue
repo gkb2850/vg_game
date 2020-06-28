@@ -18,7 +18,7 @@
                     <div class="bot_box">
                         <div class="txt">2020年6月29日</div>
                         <div class="line"></div>
-                        <div class="txt">1234条评论</div>
+                        <div class="txt">1234666条评论</div>
                     </div>
                 </div>
                 <div class="trem_box">
@@ -185,19 +185,24 @@
                 </div>
             </div>
         </div>
+        <div class="page_big_box">
+            <pageItem :pageNumData="pageNumData"></pageItem>
+        </div>
     </div>
 </template>
 
 <script>
 import deviceOrSet from '@/components/topImgItem.vue'
+import pageItem from '@/components/pageItem.vue'
 export default {
     data () {
         return {
-
+            pageNumData: ['','','','','','','']
         }
     },
     components: {
-        deviceOrSet
+        deviceOrSet,
+        pageItem
     }
 }
 </script>

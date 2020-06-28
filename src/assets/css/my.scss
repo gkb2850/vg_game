@@ -1,0 +1,428 @@
+.my_container {
+    background: #F7F7F7;
+    .main_cont_box {
+        padding: 69px 150px 140px;
+        box-sizing: border-box;
+        background: #F7F7F7;
+        .user_box {
+            border: 1px solid #C9C2D0;
+            background: #EDEBEF;
+            display: flex;
+            height: 987px;
+            .l_nav_user {
+                background: #fff;
+                width: 298px;
+                .user_info {
+                    padding: 28px 0;
+                    border-bottom: 1px solid #C9C2D0;
+                    img {
+                        height: 76px;
+                        width: 76px;
+                        display: block;
+                        border-radius: 50%;
+                        margin:  0 auto 14px;
+                    }
+                    .name {
+                        height: 33px;
+                        line-height: 33px;
+                        text-align: center;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        font-size:24px;
+                        font-family:PingFangSC-Regular,PingFang SC;
+                        font-weight:400;
+                        color:rgba(77,54,98,1);
+                    }
+                }
+                .trem_txt {
+                    height: 85px;
+                    line-height: 84px;
+                    box-sizing: border-box;
+                    border-top: 1px solid #fff;
+                    background: #fff;
+                    font-size:24px;
+                    font-family:PingFangSC-Medium,PingFang SC;
+                    font-weight:400;
+                    color:rgba(77,54,98,1);
+                    text-align: center;
+                }
+                .trem_txt.active {
+                    background: #EDEBEF;
+                    font-weight:500;
+                    color:rgba(137,79,160,1);
+                }
+            }
+            .r_cont_box {
+                padding: 0  0 40px;
+                box-sizing: border-box;
+                flex: 1;
+                .user_data_box {
+                    .title_box {
+                        overflow: hidden;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        margin-bottom: 8px;
+                        border-bottom: 1px solid #C9C2D0;
+                        .l_name {
+                            height: 29px;
+                            line-height: 29px;
+                            font-size:21px;
+                            font-family:PingFangSC-Regular,PingFang SC;
+                            font-weight:400;
+                            color:rgba(77,54,98,1);
+                            margin: 45px 50px 21px;
+                        }
+                    }
+                    .c_box {
+                        margin-left: 50px;
+                        padding-right: 30px;
+                        box-sizing: border-box;
+                        .inset_first_box {
+                            .item_box {
+                                display: flex;
+                                align-items: center;
+                                border-bottom: 1px solid #C9C2D0;
+                                padding: 20px 0;
+                                .l_label_box {
+                                    flex: 1;
+                                    overflow: hidden;
+                                    display: flex;
+                                    align-items: center;
+                                    .h_txt {
+                                        margin-right: 30px;
+                                        height: 22px;
+                                        line-height: 22px;
+                                        font-size:16px;
+                                        font-family:PingFangSC-Regular,PingFang SC;
+                                        font-weight:400;
+                                        color:#4D3662;
+                                        text-align: right;
+                                        width: 3em;
+                                    }
+                                    .h_info_txt {
+                                        height:22px;
+                                        font-size:16px;
+                                        font-family:PingFangSC-Regular,PingFang SC;
+                                        font-weight:400;
+                                        color:rgba(140,111,154,1);
+                                        line-height:22px;
+                                    }
+                                    .h_info_icon {
+                                        height: 30px;
+                                        width: 29px;
+                                    }
+                                    .h_info_btn {
+                                        width: 113px;
+                                        height: 38px;
+                                        text-align: center;
+                                        box-sizing: border-box;
+                                        border: 1px solid #8C6F9A;
+                                        border-radius: 2px;
+                                        font-size:16px;
+                                        font-family:PingFangSC-Regular,PingFang SC;
+                                        font-weight:400;
+                                        color:rgba(140,111,154,1);
+                                        line-height:38px;
+                                    }
+                                    .h_info_input {
+                                        width: 300px;
+                                        height: 36px;
+                                        background: #fff;
+                                        padding: 7px 10px;
+                                        box-sizing: border-box;
+                                        border: none;
+                                        outline: none;
+                                        font-size:16px;
+                                        font-family:PingFangSC-Regular,PingFang SC;
+                                        font-weight:400;
+                                        color:rgba(77,54,98,1);
+                                        line-height: 22px;
+                                        border-radius:2px;
+                                    }
+                                    .h_info_radio_box {
+                                        height: 22px;
+                                        display: flex;
+                                        align-items: center;
+                                        .item_radio {
+                                            display: inline-flex;
+                                            align-items: center;
+                                            input {
+                                                border: 1px solid #4D3662;
+                                                height: 15px;
+                                                width: 15px;
+                                                box-sizing: border-box;
+                                            }
+                                        }
+                                        .item_radio:first-child {
+                                            margin-right: 30px;
+                                        }
+                                    }
+                                    .pass_input_box {
+                                        flex: 1;
+                                        overflow: hidden;
+                                        .r_input {
+                                            width: 300px;
+                                            height: 36px;
+                                            background: #fff;
+                                            padding: 7px 10px;
+                                            box-sizing: border-box;
+                                            border: none;
+                                            outline: none;
+                                            font-size:16px;
+                                            font-family:PingFangSC-Regular,PingFang SC;
+                                            font-weight:400;
+                                            color:rgba(77,54,98,1);
+                                            line-height: 22px;
+                                            margin-bottom: 12px;
+                                            border-radius:2px;
+                                        }
+                                        .r_input:last-child {
+                                            margin-bottom: 0;
+                                        }
+                                        .pass_txt {
+                                            height:22px;
+                                            font-size:16px;
+                                            font-family:PingFangSC-Regular,PingFang SC;
+                                            font-weight:400;
+                                            color:rgba(140,111,154,1);
+                                            line-height:22px;
+                                            margin-bottom: 12px;
+                                        }
+                                    }
+                                }
+                                .r_txt {
+                                    height: 22px;
+                                    line-height: 22px;
+                                    font-size:16px;
+                                    font-family:PingFangSC-Regular,PingFang SC;
+                                    font-weight:400;
+                                    color:rgba(140,111,154,1);
+                                    padding-left: 30px;
+                                }
+                            }
+                        }
+                        .inset_second_box {
+                            .item_box {
+                                display: flex;
+                                margin-top: 25px;
+                                .l_label {
+                                    width: 84px;
+                                    text-align: right;
+                                    margin-right: 30px;
+                                    height: 36px;
+                                    line-height: 36px;
+                                    font-size:16px;
+                                    font-family:PingFangSC-Regular,PingFang SC;
+                                    font-weight:400;
+                                    color:rgba(77,54,98,1);
+                                }
+                                .input_box {
+                                    flex: 1;
+                                }
+                                .r_input {
+                                    height: 36px;
+                                    border: none;
+                                    outline: none;
+                                    padding: 7px 10px;
+                                    box-sizing: border-box;
+                                    width: 300px;
+                                    font-size:16px;
+                                    font-family:PingFangSC-Regular,PingFang SC;
+                                    font-weight:400;
+                                    color:rgba(77,54,98,1);
+                                    line-height: 22px;
+                                    margin-bottom: 12px;
+                                }
+                                .r_input:last-child {
+                                    margin-bottom: 0;
+                                }
+                                .radio_box {
+                                    height: 36px;
+                                    display: flex;
+                                    align-items: center;
+                                    .item_radio {
+                                        display: inline-flex;
+                                        align-items: center;
+                                        input {
+                                            border: 1px solid #4D3662;
+                                        }
+                                    }
+                                    .item_radio:first-child {
+                                        margin-right: 30px;
+                                    }
+                                }
+                            }
+                        }
+                        .message_user_box {
+                            .trem_box {
+                                margin-bottom: 35px;
+                                .people_box {
+                                    height: 70px;
+                                    display: flex;
+                                    .l_box {
+                                        width: 70px;
+                                        margin-right: 15px;
+                                        height: 100%;
+                                        .people_img {
+                                            height: 100%;
+                                            width: 100%;
+                                            display: block;
+                                            border-radius: 50%;
+                                        }
+                                    }
+                                    .r_box {
+                                        flex: 1;
+                                        height: 100%;
+                                        .name {
+                                            margin: 9px 0 5px;
+                                            height: 28px;
+                                            line-height: 28px;
+                                            font-size:20px;
+                                            font-family:PingFangSC-Medium,PingFang SC;
+                                            font-weight:500;
+                                            color:rgba(77,54,98,1);
+                                        }
+                                        .time_box {
+                                            height: 20px;
+                                            display: flex;
+                                            .t_txt {
+                                                height: 100%;
+                                                line-height: 20px;
+                                                margin-right: 15px;
+                                                font-size:14px;
+                                                font-family:PingFangSC-Regular,PingFang SC;
+                                                font-weight:400;
+                                                color:rgba(140,111,154,1);
+                                            }
+                                        }
+                                    }
+                                    .rr_box {
+                                        align-self: flex-end;
+                                        input {
+                                            height: 32px;
+                                            width: 32px;
+                                            border: 1px solid #4D3662;
+                                        }
+                                    }
+                                }
+                                .message_box {
+                                    display: flex;
+                                    padding-left: 45px;
+                                    box-sizing: border-box;
+                                    margin-top: 15px;
+                                    .l_icon {
+                                        height: 18px;
+                                        width: 24px;
+                                    }
+                                    .txt_box {
+                                        flex: 1;
+                                        box-sizing: border-box;
+                                        border-radius:0px 6px 6px 6px;
+                                        border:3px solid rgba(140,111,154,1);
+                                        padding: 16px 30px;
+                                        font-size:16px;
+                                        font-family:PingFangSC-Regular,PingFang SC;
+                                        font-weight:400;
+                                        color:rgba(77,54,98,1);
+                                        line-height:22px;
+                                        background: #EDEBEF;
+                                    }
+                                }
+                                .page_big_box {
+                                    display: flex;
+                                    justify-content: center;
+                                }
+                            }
+                        }
+                        .select_user_img {
+                            .select_img {
+                                width: 543px;
+                                margin: 62px auto 0;
+                                .inset_img {
+                                    background: #fff;
+                                    height: 543px;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    .upload_box {
+                                        position: relative;
+                                        width: 134px;
+                                        height: 34px;
+                                        margin: 0 auto;
+                                        .show_txt {
+                                            height: 100%;
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            background: #EDEBEF;
+                                            box-sizing: border-box;
+                                            border:1px solid #8C6F9A;
+                                            img {
+                                                height: 16px;
+                                                width: 16px;
+                                                margin-right: 8px;
+                                            }
+                                            div {
+                                                height: 22px;
+                                                font-size:16px;
+                                                font-family:PingFangSC-Regular,PingFang SC;
+                                                font-weight:400;
+                                                color:rgba(140,111,154,1);
+                                                line-height:22px;
+                                            }
+                                        }
+                                        .fileInput {
+                                            position: absolute;
+                                            left: 0;
+                                            top: 0;
+                                            height: 100%;
+                                            width: 100%;
+                                            border: none;
+                                            outline: none;
+                                            opacity: 0;
+                                        }
+                                    }
+                                    .js_txt {
+                                        height: 20px;
+                                        margin-top: 19px;
+                                        text-align: center;
+                                        font-size:14px;
+                                        font-family:PingFangSC-Regular,PingFang SC;
+                                        font-weight:400;
+                                        color:rgba(77,54,98,1);
+                                        line-height:20px;
+                                    }
+                                }
+                                .btn_box {
+                                    height: 42px;
+                                    display: flex;
+                                    margin-top: 40px;
+                                    justify-content: center;
+                                    button {
+                                        width: 99px;
+                                        height: 100%;
+                                        line-height: 40px;
+                                        font-size:16px;
+                                        font-family:PingFangSC-Regular,PingFang SC;
+                                        font-weight:400;
+                                        color:rgba(77,54,98,1);
+                                        border: 1px solid #8C6F9A;
+                                        box-sizing: border-box;
+                                        text-align: center;
+                                    }
+                                    button:first-child {
+                                        background:  rgba(140,111,154,1);
+                                        color: #fff;
+                                        margin-right: 54px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

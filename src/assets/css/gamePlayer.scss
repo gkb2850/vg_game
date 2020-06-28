@@ -2,13 +2,13 @@
     .main_cont_box {
         padding: 93px 150px 0;
         box-sizing: border-box;
-        background: #EFE3C4;
+        background: #FFF6DD;
         .people_box {
             display: flex;
             flex-wrap: wrap;
             .trem_box {
-                flex: 1;
-                margin-right: 29px;
+                width: 18%;
+                margin-right: 2.5%;
                 background:#EFE3C4;
                 box-shadow:0px 2px 20px 0px rgba(106,87,35,0.45);
                 margin-bottom: 30px;
@@ -83,7 +83,9 @@
                         font-family:PingFangSC-Regular,PingFang SC;
                         font-weight:400;
                         color:rgba(180,145,85,1);
-                        
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                     }
                     .line {
                         height: 14px;
@@ -97,5 +99,11 @@
                 margin-right: 0;
             }
         }
+    }
+    .page_big_box {
+        display: flex;
+        justify-content: center;
+        padding: 50px 0;
+        background: #FFF6DD;
     }
 }

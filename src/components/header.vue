@@ -39,19 +39,19 @@ export default {
                 },
                 {
                     txt: '玩家们',
-                    path: '/index'
+                    path: '/gamePlayer'
                 },
                 {
                     txt: '最佳装备',
-                    path: '/index'
+                    path: '/productPageInfo'
                 },
                 {
                     txt: '评估评测',
-                    path: '/index'
+                    path: '/assessPage'
                 },
                 {
                     txt: '问答',
-                    path: '/index'
+                    path: '/answerPage'
                 }
             ]
         }
