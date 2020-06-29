@@ -1,4 +1,4 @@
-
+import Qs from 'qs';
 
 // 配置API接口地址
 var root = process.env.API_ROOT
@@ -33,11 +33,11 @@ function apiAxios (method, url, params={}) {
           axios({
             method: method,
             url: url,
-            data: method === 'POST' || method === 'PUT' ? params : null,
+            data: method === 'POST' || method === 'PUT' ? Qs.stringify(params) : null,
             params: method === 'GET' || method === 'DELETE' ? params : null,
             baseURL: root,
             withCredentials: false,
-            header: {'Content-Type':'application/x-www-form-urlencoded'}
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           }).then(function (res) {
             if (res.data.code === 1) {
                 resolve(res.data)

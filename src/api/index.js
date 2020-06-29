@@ -7,4 +7,6 @@ export default {
     indexgetholdProFeath: (data) => apiAxios('POST', '/api/device/getClickList', data),//首页最新设备
     seePlayerInfoFeath: (data) => apiAxios('POST', '/api/player/getPlayInfo', data),//选手详情
     playerPageListFeath: (data) => apiAxios('POST', '/api/player/getPlayPageList', data),//选手列表页
+    indexSearchFeath: (data) => apiAxios('POST', '/api/player/search', data),//搜索
+    proDeviceInfoFeath: (data) => apiAxios('POST', '/api/device/getDeviceInfo', data),//设备信息
 }

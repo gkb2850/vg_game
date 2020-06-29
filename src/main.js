@@ -3,22 +3,24 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import ViewUI from 'view-design';
+// import ViewUI, { Message } from 'view-design';
 Vue.config.productionTip = false
 
 // 引用全局样式
 import './assets/css/export.scss';
 
 
-// 引用iview
+// // 引用iview
 import { Spin } from 'view-design';
 import { Icon } from 'view-design';
+import { Message } from 'view-design';
 import 'view-design/dist/styles/iview.css';
 
 Vue.component('Spin', Spin);
 Vue.component('Icon', Icon);
+Vue.prototype.$Message = Message
 
-Vue.use(ViewUI);
+// Vue.use(ViewUI);
 
 /* eslint-disable no-new */
 new Vue({

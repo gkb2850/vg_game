@@ -13,4 +13,6 @@
     "libraryName": "view-design",
     "libraryDirectory": "src/components"
     }]]
+    // "plugins": [
+    //   "transform-vue-jsx", "transform-runtime"]
 }

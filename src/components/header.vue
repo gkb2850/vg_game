@@ -16,7 +16,7 @@
             </div>
             <div class="r_box">
                 <div class="search_box">
-                    <input type="text" placeholder="请输入关键字">
+                    <input type="text" placeholder="请输入关键字" @change="getSearchData" v-model="searchtxt">
                     <img src="../assets/images/search_icon.png" alt="">
                 </div>
             </div>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import ajaxHttp from '@/api/index.js'
 export default {
     data () {
         return {
@@ -53,8 +54,27 @@ export default {
                     txt: '问答',
                     path: '/answerPage'
                 }
-            ]
+            ],
+            searchtxt: ''
         }
+    },
+    mounted () {},
+    methods: {
+        getSearchData (e) {
+            console.log(this.searchtxt)
+            if (this.searchtxt === '') {
+                return
+            }
+            let data = {
+                key_word: this.searchtxt
+            }
+            ajaxHttp.indexSearchFeath(data).then(res => {
+                this.searchData = ''
+                console.log(res)
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
     },
 }
 </script>

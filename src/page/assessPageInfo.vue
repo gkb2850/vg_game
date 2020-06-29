@@ -86,6 +86,7 @@
 <script>
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
+import ajaxHttp from '@/api/index'
 export default {
     data () {
         return {
@@ -105,12 +106,33 @@ export default {
                 '缩放模式',
                 '赫兹'
             ],
-            pageNumData:['','','','','','','','','']
+            pageNumData:['','','','','','','','',''],
+            deviceId: ''
         }
     },
     components: {
         deviceOrSet,
         pageItem
+    },
+    created () {
+        if (this.$route.query.id) {
+            this.deviceId = this.$route.query.id
+        }
+    },
+    mounted () {
+        this.getDeviceInfo()
+    },
+    methods: {
+        getDeviceInfo () {
+            let data = {
+                device_id: this.deviceId
+            }
+            ajaxHttp.proDeviceInfoFeath(data).then(res => {
+                console.log(res)
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        }
     }
 }
 </script>

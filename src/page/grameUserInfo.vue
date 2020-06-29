@@ -4,18 +4,18 @@
         <div class="main_box">
             <div class="js_title_box">
                 <div class="people_box">
-                    <img src="../assets/images/title_img.jpg" class="img_user" alt="">
+                    <img :src="playerInfoData && playerInfoData.info.img" class="img_user" alt="">
                     <div class="cont_box_people">
                         <div class="zd_name_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div>超强队员LOPJBKL</div>
+                            <img :src="playerInfoData && playerInfoData.info.nation_img" alt="">
+                            <div>{{playerInfoData && playerInfoData.info.name}}</div>
                         </div>
-                        <div class="or_txt">又名：lipou</div>
+                        <div class="or_txt">又名：{{playerInfoData && playerInfoData.info.nickname}}</div>
                         <div class="zd_name_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div>超强队员LOPJBKL</div>
+                            <img :src="playerInfoData && playerInfoData.info.nation_img" alt="">
+                            <div>{{playerInfoData && playerInfoData.info.nation}}</div>
                         </div>
-                        <div class="xx_txt">超强队员LOPJBKL于1997年10月2日出生，目前为Natus Vincere作为AWPer参赛。</div>
+                        <div class="xx_txt">{{playerInfoData && playerInfoData.info.introduction}}</div>
                     </div>
                     <div class="bot_box_people">
                         <img src="../assets/images/tt_icon.png" alt="">
@@ -28,124 +28,58 @@
                     <div class="table_info_st">
                         <div class="title">鼠标设置– ZOWIE FK1 + DIVINA EDITION</div>
                         <div class="table_title">
-                            <div class="txt" v-for="(item, index) in setTabelTitleFirst" :key="index">{{item}}</div>
+                            <div class="txt" v-for="(item, index) in setTabelTitleFirst.title" :key="index">{{item}}</div>
                         </div>
                         <div class="table_cont_txt">
-                            <div class="txt">400</div>
-                            <div class="txt">3.09</div>
-                            <div class="txt">1236</div>
-                            <div class="txt">上</div>
-                            <div class="txt">1000</div>
-                            <div class="txt">1.00</div>
-                            <div class="txt">6</div>
-                            <div class="txt">关</div>
+                            <div class="txt" v-for="(item, index) in setTabelTitleFirst.conttxt" :key="index">{{item}}</div>
                         </div>
                     </div>
                     <div class="table_info_st">
                         <div class="title">显示器设置– BENQ XL2540</div>
                         <div class="table_title">
-                            <div class="txt" v-for="(item, index) in setTabelTitleSecond" :key="index">{{item}}</div>
+                            <div class="txt" v-for="(item, index) in setTabelTitleSecond.title" :key="index">{{item}}</div>
                         </div>
                         <div class="table_cont_txt">
-                            <div class="txt">1280x960</div>
-                            <div class="txt">4:3</div>
-                            <div class="txt">拉长的</div>
-                            <div class="txt">240</div>
+                            <div class="txt" v-for="(item, index) in setTabelTitleSecond.conttxt" :key="index">{{item}}</div>
                         </div>
                     </div>
-                    <div class="str_info_st">
+                    <div class="str_info_st" v-if="playerInfoData && playerInfoData.info.crosshair">
                         <div class="title">十字线</div>
-                        <div class="c_txt">cl_crosshairalpha 255; cl_crosshaircolor 4; cl_crosshairdot 1; cl_crosshairgap 0; cl_crosshairsize 2; cl_crosshairstyle 4; cl_crosshairusealpha 1; cl_crosshairthickness 0; cl_crosshair_drawoutline 0; cl_crosshair_sniper_width 1; cl_crosshaircolor_r 255; cl_crosshaircolor_g 255; cl_crosshaircolor_b 165;</div>
+                        <div class="c_txt">{{playerInfoData.info.crosshair}}</div>
                     </div>
-                    <div class="str_info_st">
+                    <div class="str_info_st" v-if="playerInfoData && playerInfoData.info.view_model">
                         <div class="title">视图模型</div>
-                        <div class="c_txt">cl_crosshairalpha 255; cl_crosshaircolor 4; cl_crosshairdot 1; cl_crosshairgap 0; cl_crosshairsize 2; cl_crosshairstyle 4; cl_crosshairusealpha 1; cl_crosshairthickness 0; cl_crosshair_drawoutline 0; cl_crosshair_sniper_width 1; cl_crosshaircolor_r 255; cl_crosshaircolor_g 255; cl_crosshaircolor_b 165;</div>
+                        <div class="c_txt">{{playerInfoData.info.view_model}}</div>
                     </div>
-                    <div class="str_info_st">
+                    <div class="str_info_st" v-if="playerInfoData && playerInfoData.info.cl_bob">
                         <div class="title">CL_BOB</div>
-                        <div class="c_txt">滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴</div>
+                        <div class="c_txt">{{playerInfoData.info.cl_bob}}</div>
                     </div>
                 </div>
             </div>
             <div class="cont_product_box">
-                <div class="first_box">
+                <div class="first_box" v-if="playerInfoData && playerInfoData.device_list.length">
                     <div class="title">他的设备</div>
                     <div class="cont_box">
-                        <div class="trem_box">
-                            <img class="product_img" src="../assets/images/title_img.jpg" alt="">
+                        <div class="trem_box" v-for="(item, index) in playerInfoData.device_list" :key="index">
+                            <img class="product_img" :src="item.img" alt="">
                             <div class="name_box">
                                 <div class="line"></div>
-                                <div class="txt">鼠标</div>
+                                <div class="txt">{{item.category}}</div>
                                 <div class="line"></div>
                             </div>
                             <div class="name_info_box">
-                                <span>罗技-huoplpyh</span>
-                            </div>
-                        </div>
-                         <div class="trem_box">
-                            <img class="product_img" src="../assets/images/title_img.jpg" alt="">
-                            <div class="name_box">
-                                <div class="line"></div>
-                                <div class="txt">鼠标</div>
-                                <div class="line"></div>
-                            </div>
-                            <div class="name_info_box">
-                                <span>罗技-huoplpyh</span>
-                            </div>
-                        </div>
-                         <div class="trem_box">
-                            <img class="product_img" src="../assets/images/title_img.jpg" alt="">
-                            <div class="name_box">
-                                <div class="line"></div>
-                                <div class="txt">鼠标</div>
-                                <div class="line"></div>
-                            </div>
-                            <div class="name_info_box">
-                                <span>罗技-huoplpyh</span>
-                            </div>
-                        </div>
-                         <div class="trem_box">
-                            <img class="product_img" src="../assets/images/title_img.jpg" alt="">
-                            <div class="name_box">
-                                <div class="line"></div>
-                                <div class="txt">鼠标</div>
-                                <div class="line"></div>
-                            </div>
-                            <div class="name_info_box">
-                                <span>罗技-huoplpyhhuoplpyh</span>
-                            </div>
-                        </div>
-                         <div class="trem_box">
-                            <img class="product_img" src="../assets/images/title_img.jpg" alt="">
-                            <div class="name_box">
-                                <div class="line"></div>
-                                <div class="txt">鼠标</div>
-                                <div class="line"></div>
-                            </div>
-                            <div class="name_info_box">
-                                <span>罗技-huoplpyh</span>
+                                <span>{{item.title}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="second_box">
+                <div class="second_box" v-if="playerInfoData && playerInfoData.player_list.length">
                     <div class="title">他的队友</div>
                     <div class="cont_box">
-                        <div class="trem_box">
-                            <img class="people_img" src="../assets/images/title_img.jpg" alt="">
-                            <div class="name">超强队员LOPJBKL</div>
-                        </div>
-                        <div class="trem_box">
-                            <img class="people_img" src="../assets/images/title_img.jpg" alt="">
-                            <div class="name">超强队员LOPJBKL</div>
-                        </div>
-                        <div class="trem_box">
-                            <img class="people_img" src="../assets/images/title_img.jpg" alt="">
-                            <div class="name">超强队员LOPJBKL</div>
-                        </div>
-                        <div class="trem_box">
-                            <img class="people_img" src="../assets/images/title_img.jpg" alt="">
-                            <div class="name">超强队员LOPJBKL</div>
+                        <div class="trem_box" v-for="(item, index) in playerInfoData.player_list" :key="index">
+                            <img class="people_img" :src="item.img" alt="">
+                            <div class="name">{{item.name}}</div>
                         </div>
                     </div>
                 </div>
@@ -192,24 +126,17 @@ import ajaxHttp from '@/api/index.js'
 export default {
     data () {
         return {
-            setTabelTitleFirst: [
-                'DPI',
-                '灵敏度',
-                'eDPI',
-                '原始输入',
-                '赫兹',
-                '变焦灵敏度',
-                'windos灵敏度',
-                '鼠标加速'
-            ],
-            setTabelTitleSecond: [
-                '解析度',
-                '长度比',
-                '缩放模式',
-                '赫兹'
-            ],
+            setTabelTitleFirst: {
+                title: [],
+                conttxt: []
+            },
+            setTabelTitleSecond: {
+                title: [],
+                conttxt: []
+            },
             pageNumData:['','','','','','','','',''],
-            playerId: ''
+            playerId: '',
+            playerInfoData: ''
         }
     },
     created () {
@@ -231,6 +158,25 @@ export default {
             }
             ajaxHttp.seePlayerInfoFeath(data).then(res => {
                 console.log(res)
+                this.playerInfoData = res.data
+                res.data.mouse
+                let firstTitleF = []
+                let firstTitleS = []
+                for (let i in res.data.info.mouse) {
+                    firstTitleF.push(i)
+                    firstTitleS.push(res.data.info.mouse[i])
+                }
+                this.setTabelTitleFirst.title = firstTitleF
+                this.setTabelTitleFirst.conttxt = firstTitleS
+                let secondTitleF = []
+                let secondTitleS = []
+                for (let i in res.data.info.keyboard) {
+                    secondTitleF.push(i)
+                    secondTitleS.push(res.data.info.keyboard[i])
+                }
+                this.setTabelTitleSecond.title = secondTitleF
+                this.setTabelTitleSecond.conttxt = secondTitleS
+                console.log(this.setTabelTitleFirst)
             }).catch(err => {
                 console.log(err)
                 this.$Message.error(err.message)

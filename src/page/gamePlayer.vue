@@ -3,184 +3,22 @@
         <deviceOrSet title="CS GO 玩家们"></deviceOrSet>
         <div class="main_cont_box">
             <div class="people_box">
-                <div class="trem_box">
+                <div class="trem_box" v-for="(item, index) in playerListData" :key="index">
                     <div class="img_header">
-                        <img src="../assets/images/title_img.jpg" alt="">
+                        <img :src="item.img" alt="">
                         <div class="top_name">CS GO</div>
                     </div>
                     <div class="c_box">
-                        <div class="zd_name">超强队员LOPJBKL</div>
+                        <div class="zd_name">{{item.name}}</div>
                         <div class="other_box">
                             <div>查看更多</div>
                             <img src="../assets/images/toright_icon.png" alt="">
                         </div>
                     </div>
                     <div class="bot_box">
-                        <div class="txt">2020年6月29日</div>
+                        <div class="txt">{{item.add_time}}</div>
                         <div class="line"></div>
                         <div class="txt">1234666条评论</div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="img_header">
-                        <img src="../assets/images/title_img.jpg" alt="">
-                        <div class="top_name">CS GO</div>
-                    </div>
-                    <div class="c_box">
-                        <div class="zd_name">超强队员LOPJBKL</div>
-                        <div class="other_box">
-                            <div>查看更多</div>
-                            <img src="../assets/images/toright_icon.png" alt="">
-                        </div>
-                    </div>
-                    <div class="bot_box">
-                        <div class="txt">2020年6月29日</div>
-                        <div class="line"></div>
-                        <div class="txt">1234条评论</div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="img_header">
-                        <img src="../assets/images/title_img.jpg" alt="">
-                        <div class="top_name">CS GO</div>
-                    </div>
-                    <div class="c_box">
-                        <div class="zd_name">超强队员LOPJBKL</div>
-                        <div class="other_box">
-                            <div>查看更多</div>
-                            <img src="../assets/images/toright_icon.png" alt="">
-                        </div>
-                    </div>
-                    <div class="bot_box">
-                        <div class="txt">2020年6月29日</div>
-                        <div class="line"></div>
-                        <div class="txt">1234条评论</div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="img_header">
-                        <img src="../assets/images/title_img.jpg" alt="">
-                        <div class="top_name">CS GO</div>
-                    </div>
-                    <div class="c_box">
-                        <div class="zd_name">超强队员LOPJBKL</div>
-                        <div class="other_box">
-                            <div>查看更多</div>
-                            <img src="../assets/images/toright_icon.png" alt="">
-                        </div>
-                    </div>
-                    <div class="bot_box">
-                        <div class="txt">2020年6月29日</div>
-                        <div class="line"></div>
-                        <div class="txt">1234条评论</div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="img_header">
-                        <img src="../assets/images/title_img.jpg" alt="">
-                        <div class="top_name">CS GO</div>
-                    </div>
-                    <div class="c_box">
-                        <div class="zd_name">超强队员LOPJBKL</div>
-                        <div class="other_box">
-                            <div>查看更多</div>
-                            <img src="../assets/images/toright_icon.png" alt="">
-                        </div>
-                    </div>
-                    <div class="bot_box">
-                        <div class="txt">2020年6月29日</div>
-                        <div class="line"></div>
-                        <div class="txt">1234条评论</div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="img_header">
-                        <img src="../assets/images/title_img.jpg" alt="">
-                        <div class="top_name">CS GO</div>
-                    </div>
-                    <div class="c_box">
-                        <div class="zd_name">超强队员LOPJBKL</div>
-                        <div class="other_box">
-                            <div>查看更多</div>
-                            <img src="../assets/images/toright_icon.png" alt="">
-                        </div>
-                    </div>
-                    <div class="bot_box">
-                        <div class="txt">2020年6月29日</div>
-                        <div class="line"></div>
-                        <div class="txt">1234条评论</div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="img_header">
-                        <img src="../assets/images/title_img.jpg" alt="">
-                        <div class="top_name">CS GO</div>
-                    </div>
-                    <div class="c_box">
-                        <div class="zd_name">超强队员LOPJBKL</div>
-                        <div class="other_box">
-                            <div>查看更多</div>
-                            <img src="../assets/images/toright_icon.png" alt="">
-                        </div>
-                    </div>
-                    <div class="bot_box">
-                        <div class="txt">2020年6月29日</div>
-                        <div class="line"></div>
-                        <div class="txt">1234条评论</div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="img_header">
-                        <img src="../assets/images/title_img.jpg" alt="">
-                        <div class="top_name">CS GO</div>
-                    </div>
-                    <div class="c_box">
-                        <div class="zd_name">超强队员LOPJBKL</div>
-                        <div class="other_box">
-                            <div>查看更多</div>
-                            <img src="../assets/images/toright_icon.png" alt="">
-                        </div>
-                    </div>
-                    <div class="bot_box">
-                        <div class="txt">2020年6月29日</div>
-                        <div class="line"></div>
-                        <div class="txt">1234条评论</div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="img_header">
-                        <img src="../assets/images/title_img.jpg" alt="">
-                        <div class="top_name">CS GO</div>
-                    </div>
-                    <div class="c_box">
-                        <div class="zd_name">超强队员LOPJBKL</div>
-                        <div class="other_box">
-                            <div>查看更多</div>
-                            <img src="../assets/images/toright_icon.png" alt="">
-                        </div>
-                    </div>
-                    <div class="bot_box">
-                        <div class="txt">2020年6月29日</div>
-                        <div class="line"></div>
-                        <div class="txt">1234条评论</div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="img_header">
-                        <img src="../assets/images/title_img.jpg" alt="">
-                        <div class="top_name">CS GO</div>
-                    </div>
-                    <div class="c_box">
-                        <div class="zd_name">超强队员LOPJBKL</div>
-                        <div class="other_box">
-                            <div>查看更多</div>
-                            <img src="../assets/images/toright_icon.png" alt="">
-                        </div>
-                    </div>
-                    <div class="bot_box">
-                        <div class="txt">2020年6月29日</div>
-                        <div class="line"></div>
-                        <div class="txt">1234条评论</div>
                     </div>
                 </div>
             </div>
@@ -198,7 +36,8 @@ import ajaxHttp from '@/api/index.js'
 export default {
     data () {
         return {
-            pageNumData: ['','','','','','','']
+            pageNumData: ['','','','','','',''],
+            playerListData: []
         }
     },
     components: {
@@ -212,6 +51,7 @@ export default {
         getPlayerList () {
             ajaxHttp.playerPageListFeath().then(res => {
                 console.log(res)
+                this.playerListData = res.data.list
             }).catch(err => {
                 this.$Message.error(err.message)
             })

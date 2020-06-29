@@ -42,7 +42,7 @@
             <div class="item_s_box">
                 <div class="title">最近更新设备</div>
                 <div class="cont">
-                    <div class="trem_box" v-for="(item, index) in newProListData" :key="index">
+                    <div class="trem_box" v-for="(item, index) in newProListData" :key="index" @click="seeAssessInfo(item)">
                         <img class="order_img" :src="item.img" alt="">
                         <div class="f_txt">{{item.title}}</div>
                         <div class="s_txt">{{item.add_time}}</div>
@@ -126,7 +126,7 @@
             <div class="main_ff_box">
                 <div class="title">热门CS GO设备</div>
                 <div class="cont">
-                    <div class="trem_box" v-for="(item, index) in holdProListData" :key="index">
+                    <div class="trem_box" v-for="(item, index) in holdProListData" :key="index" @click="seeAssessInfo(item)">
                         <img class="img_product" :src="item.img" alt="">
                         <div class="txt">{{item.title}}</div>
                     </div>
@@ -284,6 +284,14 @@ export default {
                 path: '/grameUserInfo',
                 query: {
                     id: item.player_id
+                }
+            })
+        },
+        seeAssessInfo (item) {
+            this.$router.push({
+                path: '/assessPageInfo',
+                query: {
+                    id: item.device_id
                 }
             })
         },
