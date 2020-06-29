@@ -25,7 +25,7 @@ function filterNull (o) {
   return o
 }
  
-function apiAxios (method, url, params) {
+function apiAxios (method, url, params={}) {
     return new Promise((resolve, reject) => {
         if (params) {
             params = filterNull(params)
@@ -39,8 +39,10 @@ function apiAxios (method, url, params) {
             withCredentials: false,
             header: {'Content-Type':'application/x-www-form-urlencoded'}
           }).then(function (res) {
-            if (res.data.code === 200) {
+            if (res.data.code === 1) {
                 resolve(res.data)
+            } else if (res.data.code === -1) {//需要登录
+
             } else {
               reject(res.data)
             }
@@ -51,5 +53,4 @@ function apiAxios (method, url, params) {
 }
  
 // 返回在vue模板中的调用接口
-console.log(apiAxios)
 export default apiAxios

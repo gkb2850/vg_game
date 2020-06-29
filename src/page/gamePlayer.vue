@@ -194,6 +194,7 @@
 <script>
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
+import ajaxHttp from '@/api/index.js'
 export default {
     data () {
         return {
@@ -203,6 +204,18 @@ export default {
     components: {
         deviceOrSet,
         pageItem
+    },
+    mounted () {
+        this.getPlayerList()
+    },
+    methods: {
+        getPlayerList () {
+            ajaxHttp.playerPageListFeath().then(res => {
+                console.log(res)
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        }
     }
 }
 </script>

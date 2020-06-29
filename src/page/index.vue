@@ -40,48 +40,21 @@
                 </div>
             </div>
             <div class="item_s_box">
-                <div class="title">最近游戏硬件评论</div>
+                <div class="title">最近更新设备</div>
                 <div class="cont">
-                    <div class="trem_box">
-                        <img class="order_img" src="../assets/images/title_img.jpg" alt="">
-                        <div class="f_txt">罗技鼠标POJH-OJHKb</div>
-                        <div class="s_txt">2020-07-06</div>
-                    </div>
-                    <div class="trem_box">
-                        <img class="order_img" src="../assets/images/title_img.jpg" alt="">
-                        <div class="f_txt">罗技鼠标POJH-OJHKb</div>
-                        <div class="s_txt">2020-07-06</div>
-                    </div>
-                    <div class="trem_box">
-                        <img class="order_img" src="../assets/images/title_img.jpg" alt="">
-                        <div class="f_txt">罗技鼠标POJH-OJHKb</div>
-                        <div class="s_txt">2020-07-06</div>
-                    </div>
-                    <div class="trem_box">
-                        <img class="order_img" src="../assets/images/title_img.jpg" alt="">
-                        <div class="f_txt">罗技鼠标POJH-OJHKb</div>
-                        <div class="s_txt">2020-07-06</div>
+                    <div class="trem_box" v-for="(item, index) in newProListData" :key="index">
+                        <img class="order_img" :src="item.img" alt="">
+                        <div class="f_txt">{{item.title}}</div>
+                        <div class="s_txt">{{item.add_time}}</div>
                     </div>
                 </div>
             </div>
             <div class="item_t_box">
-                <div class="title">近期玩家数据库更新</div>
+                <div class="title">最近更新选手</div>
                 <div class="cont">
-                    <div class="trem_box">
-                        <div class="f_txt">GS GO 告诫玩家LOPU</div>
-                        <div class="s_txt">2020-06-06</div>
-                    </div>
-                    <div class="trem_box">
-                        <div class="f_txt">GS GO 告诫玩家LOPU</div>
-                        <div class="s_txt">2020-06-06</div>
-                    </div>
-                    <div class="trem_box">
-                        <div class="f_txt">GS GO 告诫玩家LOPU</div>
-                        <div class="s_txt">2020-06-06</div>
-                    </div>
-                    <div class="trem_box">
-                        <div class="f_txt">GS GO 告诫玩家LOPU</div>
-                        <div class="s_txt">2020-06-06</div>
+                    <div class="trem_box" v-for="(item, index) in playeListData" :key="index" @click="seePlayeInfo(item)">
+                        <div class="f_txt">{{item.name}}</div>
+                        <div class="s_txt">{{item.add_time}}</div>
                     </div>
                 </div>
             </div>
@@ -144,50 +117,18 @@
             <div class="main_t_box"> 
                 <div class="title">热门CS GO 队员</div>
                 <div class="cont">
-                    <div class="trem_box">
-                        <img class="top_img_p" src="../assets/images/title_img.jpg" alt="">
-                        <div class="js_txt">超强队员LOP JBKL</div>
-                    </div>
-                    <div class="trem_box">
-                        <img class="top_img_p" src="../assets/images/title_img.jpg" alt="">
-                        <div class="js_txt">超强队员LOP JBKL</div>
-                    </div>
-                    <div class="trem_box">
-                        <img class="top_img_p" src="../assets/images/title_img.jpg" alt="">
-                        <div class="js_txt">超强队员LOP JBKL</div>
-                    </div>
-                    <div class="trem_box">
-                        <img class="top_img_p" src="../assets/images/title_img.jpg" alt="">
-                        <div class="js_txt">超强队员LOP JBKL</div>
-                    </div>
-                    <div class="trem_box">
-                        <img class="top_img_p" src="../assets/images/title_img.jpg" alt="">
-                        <div class="js_txt">超强队员LOP JBKL</div>
-                    </div>
-                    <div class="trem_box">
-                        <img class="top_img_p" src="../assets/images/title_img.jpg" alt="">
-                        <div class="js_txt">超强队员LOP JBKL</div>
+                    <div class="trem_box" v-for="(item, index) in playeImgListData" :key="index" @click="seePlayeInfo(item)">
+                        <img class="top_img_p" :src="item.img" alt="">
+                        <div class="js_txt">{{item.name}}</div>
                     </div>
                 </div>
             </div>
             <div class="main_ff_box">
                 <div class="title">热门CS GO设备</div>
                 <div class="cont">
-                    <div class="trem_box">
-                        <img class="img_product" src="../assets/images/title_img.jpg" alt="">
-                        <div class="txt">罗技鼠标POJH-OJHKb</div>
-                    </div>
-                    <div class="trem_box">
-                        <img class="img_product" src="../assets/images/title_img.jpg" alt="">
-                        <div class="txt">罗技鼠标POJH-OJHKb</div>
-                    </div>
-                    <div class="trem_box">
-                        <img class="img_product" src="../assets/images/title_img.jpg" alt="">
-                        <div class="txt">罗技鼠标POJH-OJHKb</div>
-                    </div>
-                    <div class="trem_box">
-                        <img class="img_product" src="../assets/images/title_img.jpg" alt="">
-                        <div class="txt">罗技鼠标POJH-OJHKb</div>
+                    <div class="trem_box" v-for="(item, index) in holdProListData" :key="index">
+                        <img class="img_product" :src="item.img" alt="">
+                        <div class="txt">{{item.title}}</div>
                     </div>
                 </div>
             </div>
@@ -290,26 +231,65 @@
 
 <script>
 import ajaxHttp from '@/api/index.js'
+import spinItem from '@/components/spinItem.vue'
 export default {
     data () {
         return {
-            
+            playeListData: [],
+            playeImgListData: [],
+            newProListData: [],
+            holdProListData: []
         }
     },
     mounted () {
-        this.api()
+        this.getPlayeList()
+        this.getPlayeImgList()
+        this.getNewProList()
+        this.getHoldProList()
     },
     methods: {
-        api() {
-            let data = {
-                j:'2'
-            }
-            ajaxHttp.indexPlayeFeath(data).then(res => {
+        getPlayeList() {
+            ajaxHttp.indexPlayeFeath().then(res => {
                 console.log(res)
+                this.playeListData = res.data.list
             }).catch(err => {
                 console.log(err)
+                this.$Message.error(err.message);
             })
-        }
+        },
+        getPlayeImgList () {
+            ajaxHttp.indexPlayeImgFeath().then(res => {
+                this.playeImgListData = res.data.list
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        getNewProList () {
+            ajaxHttp.indexgetNewProFeath().then(res => {
+                this.newProListData = res.data.list
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        getHoldProList () {
+            ajaxHttp.indexgetholdProFeath().then(res => {
+                this.holdProListData = res.data.list
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        seePlayeInfo (item) {
+            console.log(item.player_id)
+            this.$router.push({
+                path: '/grameUserInfo',
+                query: {
+                    id: item.player_id
+                }
+            })
+        },
+    },
+    components: {
+        spinItem
     }
 }
 </script>

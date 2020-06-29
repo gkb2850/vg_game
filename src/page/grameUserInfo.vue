@@ -188,6 +188,7 @@
 <script>
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
+import ajaxHttp from '@/api/index.js'
 export default {
     data () {
         return {
@@ -207,12 +208,34 @@ export default {
                 '缩放模式',
                 '赫兹'
             ],
-            pageNumData:['','','','','','','','','']
+            pageNumData:['','','','','','','','',''],
+            playerId: ''
+        }
+    },
+    created () {
+        if (this.$route.query.id) {
+            this.playerId = this.$route.query.id
         }
     },
     components: {
         deviceOrSet,
         pageItem
+    },
+    mounted () {
+        this.getPlayerInfo()
+    },
+    methods: {
+        getPlayerInfo () {
+            let data = {
+                player_id: this.playerId
+            }
+            ajaxHttp.seePlayerInfoFeath(data).then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+                this.$Message.error(err.message)
+            })
+        },
     }
 }
 </script>
