@@ -30,4 +30,5 @@ export default {
     margin: 0;
     min-width: 1200px;
   }
+  
 </style>

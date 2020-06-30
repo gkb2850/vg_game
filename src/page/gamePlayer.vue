@@ -10,9 +10,11 @@
                     </div>
                     <div class="c_box">
                         <div class="zd_name">{{item.name}}</div>
-                        <div class="other_box">
-                            <div>查看更多</div>
-                            <img src="../assets/images/toright_icon.png" alt="">
+                        <div class="other_box" @click="seePlayerInfo(item)">
+                            <a href="javascript:;">
+                                <div>查看更多</div>
+                                <img src="../assets/images/toright_icon.png" alt="">
+                            </a>
                         </div>
                     </div>
                     <div class="bot_box">
@@ -36,7 +38,7 @@ import ajaxHttp from '@/api/index.js'
 export default {
     data () {
         return {
-            pageNumData: ['','','','','','',''],
+            pageNumData: [],
             playerListData: []
         }
     },
@@ -50,10 +52,27 @@ export default {
     methods: {
         getPlayerList () {
             ajaxHttp.playerPageListFeath().then(res => {
-                console.log(res)
                 this.playerListData = res.data.list
+                // this.pageNumData = new Array(res.data.list.length)
+                console.log(this.pageNumData)
+                if (res.data.list.length > 10) {
+                    for (let i = 1; i< Math.ceil((res.data.list.length)/10) + 1;i++){
+                        this.pageNumData.push(i)
+                    }
+                } else {
+                    this.pageNumData.push(1)
+                }
+                
             }).catch(err => {
                 this.$Message.error(err.message)
+            })
+        },
+        seePlayerInfo (item) {
+            this.$router.push({
+                path: '/grameUserInfo',
+                query: {
+                    id: item.player_id
+                }
             })
         }
     }
