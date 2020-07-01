@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="page_big_box">
-            <pageItem :pageNumData="pageNumData"></pageItem>
+            <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" :limit="limit"></pageItem>
         </div>
     </div>
 </template>
@@ -39,7 +39,8 @@ export default {
     data () {
         return {
             pageNumData: [],
-            playerListData: []
+            playerListData: [],
+            limit: 10
         }
     },
     components: {

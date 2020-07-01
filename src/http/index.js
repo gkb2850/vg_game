@@ -1,4 +1,7 @@
 import Qs from 'qs';
+import Vue from 'vue'
+import { Spin } from 'view-design';
+import 'view-design/dist/styles/iview.css';
 
 // 配置API接口地址
 var root = process.env.API_ROOT
@@ -25,8 +28,7 @@ function filterNull (o) {
   return o
 }
  
-function apiAxios (method, url, params={}) {
-  let that = this
+function apiAxios (method, url, params={}, that) {
     return new Promise((resolve, reject) => {
         if (params) {
             params = filterNull(params)
@@ -43,7 +45,7 @@ function apiAxios (method, url, params={}) {
             if (res.data.code === 1) {
                 resolve(res.data)
             } else if (res.data.code === -1) {//需要登录
-              that.$Message.error('登陆超时，请重新登录')
+              Message.error('登陆超时，请重新登录')
               localStorage.removeItem('userInfo')
             } else {
               reject(res.data)

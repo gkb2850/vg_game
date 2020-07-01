@@ -18,4 +18,6 @@ export default {
     usercommenFeath: (data) => apiAxios('POST', '/api/comment/getUserCommentList', data),//用户评论列表
     questionListFeath: (data) => apiAxios('POST', '/api/question/getList', data),//问答列表
     questionInfoFeath: (data) => apiAxios('POST', '/api/question/getDetail', data),//问答详情
+    bastDeviceListFeath: (data) => apiAxios('POST', '/api/device/getBastDeviceList', data),//状态栏最佳设备表
+    bastDeviceInfoFeath: (data) => apiAxios('POST', '/api/device/getBastDeviceInfo', data),//最佳设备详情
 }

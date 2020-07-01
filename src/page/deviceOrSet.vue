@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <pageItem :pageNumData="pageNumDataF"></pageItem>
+                <pageItem v-if="pageNumDataF.length" :pageNumData="pageNumDataF" :limit="limitF"></pageItem>
             </div>
             <div class="comment_message_box">
                 <div class="title">关于CS GO设备与设置的评论 (1233条)</div>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <pageItem :pageNumData="pageNumData"></pageItem>
+                <pageItem v-if="pageNumDataS.length" :pageNumData="pageNumDataS" :limit="limitS"></pageItem>
             </div>
             <div class="submit_messages_box">
                 <div class="title">发表评论</div>
@@ -154,7 +154,10 @@ export default {
                 '配置'
             ],
             pageNumDataF:[],
-            deviceConfigList: []
+            pageNumDataS:[],
+            deviceConfigList: [],
+            limitF: 10,
+            limitS: 10
         }
     },
     components: {

@@ -20,6 +20,10 @@ export default {
         pageNumData: {
             type: Array,
             default: []
+        },
+        limit: {
+            type: Number,
+            default: 10
         }
     },
     data () {
@@ -31,10 +35,10 @@ export default {
         }
     },
     created () {
-        
+
     },
     mounted () {
-        
+        this.changePageArray()
     },
     methods: {
         pageToChange (str) {
@@ -65,22 +69,23 @@ export default {
         pageIndexChange (index) {
             this.pageIndex = index
             this.$emit('changePage', index)
-        }
-    },
-    watch: {
-        pageNumData (val) {
+        },
+        changePageArray () {
+            console.log(this.pageDataChange)
             if (this.pageDataChange) {
                 return
             }
-            console.log(123)
-            if (val.length > 10) {
-                for (let i=1;i<11;i++) {
+            if (this.pageNumData.length > this.limit) {
+                for (let i=1;i<this.limit;i++) {
                     this.$set(this.pageArrayList, i-1, i)
                 }
             } else {
                 this.pageArrayList = this.pageNumData
             }
-        },
+        }
+    },
+    watch: {
+        
     },
 }
 </script>

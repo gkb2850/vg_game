@@ -48,14 +48,35 @@
 
 <script>
 import deviceOrSet from '@/components/topImgItem.vue'
+import ajaxHttp from '@/api/index'
 export default {
     data () {
         return {
-
+            baseId: ''
+        }
+    },
+    created () {
+        if (this.$route.query.id) {
+            this.baseId = this.$route.query.id
         }
     },
     components: {
         deviceOrSet
+    },
+    mounted () {
+        this.getBasDevInfo()
+    },
+    methods: {
+        getBasDevInfo () {
+            let data = {
+                base_id: this.baseId
+            }
+            ajaxHttp.bastDeviceInfoFeath(data).then(res => {
+                console.log(res)
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        }
     }
 }
 </script>

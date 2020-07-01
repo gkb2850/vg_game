@@ -4,7 +4,7 @@
         <div class="main_box">
             <div class="question_box_cont">
                 <div class="title">{{questionInfoData.title}}</div>
-                <div class="c_txt"></div>
+                <div class="c_txt" v-html="questionInfoData.content"></div>
             </div>
             <div class="comment_message_box" v-if="messageTotal > 0">
                 <div class="title">关于CS GO设备与设置的评论 ({{messageTotal}}条)</div>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <pageItem :pageNumData="pageNumData" @changePage="changePage"></pageItem>
+                <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage" :limit="limit"></pageItem>
             </div>
             <div class="submit_messages_box">
                 <div class="title">发表评论</div>
@@ -88,7 +88,7 @@ export default {
             }
             ajaxHttp.questionInfoFeath(data).then(res => {
                 console.log(res)
-                this.questionInfoData = res.info
+                this.questionInfoData = res.data.info
             }).catch(err => {
                 this.$Message.error(err.message)
             })
@@ -111,6 +111,7 @@ export default {
                 } else {
                     this.pageNumData.push(1)
                 }
+                console.log(this.pageNumData)
             }).catch(err => {
                 this.$Message.error(err.message)
             })

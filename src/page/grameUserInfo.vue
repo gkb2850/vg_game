@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <pageItem :pageNumData="pageNumData" @changePage="changePage"></pageItem>
+                <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage"></pageItem>
             </div>
             <div class="submit_messages_box">
                 <div class="title">发表评论</div>

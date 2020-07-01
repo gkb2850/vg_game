@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <pageItem :pageNumData="pageNumData"></pageItem>
+                <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" :limit="limit"></pageItem>
             </div>
             <div class="submit_messages_box">
                 <div class="title">发表评论</div>
@@ -107,7 +107,8 @@ export default {
                 '赫兹'
             ],
             pageNumData:['','','','','','','','',''],
-            deviceId: ''
+            deviceId: '',
+            limit: 10
         }
     },
     components: {

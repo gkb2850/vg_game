@@ -3,7 +3,7 @@
         <deviceOrSet title="评估测评"></deviceOrSet>
         <div class="main_cont_box">
             <div class="product_box">
-                <div class="trem_box" v-for="(item, index) in deviceListData" :key="index">
+                <div class="trem_box" v-for="(item, index) in deviceListData" :key="index" @click="toSeeAssessInfo(item)">
                     <img class="img_header" :src="item.img" alt="">
                     <div class="pc_name">{{item.title}}</div>
                     <div class="time_txt">{{item.add_time}}</div>
@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="page_big_box">
-            <pageItem :pageNumData="pageNumData"></pageItem>
+            <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" :limit="limit"></pageItem>
         </div>
     </div>
 </template>
@@ -24,7 +24,8 @@ export default {
     data () {
         return {
             pageNumData: [],
-            deviceListData: []
+            deviceListData: [],
+            limit: 10
         }
     },
     components: {
@@ -48,6 +49,14 @@ export default {
                 }
             }).catch(err => {
                 this.$Message.error(err.message)
+            })
+        },
+        toSeeAssessInfo (item) {
+            this.$router.push({
+                path: '/assessPageInfo',
+                query: {
+                    id: item.device_id
+                }
             })
         }
     }

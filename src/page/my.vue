@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                                 <div class="page_big_box">
-                                    <pageItem :pageNumData="pageNumData" @changePage="changePage"></pageItem>
+                                    <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage" :limit="limit"></pageItem>
                                 </div>
                             </div>
                         </div>
