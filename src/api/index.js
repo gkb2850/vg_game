@@ -9,4 +9,13 @@ export default {
     playerPageListFeath: (data) => apiAxios('POST', '/api/player/getPlayPageList', data),//选手列表页
     indexSearchFeath: (data) => apiAxios('POST', '/api/player/search', data),//搜索
     proDeviceInfoFeath: (data) => apiAxios('POST', '/api/device/getDeviceInfo', data),//设备信息
+    proDeviceListFeath: (data) => apiAxios('POST', '/api/device/getList', data),//设备评测列表
+    deviceConfigListFeath: (data) => apiAxios('POST', '/api/player/getDeviceConfigList', data),//选手设备与设置
+    registerFeath: (data) => apiAxios('POST', '/api/user/register', data),//注册
+    loginFeath: (data) => apiAxios('POST', '/api/user/login', data),//登录
+    commentListFeath: (data) => apiAxios('POST', '/api/comment/getList', data),//评论列表
+    submitPeocommenFeath: (data) => apiAxios('POST', '/api/comment/publishComment', data),//发表评论
+    usercommenFeath: (data) => apiAxios('POST', '/api/comment/getUserCommentList', data),//用户评论列表
+    questionListFeath: (data) => apiAxios('POST', '/api/question/getList', data),//问答列表
+    questionInfoFeath: (data) => apiAxios('POST', '/api/question/getDetail', data),//问答详情
 }

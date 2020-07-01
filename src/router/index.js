@@ -10,6 +10,7 @@ import answerPage from '@/page/answerPage'
 import my from '@/page/my'
 import feedback from '@/page/feedback'
 import productPageInfo from '@/page/productPageInfo'
+import answerInfoPage from '@/page/answerInfoPage'
 
 Vue.use(Router)
 
@@ -74,6 +75,11 @@ export default new Router({
       path: '/productPageInfo',
       name: 'productPageInfo',
       component: productPageInfo
+    },
+    {
+      path: '/answerInfoPage',
+      name: 'answerInfoPage',
+      component: answerInfoPage
     }
   ]
 })

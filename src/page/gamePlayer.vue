@@ -54,9 +54,10 @@ export default {
             ajaxHttp.playerPageListFeath().then(res => {
                 this.playerListData = res.data.list
                 // this.pageNumData = new Array(res.data.list.length)
+                this.pageNumData = []
                 console.log(this.pageNumData)
-                if (res.data.list.length > 10) {
-                    for (let i = 1; i< Math.ceil((res.data.list.length)/10) + 1;i++){
+                if (res.data.total > 10) {
+                    for (let i = 1; i< Math.ceil((res.data.total)/10) + 1;i++){
                         this.pageNumData.push(i)
                     }
                 } else {

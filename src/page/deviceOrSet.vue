@@ -14,638 +14,78 @@
                     </div>
                 </div>
                 <div class="cont_box">
-                    <div class="trem_box">
+                    <div class="trem_box" v-for="(item, index) in deviceConfigList" :key="index">
                         <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
+                            <img :src="item.img" alt="">
+                            <div class="txt">{{item.team}}</div>
                         </div>
                         <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
+                            <img :src="item.nation_img" alt="">
+                            <div class="txt">{{item.nation}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">理查德</div>
+                            <div class="txt">{{item.name}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">Zooiujkijpoijoi</div>
+                            <div class="txt">{{item.鼠标}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">500</div>
+                            <div class="txt">{{item.hz}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">800</div>
+                            <div class="txt">{{item.dpi}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">1.09</div>
+                            <div class="txt">{{item.速率}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">898</div>
+                            <div class="txt">{{item.edpi}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">898</div>
+                            <div class="txt">{{item.缩放感应}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">656</div>
+                            <div class="txt">{{item.加速}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">123</div>
+                            <div class="txt">{{item.灵敏度}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">2个</div>
+                            <div class="txt">{{item.原始输入}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">罗技XL5678</div>
+                            <div class="txt">{{item.监控}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">240</div>
+                            <div class="txt">{{item.赫兹}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">GTY1089</div>
+                            <div class="txt">{{item.显卡}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">1280x960</div>
+                            <div class="txt">{{item.解析度}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">4:3</div>
+                            <div class="txt">{{item.长宽比}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">STR</div>
+                            <div class="txt">{{item.缩放模式}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">雷蛇</div>
+                            <div class="txt">{{item.鼠标垫}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">DJO</div>
+                            <div class="txt">{{item.键盘}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">HYBpih</div>
+                            <div class="txt">{{item.耳机}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">详情</div>
-                        </div>
-                    </div>
-                    <div class="trem_box">
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">理查德</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">Zooiujkijpoijoi</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">500</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">800</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1.09</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">656</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">123</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">2个</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">罗技XL5678</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">240</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">GTY1089</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1280x960</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">4:3</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">STR</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">雷蛇</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">DJO</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">HYBpih</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">详情</div>
-                        </div>
-                    </div>
-                    <div class="trem_box">
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">理查德</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">Zooiujkijpoijoi</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">500</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">800</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1.09</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">656</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">123</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">2个</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">罗技XL5678</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">240</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">GTY1089</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1280x960</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">4:3</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">STR</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">雷蛇</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">DJO</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">HYBpih</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">详情</div>
-                        </div>
-                    </div>
-                    <div class="trem_box">
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">理查德</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">Zooiujkijpoijoi</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">500</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">800</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1.09</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">656</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">123</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">2个</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">罗技XL5678</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">240</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">GTY1089</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1280x960</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">4:3</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">STR</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">雷蛇</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">DJO</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">HYBpih</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">详情</div>
-                        </div>
-                    </div>
-                    <div class="trem_box">
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">理查德</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">Zooiujkijpoijoi</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">500</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">800</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1.09</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">656</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">123</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">2个</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">罗技XL5678</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">240</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">GTY1089</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1280x960</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">4:3</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">STR</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">雷蛇</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">DJO</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">HYBpih</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">详情</div>
-                        </div>
-                    </div>
-                    <div class="trem_box">
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">理查德</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">Zooiujkijpoijoi</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">500</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">800</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1.09</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">656</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">123</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">2个</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">罗技XL5678</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">240</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">GTY1089</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1280x960</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">4:3</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">STR</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">雷蛇</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">DJO</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">HYBpih</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">详情</div>
-                        </div>
-                    </div>
-                    <div class="trem_box">
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">理查德</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">Zooiujkijpoijoi</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">500</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">800</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1.09</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">656</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">123</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">2个</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">罗技XL5678</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">240</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">GTY1089</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1280x960</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">4:3</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">STR</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">雷蛇</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">DJO</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">HYBpih</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">详情</div>
-                        </div>
-                    </div>
-                    <div class="trem_box">
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">理查德</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">Zooiujkijpoijoi</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">500</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">800</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1.09</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">656</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">123</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">2个</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">罗技XL5678</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">240</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">GTY1089</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1280x960</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">4:3</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">STR</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">雷蛇</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">DJO</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">HYBpih</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">详情</div>
-                        </div>
-                    </div>
-                    <div class="trem_box">
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <img src="../assets/images/title_img.jpg" alt="">
-                            <div class="txt">战队</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">理查德</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">Zooiujkijpoijoi</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">500</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">800</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1.09</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">898</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">656</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">123</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">2个</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">罗技XL5678</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">240</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">GTY1089</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">1280x960</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">4:3</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">STR</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">雷蛇</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">DJO</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">HYBpih</div>
-                        </div>
-                        <div class="line_box">
-                            <div class="txt">详情</div>
+                            <a href="javascript:;" class="txt">详情</a>
                         </div>
                     </div>
                 </div>
-                <pageItem :pageNumData="pageNumData"></pageItem>
+                <pageItem :pageNumData="pageNumDataF"></pageItem>
             </div>
             <div class="comment_message_box">
                 <div class="title">关于CS GO设备与设置的评论 (1233条)</div>
@@ -685,6 +125,7 @@
 <script>
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
+import ajaxHttp from '@/api/index'
 export default {
     data () {
         return {
@@ -712,12 +153,33 @@ export default {
                 '耳机',
                 '配置'
             ],
-            pageNumData:['','','','','','','','','']
+            pageNumDataF:[],
+            deviceConfigList: []
         }
     },
     components: {
         deviceOrSet,
         pageItem
+    },
+    mounted () {
+        this.getDeviceConfig()
+    },
+    methods: {
+        getDeviceConfig () {
+            ajaxHttp.deviceConfigListFeath().then(res => {
+                console.log(res)
+                this.deviceConfigList = res.data.list
+                if (res.data.total > 12) {
+                    for (let i = 1; i< Math.ceil((res.data.total)/12) + 1; i++) {
+                        this.pageNumDataF.push(i)
+                    }
+                } else {
+                    this.pageNumDataF.push(1)
+                }
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        }
     }
 }
 </script>

@@ -3,40 +3,10 @@
         <deviceOrSet title="评估测评"></deviceOrSet>
         <div class="main_cont_box">
             <div class="product_box">
-                <div class="trem_box">
-                    <img class="img_header" src="../assets/images/title_img.jpg" alt="">
-                    <div class="pc_name">评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测</div>
-                    <div class="time_txt">2020年4月25日</div>
-                </div>
-                <div class="trem_box">
-                    <img class="img_header" src="../assets/images/title_img.jpg" alt="">
-                    <div class="pc_name">评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测</div>
-                    <div class="time_txt">2020年4月25日</div>
-                </div>
-                <div class="trem_box">
-                    <img class="img_header" src="../assets/images/title_img.jpg" alt="">
-                    <div class="pc_name">评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测</div>
-                    <div class="time_txt">2020年4月25日</div>
-                </div>
-                <div class="trem_box">
-                    <img class="img_header" src="../assets/images/title_img.jpg" alt="">
-                    <div class="pc_name">评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测</div>
-                    <div class="time_txt">2020年4月25日</div>
-                </div>
-                <div class="trem_box">
-                    <img class="img_header" src="../assets/images/title_img.jpg" alt="">
-                    <div class="pc_name">评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测</div>
-                    <div class="time_txt">2020年4月25日</div>
-                </div>
-                <div class="trem_box">
-                    <img class="img_header" src="../assets/images/title_img.jpg" alt="">
-                    <div class="pc_name">评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测</div>
-                    <div class="time_txt">2020年4月25日</div>
-                </div>
-                <div class="trem_box">
-                    <img class="img_header" src="../assets/images/title_img.jpg" alt="">
-                    <div class="pc_name">评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测评测</div>
-                    <div class="time_txt">2020年4月25日</div>
+                <div class="trem_box" v-for="(item, index) in deviceListData" :key="index">
+                    <img class="img_header" :src="item.img" alt="">
+                    <div class="pc_name">{{item.title}}</div>
+                    <div class="time_txt">{{item.add_time}}</div>
                 </div>
             </div>
         </div>
@@ -49,15 +19,37 @@
 <script>
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
+import ajaxHttp from '@/api/index'
 export default {
     data () {
         return {
-            pageNumData: ['','','','','','','']
+            pageNumData: [],
+            deviceListData: []
         }
     },
     components: {
         deviceOrSet,
         pageItem
+    },
+    mounted () {
+        this.getDeviceList()
+    },
+    methods: {
+        getDeviceList () {
+            ajaxHttp.proDeviceListFeath().then(res => {
+                console.log(res)
+                this.deviceListData = res.data.list
+                if (res.data.total > 10) {
+                    for (let i = 1; i< Math.ceil((res.data.total)/10) + 1; i++) {
+                        this.pageNumData.push(i)
+                    }
+                } else {
+                    this.pageNumData.push(1)
+                }
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        }
     }
 }
 </script>

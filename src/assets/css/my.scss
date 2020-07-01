@@ -74,6 +74,19 @@
                             color:rgba(77,54,98,1);
                             margin: 45px 50px 21px;
                         }
+                        .bj_btn {
+                            width: 63px;
+                            text-align: center;
+                            height: 34px;
+                            line-height: 34px;
+                            border-radius: 17px;
+                            font-size:16px;
+                            font-family:PingFangSC-Regular,PingFang SC;
+                            font-weight:400;
+                            color:rgba(255,255,255,1);
+                            background: #8C6F9A;
+                            margin: 43px 32px 21px;
+                        }
                     }
                     .c_box {
                         margin-left: 50px;
@@ -160,7 +173,7 @@
                                         }
                                     }
                                     .pass_input_box {
-                                        flex: 1;
+                                        width: 360px;
                                         overflow: hidden;
                                         .r_input {
                                             width: 300px;
@@ -305,6 +318,10 @@
                                             width: 32px;
                                             border: 1px solid #4D3662;
                                         }
+                                        input:checked+a {
+                                            background: #4D3662;
+                                            border: 1px solid #4D3662;
+                                        }
                                     }
                                 }
                                 .message_box {
@@ -330,10 +347,10 @@
                                         background: #EDEBEF;
                                     }
                                 }
-                                .page_big_box {
-                                    display: flex;
-                                    justify-content: center;
-                                }
+                            }
+                            .page_big_box {
+                                display: flex;
+                                justify-content: center;
                             }
                         }
                         .select_user_img {

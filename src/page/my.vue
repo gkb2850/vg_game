@@ -8,16 +8,17 @@
                         <img src="../assets/images/title_img.jpg" alt="">
                         <div class="name">昵称</div>
                     </div>
-                    <div class="trem_txt active">我的资料</div>
-                    <div class="trem_txt">我的评论</div>
-                    <div class="trem_txt">头像设置</div>
+                    <a href="javascript:;" :class="{trem_txt: true, active: lNavIndex === '1'}" @click="lNavTitleChange('1')">我的资料</a>
+                    <a href="javascript:;" :class="{trem_txt: true, active: lNavIndex === '2'}" @click="lNavTitleChange('2')">我的评论</a>
+                    <a href="javascript:;" :class="{trem_txt: true, active: lNavIndex === '3'}" @click="lNavTitleChange('3')">头像设置</a>
                 </div>
                 <div class="r_cont_box">
                     <div class="user_data_box">
                         <div class="title_box">
-                            <div class="l_name">我的资料</div>
+                            <div class="l_name">{{lNavIndex === '1' ? '我的资料' : lNavIndex === '2' ? '我的评论' : '头像设置'}}</div>
+                            <a class="bj_btn" v-if="lNavIndex === '2'" href="javascript:;" @click="toEnidMessage">{{radioShowBtn?'删除':'编辑'}}</a>
                         </div>
-                        <div class="c_box" v-if="true">
+                        <div class="c_box" v-if="lNavIndex === '1'">
                             <div class="inset_first_box" v-if="true">
                                 <div class="item_box">
                                     <div class="l_label_box">
@@ -111,34 +112,34 @@
                                 </div>
                             </div> -->
                         </div>
-                        <div class="c_box" v-if="false">
+                        <div class="c_box" v-if="lNavIndex === '2'">
                             <div class="message_user_box">
-                                <div class="trem_box">
+                                <div class="trem_box" v-for="(item, index) in userCommentList" :key="index">
                                     <div class="people_box">
                                         <div class="l_box">
-                                            <img class="people_img" src="../assets/images/title_img.jpg" alt="">
+                                            <img class="people_img" :src="item.acatar" alt="">
                                         </div>
                                         <div class="r_box">
-                                            <div class="name">露娜的冬瓜</div>
+                                            <div class="name">{{item.user_title}}</div>
                                             <div class="time_box">
-                                                <div class="t_txt">2020年5月23日下午4:19</div>
+                                                <div class="t_txt">{{item.add_time}}</div>
                                             </div>
                                         </div>
-                                        <div class="rr_box">
-                                            <input type="radio">
+                                        <div class="rr_box" v-if="radioShowBtn">
+                                            <input type="radio" :checked="item.radioShow" @click="radioChange(index)">
                                         </div>
                                     </div>
                                     <div class="message_box">
                                         <img class="l_icon" src="" alt="">
-                                        <div class="txt_box">在徐州人家小区，发现白云南区9号楼2单元门前停放一辆电动自行车，从该楼高层甩下来一根黄色电线，正在充电</div>
+                                        <div class="txt_box">{{item.content}}</div>
                                     </div>
-                                    <div class="page_big_box">
-                                        <pageItem :pageNumData="pageNumData"></pageItem>
-                                    </div>
+                                </div>
+                                <div class="page_big_box">
+                                    <pageItem :pageNumData="pageNumData" @changePage="changePage"></pageItem>
                                 </div>
                             </div>
                         </div>
-                        <div class="c_box" v-if="false">
+                        <div class="c_box" v-if="lNavIndex === '3'">
                             <div class="select_user_img">
                                 <div class="select_img">
                                     <div class="inset_img">
@@ -168,16 +169,74 @@
 <script>
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
+import ajaxHttp from '@/api/index'
 export default {
     data () {
         return {
             SelectRadio: 'one',
-            pageNumData:['','','','','','']
+            pageNumData:['','','','','',''],
+            page: 1,
+            limit: 4,
+            lNavIndex: '1',
+            userCommentList:[],
+            radioShowBtn: false
         }
     },
     components: {
         deviceOrSet,
         pageItem
+    },
+    mounted () {},
+    methods: {
+        getUserCommentList () {
+            let data = {
+                token: JSON.parse(localStorage.getItem('userInfo')).token,
+                user_id: JSON.parse(localStorage.getItem('userInfo')).user_id,
+                page: this.page,
+                limit: this.limit
+            }
+            ajaxHttp.usercommenFeath(data).then(res => {
+                let data = res.data.list
+                data.forEach(i => {
+                    i.radioShow = false
+                });
+                this.userCommentList = data
+                this.pageNumData = []
+                if (res.data.total > 4) {
+                    for (let i = 1; i< Math.ceil((res.data.total)/4) + 1;i++){
+                        this.pageNumData.push(i)
+                    }
+                } else {
+                    this.pageNumData.push(1)
+                }
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        changePage (e) {
+            this.page = e
+            this.getUserCommentList()
+        },
+        lNavTitleChange (str) {
+            this.lNavIndex = str
+            console.log(str)
+            if (str === '2') {
+                this.getUserCommentList();
+            }
+        },
+        toEnidMessage () {
+            if (this.radioShowBtn) {
+
+            } else {
+                this.radioShowBtn = true
+            }
+        },
+        radioChange (index) {
+            console.log(22)
+            let data = this.userCommentList[index]
+            data.radioShow = !data.radioShow
+            this.$set(this.userCommentList, index, data)
+        }
     }
 }
 </script>

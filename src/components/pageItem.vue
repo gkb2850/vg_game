@@ -4,7 +4,7 @@
             <div class="f_btn btn" @click="pageToChange('left')">
                 <a class="icon iconfont icon-zuojiantou_huaban"></a>
             </div>
-            <div class="btn" v-for="(item, index) in pageArrayList" :key="index" @click="pageIndexChange(index)">
+            <div class="btn" v-for="(item, index) in pageArrayList" :key="index" @click="pageIndexChange(item)">
                 <a :class="[pageIndex === item ? 'active' : '']">{{item}}</a>
             </div>
             <div class="l_btn btn" @click="pageToChange('right')">
@@ -63,7 +63,8 @@ export default {
             }
         },
         pageIndexChange (index) {
-            this.pageIndex = index + 1
+            this.pageIndex = index
+            this.$emit('changePage', index)
         }
     },
     watch: {

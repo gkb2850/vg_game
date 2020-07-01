@@ -30,5 +30,10 @@ export default {
     margin: 0;
     min-width: 1200px;
   }
+
+  a {
+    text-decoration: none;
+    display: block;
+  }
   
 </style>

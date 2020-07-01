@@ -3,120 +3,21 @@
         <deviceOrSet title="问答"></deviceOrSet>
         <div class="main_cont_box">
             <div class="product_box">
-                <div class="trem_box">
-                    <div class="title">键盘尺寸差异说明</div>
+                <a class="trem_box" v-for="(item, index) in questionList" :key="index" @click="toSeeQuestionInfo(item)">
+                    <div class="title">{{item.title}}</div>
                     <div class="c_box">
-                        <div class="c_txt">进入机械键盘世界绝对是一个令人困惑的旅程。对于初学者来说，可用的键盘开关种类繁多，一旦掌握了这些，就会有很多缩写和不常用的术语供您了解。这些就会有很多缩……</div>
+                        <div class="c_txt">{{item.content}}</div>
                         <div class="bot_box">
-                            <div class="txt">2020年4月25日</div>
+                            <div class="txt">{{item.add_time}}</div>
                             <div class="line"></div>
                             <div class="txt">5条评论</div>
                         </div>
                     </div>
-                </div>
-                <div class="trem_box">
-                    <div class="title">键盘尺寸差异说明</div>
-                    <div class="c_box">
-                        <div class="c_txt">进入机械键盘世界绝对是一个令人困惑的旅程。对于初学者来说，可用的键盘开关种类繁多，一旦掌握了这些，就会有很多缩写和不常用的术语供您了解。这些就会有很多缩……</div>
-                        <div class="bot_box">
-                            <div class="txt">2020年4月25日</div>
-                            <div class="line"></div>
-                            <div class="txt">5条评论</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="title">键盘尺寸差异说明</div>
-                    <div class="c_box">
-                        <div class="c_txt">进入机械键盘世界绝对是一个令人困惑的旅程。对于初学者来说，可用的键盘开关种类繁多，一旦掌握了这些，就会有很多缩写和不常用的术语供您了解。这些就会有很多缩……</div>
-                        <div class="bot_box">
-                            <div class="txt">2020年4月25日</div>
-                            <div class="line"></div>
-                            <div class="txt">5条评论</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="title">键盘尺寸差异说明</div>
-                    <div class="c_box">
-                        <div class="c_txt">进入机械键盘世界绝对是一个令人困惑的旅程。对于初学者来说，可用的键盘开关种类繁多，一旦掌握了这些，就会有很多缩写和不常用的术语供您了解。这些就会有很多缩……</div>
-                        <div class="bot_box">
-                            <div class="txt">2020年4月25日</div>
-                            <div class="line"></div>
-                            <div class="txt">5条评论</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="title">键盘尺寸差异说明</div>
-                    <div class="c_box">
-                        <div class="c_txt">进入机械键盘世界绝对是一个令人困惑的旅程。对于初学者来说，可用的键盘开关种类繁多，一旦掌握了这些，就会有很多缩写和不常用的术语供您了解。这些就会有很多缩……</div>
-                        <div class="bot_box">
-                            <div class="txt">2020年4月25日</div>
-                            <div class="line"></div>
-                            <div class="txt">5条评论</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="title">键盘尺寸差异说明</div>
-                    <div class="c_box">
-                        <div class="c_txt">进入机械键盘世界绝对是一个令人困惑的旅程。对于初学者来说，可用的键盘开关种类繁多，一旦掌握了这些，就会有很多缩写和不常用的术语供您了解。这些就会有很多缩……</div>
-                        <div class="bot_box">
-                            <div class="txt">2020年4月25日</div>
-                            <div class="line"></div>
-                            <div class="txt">5条评论</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="title">键盘尺寸差异说明</div>
-                    <div class="c_box">
-                        <div class="c_txt">进入机械键盘世界绝对是一个令人困惑的旅程。对于初学者来说，可用的键盘开关种类繁多，一旦掌握了这些，就会有很多缩写和不常用的术语供您了解。这些就会有很多缩……</div>
-                        <div class="bot_box">
-                            <div class="txt">2020年4月25日</div>
-                            <div class="line"></div>
-                            <div class="txt">5条评论</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="title">键盘尺寸差异说明</div>
-                    <div class="c_box">
-                        <div class="c_txt">进入机械键盘世界绝对是一个令人困惑的旅程。对于初学者来说，可用的键盘开关种类繁多，一旦掌握了这些，就会有很多缩写和不常用的术语供您了解。这些就会有很多缩……</div>
-                        <div class="bot_box">
-                            <div class="txt">2020年4月25日</div>
-                            <div class="line"></div>
-                            <div class="txt">5条评论</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="title">键盘尺寸差异说明</div>
-                    <div class="c_box">
-                        <div class="c_txt">进入机械键盘世界绝对是一个令人困惑的旅程。对于初学者来说，可用的键盘开关种类繁多，一旦掌握了这些，就会有很多缩写和不常用的术语供您了解。这些就会有很多缩……</div>
-                        <div class="bot_box">
-                            <div class="txt">2020年4月25日</div>
-                            <div class="line"></div>
-                            <div class="txt">5条评论</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="trem_box">
-                    <div class="title">键盘尺寸差异说明</div>
-                    <div class="c_box">
-                        <div class="c_txt">进入机械键盘世界绝对是一个令人困惑的旅程。对于初学者来说，可用的键盘开关种类繁多，一旦掌握了这些，就会有很多缩写和不常用的术语供您了解。这些就会有很多缩……</div>
-                        <div class="bot_box">
-                            <div class="txt">2020年4月25日</div>
-                            <div class="line"></div>
-                            <div class="txt">5条评论</div>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
         <div class="page_big_box">
-            <pageItem :pageNumData="pageNumData"></pageItem>
+            <pageItem :pageNumData="pageNumData" @changePage="changePage"></pageItem>
         </div>
     </div>
 </template>
@@ -124,16 +25,57 @@
 <script>
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
+import ajaxHttp from '@/api/index'
 export default {
     data () {
         return {
-            pageNumData: ['','','','','','','']
+            pageNumData: [],
+            page: 1,
+            limit: 10,
+            questionList: []
         }
     },
     components: {
         deviceOrSet,
         pageItem
-    }
+    },
+    mounted () {
+        this.getQuestionList()
+    },
+    methods: {
+        getQuestionList () {
+            let data = {
+                page: this.page,
+                limit: this.limit
+            }
+            ajaxHttp.questionListFeath(data).then(res => {
+                console.log(res)
+                this.questionList = res.data.list
+                this.pageNumData = []
+                if (res.data.total > 10) {
+                    for (let i = 1; i< Math.ceil((res.data.total)/10) + 1;i++){
+                        this.pageNumData.push(i)
+                    }
+                } else {
+                    this.pageNumData.push(1)
+                }
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        changePage (e) {
+            this.page = e
+            this.getQuestionList()
+        },
+        toSeeQuestionInfo (item) {
+            this.$router.push({
+                path: '/answerInfoPage',
+                query: {
+                    id: item.id
+                }
+            })
+        }
+    },
 }
 </script>
 
