@@ -189,9 +189,14 @@ export default {
     mounted () {},
     methods: {
         getUserCommentList () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                return
+            }
             let data = {
-                token: JSON.parse(localStorage.getItem('userInfo')).token,
-                user_id: JSON.parse(localStorage.getItem('userInfo')).user_id,
+                token: userInfo.token,
+                user_id: userInfo.user_id,
                 page: this.page,
                 limit: this.limit
             }

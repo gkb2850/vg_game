@@ -17,7 +17,7 @@
             </div>
             <div class="r_box">
                 <div class="search_box">
-                    <input type="text" placeholder="请输入关键字" @change="getSearchData" v-model="searchtxt">
+                    <input type="text" placeholder="请输入关键字"  @keyup.enter="getSearchData" v-model="searchtxt">
                     <img src="../assets/images/search_icon.png" alt="">
                 </div>
             </div>
@@ -110,6 +110,8 @@
 
 <script>
 import ajaxHttp from '@/api/index.js'
+import searchPage from '../page/searchPage.vue'
+var content = searchPage
 export default {
     data () {
         return {
@@ -159,11 +161,13 @@ export default {
         } else {
             this.isLogin = false
         }
+        if (this.$route.path !== '/searchPage') {
+            this.searchtxt = ''
+        }
     },
     mounted () {},
     methods: {
         getSearchData (e) {
-            console.log(this.searchtxt)
             if (this.searchtxt === '') {
                 return
             }
@@ -171,8 +175,24 @@ export default {
                 key_word: this.searchtxt
             }
             ajaxHttp.indexSearchFeath(data).then(res => {
-                this.searchData = ''
-                console.log(res)
+                if (this.$route.path !== '/searchPage') {
+                    this.$router.push({
+                        path: '/searchPage',
+                        query: {
+                            data: res.data.list? res.data : {list: [],total: 0}
+                        }
+                    })
+                } else {
+                    this.$router.push('/index')
+                    setTimeout(() => {
+                        this.$router.push({
+                            path: '/searchPage',
+                            query: {
+                                data: res.data.list? res.data : {list: [],total: 0}
+                            }
+                        })
+                    },50)
+                }
             }).catch(err => {
                 this.$Message.error(err.message)
             })

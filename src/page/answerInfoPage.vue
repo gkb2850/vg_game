@@ -95,7 +95,7 @@ export default {
         },
         getCommentList () {
             let data = {
-                type: '2',
+                type: '5',
                 data_id: this.questionId,
                 page: this.page,
                 limit: this.limit
@@ -117,11 +117,16 @@ export default {
             })
         },
         toSubmitMessage () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                return
+            }
             let data = {
-                token: JSON.parse(localStorage.getItem('userInfo')).token,
-                user_id: JSON.parse(localStorage.getItem('userInfo')).user_id,
+                token: userInfo.token,
+                user_id: userInfo.user_id,
                 content: this.messageTxt,
-                type: '2',
+                type: '5',
                 data_id: this.questionId
             }
             ajaxHttp.submitPeocommenFeath(data).then(res => {
@@ -133,11 +138,16 @@ export default {
             })
         },
         toSubmitToPeople (item) {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                return
+            }
             let data = {
-                token: JSON.parse(localStorage.getItem('userInfo')).token,
-                user_id: JSON.parse(localStorage.getItem('userInfo')).user_id,
+                token: userInfo.token,
+                user_id: userInfo.user_id,
                 content: this.messagePeopleTxt,
-                type: '2',
+                type: '5',
                 data_id: this.questionId,
                 father_id: item.comment_id
             }

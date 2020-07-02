@@ -85,37 +85,45 @@
                         </div>
                     </div>
                 </div>
-                <pageItem v-if="pageNumDataF.length" :pageNumData="pageNumDataF" :limit="limitF"></pageItem>
+                <pageItem v-if="pageNumDataF.length" :pageNumData="pageNumDataF" :limit="limitF" @changePage="changePage"></pageItem>
             </div>
-            <div class="comment_message_box">
-                <div class="title">关于CS GO设备与设置的评论 (1233条)</div>
+            <div class="comment_message_box" v-if="messageTotal > 0">
+                <div class="title">关于CS GO设备与设置的评论 ({{messageTotal}}条)</div>
                 <div class="cont_box">
-                    <div class="trem_box">
+                    <div class="trem_box" v-for="(item, index) in commentListData" :key="index">
                         <div class="people_box">
                             <div class="l_box">
-                                <img class="people_img" src="../assets/images/title_img.jpg" alt="">
+                                <img class="people_img" :src="item.avatar" alt="">
                             </div>
                             <div class="r_box">
-                                <div class="name">露娜的冬瓜</div>
+                                <div class="name">
+                                    <div>{{item.user_title}}</div>
+                                    <div v-if="item.father_id !== 0">回复{{item.parent_user_title}}</div>
+                                </div>
                                 <div class="time_box">
-                                    <div class="t_txt">2020年5月23日下午4:19</div>
-                                    <a href="javascript:;">回复Ta</a>
+                                    <div class="t_txt">{{item.add_time}}</div>
+                                    <a href="javascript:;" @click="toTalkPeople(index)">回复Ta</a>
                                 </div>
                             </div>
                         </div>
                         <div class="message_box">
                             <img class="l_icon" src="" alt="">
-                            <div class="txt_box">在徐州人家小区，发现白云南区9号楼2单元门前停放一辆电动自行车，从该楼高层甩下来一根黄色电线，正在充电</div>
+                            <!-- <div class="txt_box">{{item.father_id !== 0 ? item.parent_content : item.content}}</div> -->
+                            <div class="txt_box">{{item.content}}</div>
+                        </div>
+                        <div class="hf_message_box" v-if="messageIndex === index">
+                            <textarea placeholder="请输入你要回复的内容" v-model="messagePeopleTxt"></textarea>
+                            <a href="javascript:;" class="submit_btn" @click="toSubmitToPeople(item)">发表</a>
                         </div>
                     </div>
                 </div>
-                <pageItem v-if="pageNumDataS.length" :pageNumData="pageNumDataS" :limit="limitS"></pageItem>
+                <pageItem v-if="pageNumDataS.length" :pageNumData="pageNumDataS" @changePages="changePages" ItemIdex="2"></pageItem>
             </div>
             <div class="submit_messages_box">
                 <div class="title">发表评论</div>
-                <textarea class="sr_messages" placeholder="请输入你要发表的评论"></textarea>
+                <textarea class="sr_messages" placeholder="请输入你要发表的评论" v-model="messageTxt"></textarea>
                 <div class="submit_btn">
-                    <button>提交</button>
+                    <a href="javascript:;" @click="toSubmitMessage">提交</a>
                 </div>
             </div>
         </div>
@@ -157,7 +165,14 @@ export default {
             pageNumDataS:[],
             deviceConfigList: [],
             limitF: 10,
-            limitS: 10
+            limitS: 5,
+            pageS: 1,
+            pageF: 1,
+            messageTotal: 0,
+            commentListData: [],
+            messageIndex: -1,
+            messagePeopleTxt: '',
+            messageTxt: ''
         }
     },
     components: {
@@ -166,6 +181,7 @@ export default {
     },
     mounted () {
         this.getDeviceConfig()
+        this.getCommentList()
     },
     methods: {
         getDeviceConfig () {
@@ -182,6 +198,82 @@ export default {
             }).catch(err => {
                 this.$Message.error(err.message)
             })
+        },
+        getCommentList () {
+            let data = {
+                type: '3',
+                page: this.pageS,
+                limit: this.limitS
+            }
+            ajaxHttp.commentListFeath(data).then(res => {
+                console.log(res)
+                this.commentListData = res.data.list
+                this.messageTotal = res.data.total
+                this.pageNumDataS = []
+                if (res.data.total > 5) {
+                    for (let i = 1; i< Math.ceil((res.data.total)/5) + 1;i++){
+                        console.log(i)
+                        this.pageNumDataS.push(i)
+                    }
+                } else {
+                    this.pageNumDataS.push(1)
+                }
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        toSubmitToPeople (item) {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                return
+            }
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id,
+                content: this.messagePeopleTxt,
+                type: '3',
+                father_id: item.comment_id
+            }
+            ajaxHttp.submitPeocommenFeath(data).then(res => {
+                console.log(res)
+                this.$Message.success('回复成功')
+                this.getCommentList()
+                this.messageIndex = -1
+                this.messagePeopleTxt = ''
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        toSubmitMessage () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                return
+            }
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id,
+                content: this.messageTxt,
+                type: '3'
+            }
+            ajaxHttp.submitPeocommenFeath(data).then(res => {
+                this.$Message.success('发表成功')
+                this.getCommentList()
+                this.messageTxt = ''
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        toTalkPeople (index) {
+            this.messageIndex = index
+        },
+        changePage (e) {
+            this.pageF = e
+        },
+        changePages (e) {
+            this.pageS = e
+            this.getCommentList()
         }
     }
 }

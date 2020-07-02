@@ -189,11 +189,21 @@
                             .name {
                                 margin: 9px 0 5px;
                                 height: 28px;
-                                line-height: 28px;
-                                font-size:20px;
-                                font-family:PingFangSC-Medium,PingFang SC;
-                                font-weight:500;
-                                color:rgba(77,54,98,1);
+                                display: flex;
+                                div {
+                                    line-height: 28px;
+                                    font-size:20px;
+                                    font-family:PingFangSC-Medium,PingFang SC;
+                                    font-weight:500;
+                                    color:rgba(77,54,98,1);
+                                    height: 100%;
+                                }
+                                div:first-child {
+                                    margin-right: 5px;
+                                }
+                                div:nth-child(2) {    
+                                    color: #1B092B;
+                                }
                             }
                             .time_box {
                                 height: 20px;
@@ -222,6 +232,7 @@
                         }
                     }
                     .message_box {
+                        margin-top: 15px;
                         display: flex;
                         padding-left: 45px;
                         box-sizing: border-box;
@@ -241,6 +252,42 @@
                             color:rgba(34,11,55,1);
                             line-height:28px;
                             background: #EDEBEF;
+                        }
+                    }
+                    .hf_message_box {
+                        margin-top: 23px;
+                        padding-left: 69px;
+                        box-sizing: border-box;
+                        overflow: hidden;
+                        textarea {
+                            width: 100%;
+                            border-radius:6px;
+                            height: 100%;
+                            background: #EBEBEB;
+                            padding: 15px 16px;
+                            box-sizing: border-box;
+                            font-size:16px;
+                            font-family:PingFangSC-Regular,PingFang SC;
+                            font-weight:400;
+                            color:rgba(34,11,55,1);
+                            line-height:25px;
+                            height: 130px;
+                            border: none;
+                            outline: none;
+                        }
+                        .submit_btn {
+                            margin-top: 10px;
+                            width: 70px;
+                            height: 35px;
+                            line-height: 35px;
+                            text-align: center;
+                            background: #8C6F9A;
+                            border-radius: 4px;
+                            font-size:16px;
+                            font-family:PingFangSC-Regular,PingFang SC;
+                            font-weight:400;
+                            color:rgba(255,255,255,1);
+                            float: right;
                         }
                     }
                 }
@@ -279,7 +326,7 @@
                 margin: 40px 0 133px;
                 display: flex;
                 justify-content: flex-end;
-                button {
+                a {
                     border: none;
                     background:rgba(140,111,154,1);
                     border-radius:6px;

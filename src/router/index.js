@@ -11,10 +11,11 @@ import my from '@/page/my'
 import feedback from '@/page/feedback'
 import productPageInfo from '@/page/productPageInfo'
 import answerInfoPage from '@/page/answerInfoPage'
+import searchPage from '@/page/searchPage'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -80,6 +81,17 @@ export default new Router({
       path: '/answerInfoPage',
       name: 'answerInfoPage',
       component: answerInfoPage
+    },
+    {
+      path: '/searchPage',
+      name: 'searchPage',
+      component: searchPage
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  next();
+})
+
+export default router

@@ -24,6 +24,10 @@ export default {
         limit: {
             type: Number,
             default: 10
+        },
+        ItemIdex: {
+            type: String,
+            default: '1'
         }
     },
     data () {
@@ -68,7 +72,12 @@ export default {
         },
         pageIndexChange (index) {
             this.pageIndex = index
-            this.$emit('changePage', index)
+            if (this.ItemIdex === '1') {
+                this.$emit('changePage', index)
+            } else if (this.ItemIdex === '2') {
+                this.$emit('changePages', index)
+            }
+            
         },
         changePageArray () {
             console.log(this.pageDataChange)

@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div class="item_s_box">
+            <div class="item_s_box" v-if="newProListData.length">
                 <div class="title">最近更新设备</div>
                 <div class="cont">
                     <div class="trem_box" v-for="(item, index) in newProListData" :key="index" @click="seeAssessInfo(item)">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            <div class="item_t_box">
+            <div class="item_t_box" v-if="playeListData.length">
                 <div class="title">最近更新选手</div>
                 <div class="cont">
                     <div class="trem_box" v-for="(item, index) in playeListData" :key="index" @click="seePlayeInfo(item)">
@@ -114,7 +114,7 @@
                     </div>
                 </div>
             </div>
-            <div class="main_t_box"> 
+            <div class="main_t_box" v-if="playeImgListData.length"> 
                 <div class="title">热门CS GO 队员</div>
                 <div class="cont">
                     <div class="trem_box" v-for="(item, index) in playeImgListData" :key="index" @click="seePlayeInfo(item)">
@@ -123,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <div class="main_ff_box">
+            <div class="main_ff_box" v-if="holdProListData.length">
                 <div class="title">热门CS GO设备</div>
                 <div class="cont">
                     <div class="trem_box" v-for="(item, index) in holdProListData" :key="index" @click="seeAssessInfo(item)">

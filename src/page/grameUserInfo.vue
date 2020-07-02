@@ -98,7 +98,7 @@
                                     <div v-if="item.father_id !== 0">回复{{item.parent_user_title}}</div>
                                 </div>
                                 <div class="time_box">
-                                    <div class="t_txt">2020年5月23日下午4:19</div>
+                                    <div class="t_txt">{{item.add_time}}</div>
                                     <a href="javascript:;" @click="toTalkPeople(index)">回复Ta</a>
                                 </div>
                             </div>
@@ -226,9 +226,14 @@ export default {
             this.messageIndex = index
         },
         toSubmitToPeople (item) {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                return
+            }
             let data = {
-                token: JSON.parse(localStorage.getItem('userInfo')).token,
-                user_id: JSON.parse(localStorage.getItem('userInfo')).user_id,
+                token: userInfo.token,
+                user_id: userInfo.user_id,
                 content: this.messagePeopleTxt,
                 type: '1',
                 data_id: this.playerId,
@@ -245,9 +250,14 @@ export default {
             })
         },
         toSubmitMessage () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                return
+            }
             let data = {
-                token: JSON.parse(localStorage.getItem('userInfo')).token,
-                user_id: JSON.parse(localStorage.getItem('userInfo')).user_id,
+                token: userInfo.token,
+                user_id: userInfo.user_id,
                 content: this.messageTxt,
                 type: '1',
                 data_id: this.playerId
@@ -261,8 +271,7 @@ export default {
             })
         },
         changePage (e) {
-            this.pageS = e
-            this.getCommentList()
+            this.pageF = e
         }
     }
 }

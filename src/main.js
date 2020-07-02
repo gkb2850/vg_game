@@ -19,7 +19,6 @@ import 'view-design/dist/styles/iview.css';
 Vue.component('Spin', Spin);
 Vue.component('Icon', Icon);
 Vue.prototype.$Message = Message
-Vue.prototype.$Message = Spin
 
 // Vue.use(ViewUI);
 
