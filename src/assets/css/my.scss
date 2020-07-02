@@ -74,18 +74,24 @@
                             color:rgba(77,54,98,1);
                             margin: 45px 50px 21px;
                         }
-                        .bj_btn {
-                            width: 63px;
-                            text-align: center;
-                            height: 34px;
-                            line-height: 34px;
-                            border-radius: 17px;
-                            font-size:16px;
-                            font-family:PingFangSC-Regular,PingFang SC;
-                            font-weight:400;
-                            color:rgba(255,255,255,1);
-                            background: #8C6F9A;
-                            margin: 43px 32px 21px;
+                        .a_btn_box {
+                            display: flex;
+                            align-items: center;
+                            height: 100%;
+                            padding-right: 30px;
+                            .bj_btn {
+                                width: 63px;
+                                text-align: center;
+                                height: 34px;
+                                line-height: 34px;
+                                border-radius: 17px;
+                                font-size:16px;
+                                font-family:PingFangSC-Regular,PingFang SC;
+                                font-weight:400;
+                                color:rgba(255,255,255,1);
+                                background: #8C6F9A;
+                                margin: 43px 0 21px 20px;
+                            }
                         }
                     }
                     .c_box {
@@ -205,14 +211,19 @@
                                         }
                                     }
                                 }
-                                .r_txt {
-                                    height: 22px;
-                                    line-height: 22px;
-                                    font-size:16px;
-                                    font-family:PingFangSC-Regular,PingFang SC;
-                                    font-weight:400;
-                                    color:rgba(140,111,154,1);
-                                    padding-left: 30px;
+                                .btn_a_box {
+                                    display: inline-flex;
+                                    height: 100%;
+                                    align-items: center;
+                                    .r_txt {
+                                        height: 22px;
+                                        line-height: 22px;
+                                        font-size:16px;
+                                        font-family:PingFangSC-Regular,PingFang SC;
+                                        font-weight:400;
+                                        color:rgba(140,111,154,1);
+                                        padding-left: 30px;
+                                    }
                                 }
                             }
                         }
@@ -396,6 +407,29 @@
                                             top: 0;
                                             height: 100%;
                                             width: 100%;
+                                            border: none;
+                                            outline: none;
+                                            opacity: 0;
+                                        }
+                                    }
+                                    .select_upload_img {
+                                        position: relative;
+                                        width: 100px;
+                                        height: 100px;
+                                        margin: 0 auto;
+                                        img {
+                                            height: 100%;
+                                            width: 100%;
+                                            display: block;
+                                            border-radius: 50%;
+                                            border: 1px solid #8C6F9A;
+                                        }
+                                        .fileInput {
+                                            position: absolute;
+                                            left: 0;
+                                            top: 0;
+                                            width: 100%;
+                                            height: 100%;
                                             border: none;
                                             outline: none;
                                             opacity: 0;

@@ -16,38 +16,50 @@
                     <div class="user_data_box">
                         <div class="title_box">
                             <div class="l_name">{{lNavIndex === '1' ? '我的资料' : lNavIndex === '2' ? '我的评论' : '头像设置'}}</div>
-                            <a class="bj_btn" v-if="lNavIndex === '2'" href="javascript:;" @click="toEnidMessage">{{radioShowBtn?'删除':'编辑'}}</a>
+                            <div class="a_btn_box">
+                                <a class="bj_btn" v-if="lNavIndex === '2'" href="javascript:;" @click="toEnidMessage">{{radioShowBtn?'删除':'编辑'}}</a>
+                                <a class="bj_btn" v-if="radioShowBtn && lNavIndex === '2'" href="javascript:;" @click="toEnidChangeSuccess">完成</a>
+                            </div>
                         </div>
                         <div class="c_box" v-if="lNavIndex === '1'">
                             <div class="inset_first_box" v-if="true">
                                 <div class="item_box">
                                     <div class="l_label_box">
                                         <div class="h_txt">手机号</div>
-                                        <div class="h_info_txt" v-if="false">123456789</div>
-                                        <input type="number" class="h_info_input" v-else>
+                                        <div class="h_info_txt" v-if="userPhoneShow">{{userInfoTxt.mobile}}</div>
+                                        <input type="number" class="h_info_input" v-else v-model="userInfoEdit.mobile">
                                     </div>
-                                    <div class="r_txt">编辑</div>
+                                    <div class="btn_a_box">
+                                        <a class="r_txt" @click="editUserInfo('phone')">编辑</a>
+                                        <a class="r_txt" v-if="!userPhoneShow" @click="changeSuccessInfo('phone')">完成</a>
+                                    </div>
                                 </div>
                                 <div class="item_box">
                                     <div class="l_label_box">
                                         <div class="h_txt">密码</div>
                                         <div class="h_info_txt" v-if="false">123456789</div>
                                         <div class="pass_input_box" v-else>
-                                            <div class="pass_txt" v-if="true">未设置</div>
+                                            <div class="pass_txt" v-if="userInfoEdit.passwd !== 1">未设置</div>
                                             <input class="r_input" type="text" placeholder="当前密码" v-else>
                                             <input class="r_input" type="text" placeholder="新密码">
                                             <input class="r_input" type="text" placeholder="确认新密码">
                                         </div>
                                     </div>
-                                    <div class="r_txt">编辑</div>
+                                    <div class="btn_a_box">
+                                        <a class="r_txt" @click="editUserInfo('pass')">编辑</a>
+                                        <a class="r_txt" v-if="!userNameShow" @click="changeSuccessInfo('pass')">完成</a>
+                                    </div>
                                 </div>
                                 <div class="item_box">
                                     <div class="l_label_box">
                                         <div class="h_txt">昵称</div>
-                                        <div class="h_info_txt" v-if="false">滴滴滴</div>
-                                        <input type="number" class="h_info_input" v-else>
+                                        <div class="h_info_txt" v-if="userNameShow">{{userInfoTxt.title}}</div>
+                                        <input type="text" class="h_info_input" v-else v-model="userInfoEdit.title">
                                     </div>
-                                    <div class="r_txt">编辑</div>
+                                    <div class="btn_a_box">
+                                        <a class="r_txt" @click="editUserInfo('name')">编辑</a>
+                                        <a class="r_txt" v-if="!userNameShow" @click="changeSuccessInfo('name')">完成</a>
+                                    </div>
                                 </div>
                                 <div class="item_box">
                                     <div class="l_label_box">
@@ -55,16 +67,19 @@
                                         <div class="h_info_txt" v-if="false">男</div>
                                         <div class="h_info_radio_box">
                                             <div class="item_radio">
-                                                <input type="radio" id="one" value="男" v-model="SelectRadio">
+                                                <input type="radio" id="one" value="男" v-model="SelectRadio" :checked="radiotxtBtn" @click="radioSex">
                                                 <label for="one">男</label>
                                             </div>
                                             <div class="item_radio">
-                                                <input type="radio" id="one" value="女" v-model="SelectRadio">
+                                                <input type="radio" id="one" value="女" v-model="SelectRadio" :checked="!radiotxtBtn" @click="radioSex">
                                                 <label for="one">女</label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="r_txt">编辑</div>
+                                    <div class="btn_a_box">
+                                        <a class="r_txt" @click="editUserInfo('sex')">编辑</a>
+                                        <a class="r_txt" v-if="!userNameShow" @click="changeSuccessInfo('sex')">完成</a>
+                                    </div>
                                 </div>
                                 <div class="item_box">
                                     <div class="l_label_box">
@@ -143,17 +158,21 @@
                             <div class="select_user_img">
                                 <div class="select_img">
                                     <div class="inset_img">
-                                        <div class="upload_box">
+                                        <div class="upload_box" v-if="!uploadImgSrc">
                                             <div class="show_txt">
                                                 <img src="../assets/images/add_icon.png" alt="">
                                                 <div>选择图片</div>
                                             </div>
-                                            <input type="file" class="fileInput">
+                                            <input type="file" ref="fileImg" class="fileInput" @change="selectImgUpload">
+                                        </div>
+                                        <div class="select_upload_img" v-else>
+                                            <img :src="uploadImgSrc" alt="">
+                                            <input type="file" ref="fileImg" class="fileInput" @change="selectImgUpload">
                                         </div>
                                         <div class="js_txt">支持jpg,png大小不超过5M</div>
                                     </div>
                                     <div class="btn_box">
-                                        <button>确定</button>
+                                        <button @click="toUploadImg">确定</button>
                                         <button>取消</button>
                                     </div>
                                 </div>
@@ -173,20 +192,30 @@ import ajaxHttp from '@/api/index'
 export default {
     data () {
         return {
+            formData: new FormData(),
             SelectRadio: 'one',
-            pageNumData:['','','','','',''],
+            radiotxtBtn: true,
+            pageNumData:[],
             page: 1,
             limit: 4,
             lNavIndex: '1',
             userCommentList:[],
-            radioShowBtn: false
+            radioShowBtn: false,
+            uploadImgFile: '',
+            uploadImgSrc: '',
+            userInfoTxt: '',
+            userInfoEdit: '',
+            userNameShow: true,
+            userPhoneShow: true
         }
     },
     components: {
         deviceOrSet,
         pageItem
     },
-    mounted () {},
+    mounted () {
+        this.getUserInfoToHttp()
+    },
     methods: {
         getUserCommentList () {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
@@ -211,7 +240,7 @@ export default {
                     for (let i = 1; i< Math.ceil((res.data.total)/4) + 1;i++){
                         this.pageNumData.push(i)
                     }
-                } else {
+                } else if (res.data.total > 0 && res.data.total <= 4) {
                     this.pageNumData.push(1)
                 }
             }).catch(err => {
@@ -227,11 +256,35 @@ export default {
             console.log(str)
             if (str === '2') {
                 this.getUserCommentList();
+            } else if (str === '1') {
+                this.getUserInfoToHttp();
             }
         },
         toEnidMessage () {
             if (this.radioShowBtn) {
-
+                let arr = []
+                this.userCommentList.forEach(i => {
+                    console.log(i)
+                    if (i.radioShow) {
+                        arr.push(i.comment_id)
+                    }
+                })
+                let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+                if (!userInfo) {
+                    this.$Message.error('用户状态失效，请重新登录')
+                    return
+                }
+                let data = {
+                    token: userInfo.token,
+                    user_id: userInfo.user_id,
+                    comment_id: arr.join(',')
+                }
+                ajaxHttp.delCommentInfoFeath(data).then(res => {
+                    this.$Message.success('删除成功')
+                    this.getUserCommentList()
+                }).catch(err => {
+                    this.$Message.error(err.message)
+                })
             } else {
                 this.radioShowBtn = true
             }
@@ -241,6 +294,117 @@ export default {
             let data = this.userCommentList[index]
             data.radioShow = !data.radioShow
             this.$set(this.userCommentList, index, data)
+        },
+        toEnidChangeSuccess () {
+            this.radioShowBtn = false
+        },
+        selectImgUpload () {
+            let that = this
+            console.log(this.$refs.fileImg.files[0])
+            this.uploadImgFile = this.$refs.fileImg.files[0]
+            var reads= new FileReader();
+            reads.readAsDataURL(this.uploadImgFile);
+            reads.onload=function (e) {
+                that.uploadImgSrc = e.target.result
+            };
+        },
+        toUploadImg () {
+            if (this.uploadImgFile === '') {
+                this.$Message.error('请先上传图片')
+                return
+            }
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                return
+            }
+            this.formData.append('file', this.uploadImgFile);
+            console.log(this.formData)
+            let data = {
+                file: this.formData,
+                token: userInfo.token,
+                user_id: userInfo.user_id
+            }
+            ajaxHttp.uploadImgFeath(data).then(res => {
+                console.log(res)
+                this.$Message.success('上传成功')
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        getUserInfoToHttp () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                return
+            }
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id
+            }
+            ajaxHttp.getUserInfoFeath(data).then(res => {
+                console.log(res)
+                this.userInfoTxt = res.data.user_info
+                this.userInfoEdit = res.data.user_info
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        editUserInfo (str) {
+            switch (str) {
+                case 'phone':
+                    this.userPhoneShow = false
+                break;
+                case 'name':
+                    this.userNameShow = false
+                break;
+            }
+        },
+        changeSuccessInfo (str) {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+             switch (str) {
+                case 'phone':
+                    this.userPhoneShow = true
+                    if (!userInfo) {
+                        this.$Message.error('用户状态失效，请重新登录')
+                        return
+                    }
+                    let dataP = {
+                        token: userInfo.token,
+                        user_id: userInfo.user_id,
+                        mobile: this.userInfoEdit.mobile,
+                        gender: this.userInfoTxt.gender ? this.userInfoTxt.gender : '',
+                        title: this.userInfoTxt.title
+                    }
+                    ajaxHttp.changeUserInfoFeath(dataP).then(res => {
+                        this.$Message.success('更新成功')
+                    }).catch(err => {
+                        this.$Message.error(err.message)
+                    })
+                break;
+                case 'name':
+                    this.userNameShow = true
+                    if (!userInfo) {
+                        this.$Message.error('用户状态失效，请重新登录')
+                        return
+                    }
+                    let dataN = {
+                        token: userInfo.token,
+                        user_id: userInfo.user_id,
+                        mobile: this.userInfoTxt.mobile,
+                        gender: this.userInfoTxt.gender ? this.userInfoTxt.gender : '',
+                        title: this.userInfoEdit.title
+                    }
+                    ajaxHttp.changeUserInfoFeath(dataN).then(res => {
+                        this.$Message.success('更新成功')
+                    }).catch(err => {
+                        this.$Message.error(err.message)
+                    })
+                break;
+            }
+        },
+        radioSex (e) {
+            console.log(e)
         }
     }
 }

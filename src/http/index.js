@@ -1,6 +1,6 @@
 import Qs from 'qs';
 import Vue from 'vue'
-import { Spin } from 'view-design';
+import { Message } from 'view-design';
 import 'view-design/dist/styles/iview.css';
 
 // 配置API接口地址

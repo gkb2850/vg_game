@@ -1,7 +1,7 @@
 <template>
     <div class="header_box">
         <div class="first_box">
-            <a v-if="!isLogin" class="txt" @click="loginBoxShow('show')">欢迎来到XXX ~ 请登录你的游戏人生</a>
+            <a v-if="!isLogin" class="txt" @click="loginBoxShow('show')">欢迎来到CS GO ~ 请登录你的游戏人生</a>
             <a v-else class="txt" @click="toMyPage">欢迎用户</a>
         </div>
         <div class="nav_box">
@@ -10,8 +10,15 @@
             </div>
             <div class="c_box">
                 <div class="nav_txt" v-for="(item, index) in navData" :key="index">
-                    <router-link class="nav_link" :to="item.path">
-                        <span>{{item.txt}}</span>
+                    <router-link class="nav_link" :to="index !== 3 ? item.path: ''">
+                        <span :class="{active: navIndexTop === index}" @click="toNavClick(index)">{{item.txt}}</span>
+                        <div class="labels_box" v-if="index === 3 && navIndexShow">
+                            <div :class="{item_box: true, active: llabelIndex === 0}" @click="labelNavClick('first')">2020年最佳设备</div>
+                            <div :class="{item_box: true, active: llabelIndex === 1}" @click="labelNavClick('second')">CS GO最佳设备</div>
+                            <div class="llable_box">
+                                <div class="itxt active" v-for="(item, index) in deiceListData" :key="index" @click="toSeeDevicInfo(item)">{{item.title}}</div>
+                            </div>
+                        </div>
                     </router-link>
                 </div>
             </div>
@@ -82,6 +89,9 @@
                     <div class="c_trem_box">
                         <input type="text" placeholder="密码" class="input_txt" v-model="loginData.pass">
                     </div>
+                    <div class="c_trem_a_box">
+                        <a href="javascript:;" @click="registerBoxShow('show')" class="txta">注册账号</a>
+                    </div>
                 </div>
                 <div class="c_box" v-else>
                     <div class="phone_box">
@@ -121,11 +131,11 @@ export default {
                     path: '/index'
                 },
                 {
-                    txt: '设备与设置',
+                    txt: 'CS GO数据',
                     path: '/deviceOrSet'
                 },
                 {
-                    txt: '玩家们',
+                    txt: 'CS GO选手',
                     path: '/gamePlayer'
                 },
                 {
@@ -152,7 +162,12 @@ export default {
             loginData: {
                 phone:'',
                 pass:''
-            }
+            },
+            deiceListData: [],
+            llabelIndex: 0,
+            deiceListDataAll: [],
+            navIndexShow: false,
+            navIndexTop: 0
         }
     },
     created () {
@@ -165,8 +180,18 @@ export default {
             this.searchtxt = ''
         }
     },
-    mounted () {},
+    mounted () {
+        this.getDevListData()
+    },
     methods: {
+        getDevListData () {
+            ajaxHttp.bastDeviceListFeath().then(res => {
+                this.deiceListData = res.data.list['2020最佳设备']
+                this.deiceListDataAll = res.data.list
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
         getSearchData (e) {
             if (this.searchtxt === '') {
                 return
@@ -233,8 +258,8 @@ export default {
             ajaxHttp.registerFeath(data).then(res => {
                 console.log(res)
                 this.$Message.success('注册成功')
-                this.loginBoxShow = true
-                this.registerBoxShow = false
+                this.loginBoxShowStutas = true
+                this.registerBoxShowStutas = false
             }).catch(err => {
                 this.$Message.error(err.message)
             })
@@ -274,7 +299,7 @@ export default {
                 localStorage.setItem('userInfo', JSON.stringify(res.data))
 
             }).catch(err => {
-                this.$Message.error(err.msg)
+                this.$Message.error(err.message)
                 
             })
         },
@@ -284,6 +309,31 @@ export default {
                 return
             }
             this.$router.push('/my')
+        },
+        labelNavClick (str) {
+            if (str === 'first') {
+                this.llabelIndex = 0
+                this.deiceListData = this.deiceListDataAll['2020最佳设备']
+            } else if (str === 'second') {
+                this.llabelIndex = 1
+                this.deiceListData = this.deiceListDataAll['csgo']
+            }
+        },
+        toNavClick (index) {
+            if (index === 3) {
+                this.navIndexShow = !this.navIndexShow
+            } else {
+                this.navIndexShow = false
+            }
+            this.navIndexTop = index
+        },
+        toSeeDevicInfo (item) {
+            this.$router.push({
+                path: '/productPageInfo',
+                query: {
+                    id: item.id
+                }
+            })
         }
     },
 }
@@ -310,7 +360,7 @@ export default {
             }
         }
         .nav_box {
-            padding: 6px 150px;
+            padding: 0 150px;
             box-sizing: border-box;
             height: 75px;
             display: flex;
@@ -327,23 +377,72 @@ export default {
             }
             .c_box {
                 flex: 1;
-                overflow: hidden;
                 display: flex;
                 height: 100%;
                 justify-content: flex-end;
                 .nav_txt {
-                    margin-right: 30px;
+                    position: relative;
                     .nav_link {
                         text-decoration: none;
                         span {
-                            height: 64px;
-                            line-height: 64px;
+                            padding: 0 23px;
+                            height: 75px;
+                            line-height: 75px;
                             font-size:18px;
                             font-family:PingFangSC-Regular,PingFang SC;
                             font-weight:400;
                             color:rgba(255,255,255,1);
                             width: 100%;
                             display: block;
+                        }
+                        span.active {
+                            background: #604876;
+                        }
+                        .labels_box {
+                            position: absolute;
+                            left: 50%;
+                            bottom: -80px;
+                            width: 208px;
+                            z-index: 10;
+                            transform: translateX(-50%);
+                            background:rgba(255,255,255,1);
+                            box-shadow:0px 2px 18px 0px rgba(199,189,203,0.47);
+                            .item_box {
+                                height: 40px;
+                                line-height: 40px;
+                                text-align: center;
+                                font-size:14px;
+                                font-family:PingFangSC-Medium,PingFang SC;
+                                font-weight:500;
+                                color:#220B37;
+                                background: #F3F3F3;
+                            }
+                            .item_box.active {
+                                color: rgba(117, 79, 137, 1);
+                            }
+                            .llable_box {
+                                position: absolute;
+                                right: 0;
+                                transform: translateX(100%);
+                                top: 0;
+                                width: 208px;
+                                z-index: 10;
+                                background:rgba(255,255,255,1);
+                                box-shadow:0px 2px 18px 0px rgba(199,189,203,0.47);
+                                .itxt {
+                                    height: 40px;
+                                    line-height: 40px;
+                                    text-align: center;
+                                    font-size:14px;
+                                    font-family:PingFangSC-Medium,PingFang SC;
+                                    font-weight:500;
+                                    color:#220B37;
+                                    background: #F3F3F3;
+                                }
+                                .itxt.active {
+                                    color:rgba(117,79,137,1);
+                                }
+                            }
                         }
                     }
                 }
@@ -614,6 +713,20 @@ export default {
                         }
                         .input_txt:-moz-placeholder {
                             color:#C9C2D0;
+                        }
+                    }
+                    .c_trem_a_box {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        padding-top: 6px;
+                        .txta {
+                            height:25px;
+                            font-size:18px;
+                            font-family:PingFangSC-Medium,PingFang SC;
+                            font-weight:500;
+                            color:rgba(77,54,98,1);
+                            line-height:25px;
                         }
                     }
                     .phone_box {

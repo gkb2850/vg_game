@@ -279,22 +279,26 @@
                     flex: 1;
                     display: flex;
                     .trem_box {
+                        padding-top: 15px;
                         flex: 1;
                         .title_txt {
                             height: 25px;
                             line-height: 25px;
-                            margin-bottom: 16px;
+                            margin-bottom: 30px;
                             font-size:18px;
                             font-family:PingFangSC-Medium,PingFang SC;
                             font-weight:500;
-                            color:rgba(77,47,93,1);
+                            color:#4D2F5D;
+                        }
+                        .title_txt:nth-child(2) {
+                            margin-top: 3px;
                         }
                         .txt {
                             height: 42px;
                             line-height: 42px;
                             text-align: center;
                             background: #4D3662;
-                            margin-bottom: 12px;
+                            margin-bottom: 16px;
                             font-size:14px;
                             font-family:PingFangSC-Regular,PingFang SC;
                             font-weight:400;

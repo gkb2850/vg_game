@@ -90,9 +90,7 @@
                         <div class="trem_box">
                             <div class="title_txt">GS GO 设置指南</div>
                             <div class="txt active">GS GO 设置和装备列表</div>
-                            <div class="txt">GS GO 最佳设置指南</div>
-                            <div class="txt">GS GO 设置和装备列表</div>
-                            <div class="txt">GS GO 设置和装备列表</div>
+                            <div class="title_txt">GS GO 最佳设置指南</div>
                             <div class="txt">GS GO 设置和装备列表</div>
                         </div>
                         <div class="trem_box">
@@ -100,16 +98,12 @@
                             <div class="txt">GS GO PC指南</div>
                             <div class="txt">GS GO CPU指南</div>
                             <div class="txt">GS GO 设置指南</div>
-                            <div class="txt">GS GO 设置和装备列表</div>
-                            <div class="txt">GS GO 设置和装备列表</div>
                         </div>
                         <div class="trem_box">
-                            <div class="title_txt">GS GO 装备</div>
+                            <div class="title_txt"></div>
                             <div class="txt">GS GO 鼠标指南</div>
                             <div class="txt">GS GO 键盘指南</div>
                             <div class="txt">GS GO 鼠标垫指南</div>
-                            <div class="txt">GS GO 显示器指南</div>
-                            <div class="txt">GS GO 耳机指南</div>
                         </div>
                     </div>
                 </div>

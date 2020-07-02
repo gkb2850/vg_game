@@ -20,4 +20,8 @@ export default {
     questionInfoFeath: (data) => apiAxios('POST', '/api/question/getDetail', data),//问答详情
     bastDeviceListFeath: (data) => apiAxios('POST', '/api/device/getBastDeviceList', data),//状态栏最佳设备表
     bastDeviceInfoFeath: (data) => apiAxios('POST', '/api/device/getBastDeviceInfo', data),//最佳设备详情
+    delCommentInfoFeath: (data) => apiAxios('POST', '/api/comment/delComment', data),//删除评论
+    uploadImgFeath: (data) => apiAxios('POST', '/api/user/upFile', data),//图片上传
+    getUserInfoFeath: (data) => apiAxios('POST', '/api/user/getUserInfo', data),//获取用户信息
+    changeUserInfoFeath: (data) => apiAxios('POST', '/api/user/updateUserInfo', data),//更新用户信息
 }
