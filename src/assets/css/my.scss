@@ -172,6 +172,7 @@
                                                 height: 15px;
                                                 width: 15px;
                                                 box-sizing: border-box;
+                                                margin-right: 10px;
                                             }
                                         }
                                         .item_radio:first-child {
@@ -462,6 +463,7 @@
                                         border: 1px solid #8C6F9A;
                                         box-sizing: border-box;
                                         text-align: center;
+                                        outline: none;
                                     }
                                     button:first-child {
                                         background:  rgba(140,111,154,1);
@@ -475,5 +477,15 @@
                 }
             }
         }
+    }
+}
+
+.vertical-center-modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .ivu-modal{
+        top: 0;
     }
 }

@@ -52,7 +52,7 @@
                         <button>获取短信验证码</button>
                     </div> -->
                     <div class="item_box">
-                        <input type="text" placeholder="8-20位密码" class="input_txt" v-model="registerData.pass" @change="registerPassInput">
+                        <input type="password" placeholder="8-20位密码" class="input_txt" v-model="registerData.pass" @change="registerPassInput">
                     </div>
                 </div>
                 <div v-else>
@@ -60,7 +60,7 @@
                         <input type="text" placeholder="请输入昵称" class="input_txt" v-model="registerData.title">
                     </div>
                     <div class="item_box">
-                        <input type="text" placeholder="8-20位密码" class="input_txt" v-model="registerData.pass" @change="registerPassInput">
+                        <input type="password" placeholder="8-20位密码" class="input_txt" v-model="registerData.pass" @change="registerPassInput">
                     </div>
                 </div>
                 <a href="javascript:;" class="submit_btn" @click="toRegister">注册</a>
@@ -87,7 +87,7 @@
                         <input type="number" placeholder="手机号" class="input_txt" v-model="loginData.phone">
                     </div>
                     <div class="c_trem_box">
-                        <input type="text" placeholder="密码" class="input_txt" v-model="loginData.pass">
+                        <input type="password" placeholder="密码" class="input_txt" v-model="loginData.pass">
                     </div>
                     <div class="c_trem_a_box">
                         <a href="javascript:;" @click="registerBoxShow('show')" class="txta">注册账号</a>
@@ -100,7 +100,7 @@
                         <input type="number" placeholder="手机号" class="input_txt">
                     </div>
                     <div class="item_box">
-                        <input type="text" placeholder="请输入6位短信验证码" class="input_txt">
+                        <input type="password" placeholder="请输入6位短信验证码" class="input_txt">
                         <button>获取短信验证码</button>
                     </div>
                     <div class="other_item">
@@ -269,6 +269,8 @@ export default {
                 this.loginBoxShowStutas = true
             } else {
                 this.loginBoxShowStutas = false
+                this.loginData.phone = ''
+                this.loginData.pass = ''
             }
         },
         registerBoxShow (str) {
@@ -277,6 +279,9 @@ export default {
                 this.loginBoxShowStutas = false
             } else {
                 this.registerBoxShowStutas = false
+                this.registerData.title = ''
+                this.registerData.phone = ''
+                this.registerData.pass = ''
             }
         },
         toLogin () {
@@ -296,6 +301,7 @@ export default {
                 console.log()
                 this.$Message.success('登录成功')
                 this.loginBoxShowStutas = false
+                this.isLogin = true
                 localStorage.setItem('userInfo', JSON.stringify(res.data))
 
             }).catch(err => {

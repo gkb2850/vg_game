@@ -14,10 +14,12 @@ import './assets/css/export.scss';
 import { Spin } from 'view-design';
 import { Icon } from 'view-design';
 import { Message } from 'view-design';
+import { Modal } from 'view-design';
 import 'view-design/dist/styles/iview.css';
 
 Vue.component('Spin', Spin);
 Vue.component('Icon', Icon);
+Vue.component('Modal', Modal);
 Vue.prototype.$Message = Message
 
 // Vue.use(ViewUI);

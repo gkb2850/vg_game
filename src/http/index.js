@@ -28,7 +28,7 @@ function filterNull (o) {
   return o
 }
  
-function apiAxios (method, url, params={}, that) {
+function apiAxios (method, url, params={}) {
     return new Promise((resolve, reject) => {
         if (params) {
             params = filterNull(params)
@@ -47,6 +47,7 @@ function apiAxios (method, url, params={}, that) {
             } else if (res.data.code === -1) {//需要登录
               Message.error('登陆超时，请重新登录')
               localStorage.removeItem('userInfo')
+              location.reload()
             } else {
               reject(res.data)
             }

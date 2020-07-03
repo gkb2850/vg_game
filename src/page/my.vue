@@ -5,8 +5,8 @@
             <div class="user_box">
                 <div class="l_nav_user">
                     <div class="user_info">
-                        <img src="../assets/images/title_img.jpg" alt="">
-                        <div class="name">昵称</div>
+                        <img :src="userInfoTxt.avatar" alt="">
+                        <div class="name">{{userInfoTxt.title}}</div>
                     </div>
                     <a href="javascript:;" :class="{trem_txt: true, active: lNavIndex === '1'}" @click="lNavTitleChange('1')">我的资料</a>
                     <a href="javascript:;" :class="{trem_txt: true, active: lNavIndex === '2'}" @click="lNavTitleChange('2')">我的评论</a>
@@ -64,21 +64,21 @@
                                 <div class="item_box">
                                     <div class="l_label_box">
                                         <div class="h_txt">性别</div>
-                                        <div class="h_info_txt" v-if="false">男</div>
-                                        <div class="h_info_radio_box">
-                                            <div class="item_radio">
-                                                <input type="radio" id="one" value="男" v-model="SelectRadio" :checked="radiotxtBtn" @click="radioSex">
+                                        <div class="h_info_txt" v-if="userSexShow">{{userInfoTxt.gender?userInfoTxt.gender:'未选择'}}</div>
+                                        <div class="h_info_radio_box" v-else>
+                                            <div class="item_radio" @click="radioSex">
+                                                <input type="radio" :checked="radiotxtBtn">
                                                 <label for="one">男</label>
                                             </div>
-                                            <div class="item_radio">
-                                                <input type="radio" id="one" value="女" v-model="SelectRadio" :checked="!radiotxtBtn" @click="radioSex">
+                                            <div class="item_radio"  @click="radioSex">
+                                                <input type="radio" :checked="!radiotxtBtn">
                                                 <label for="one">女</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="btn_a_box">
                                         <a class="r_txt" @click="editUserInfo('sex')">编辑</a>
-                                        <a class="r_txt" v-if="!userNameShow" @click="changeSuccessInfo('sex')">完成</a>
+                                        <a class="r_txt" v-if="!userSexShow" @click="changeSuccessInfo('sex')">完成</a>
                                     </div>
                                 </div>
                                 <div class="item_box">
@@ -91,7 +91,7 @@
                                 <div class="item_box">
                                     <div class="l_label_box">
                                         <div class="h_txt">账号</div>
-                                        <div class="h_info_btn">退出登陆</div>
+                                        <div class="h_info_btn" @click="toLoginOut">退出登陆</div>
                                     </div>
                                 </div>
                             </div>
@@ -163,11 +163,11 @@
                                                 <img src="../assets/images/add_icon.png" alt="">
                                                 <div>选择图片</div>
                                             </div>
-                                            <input type="file" ref="fileImg" class="fileInput" @change="selectImgUpload">
+                                            <input type="file" accept="image/*" ref="fileImg" class="fileInput" @change="selectImgUpload">
                                         </div>
                                         <div class="select_upload_img" v-else>
                                             <img :src="uploadImgSrc" alt="">
-                                            <input type="file" ref="fileImg" class="fileInput" @change="selectImgUpload">
+                                            <input type="file" accept="image/*" ref="fileImg" class="fileInput" @change="selectImgUpload">
                                         </div>
                                         <div class="js_txt">支持jpg,png大小不超过5M</div>
                                     </div>
@@ -182,6 +182,13 @@
                 </div>
             </div>
         </div>
+        <Modal
+        title="退出"
+        v-model="loginOutBoxShow"
+        @on-ok="sureLoginOut"
+        class-name="vertical-center-modal">
+        <p>确定退出登陆吗？</p>
+    </Modal>
     </div>
 </template>
 
@@ -189,11 +196,11 @@
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
 import ajaxHttp from '@/api/index'
+import Axios from 'axios'
+import Qs from 'qs';
 export default {
     data () {
         return {
-            formData: new FormData(),
-            SelectRadio: 'one',
             radiotxtBtn: true,
             pageNumData:[],
             page: 1,
@@ -206,7 +213,9 @@ export default {
             userInfoTxt: '',
             userInfoEdit: '',
             userNameShow: true,
-            userPhoneShow: true
+            userPhoneShow: true,
+            userSexShow: true,
+            loginOutBoxShow: false
         }
     },
     components: {
@@ -309,6 +318,7 @@ export default {
             };
         },
         toUploadImg () {
+            let that = this
             if (this.uploadImgFile === '') {
                 this.$Message.error('请先上传图片')
                 return
@@ -318,16 +328,38 @@ export default {
                 this.$Message.error('用户状态失效，请重新登录')
                 return
             }
-            this.formData.append('file', this.uploadImgFile);
-            console.log(this.formData)
+            let file = new FormData()
+            file.append('file', this.uploadImgFile);
+            file.append('token', userInfo.token);
+            file.append('user_id', userInfo.user_id);
+            let headers = {'Content-Type': 'multipart/form-data'}
+            Axios.post(process.env.API_ROOT + '/api/user/upFile', file, headers).then(res => {
+                console.log(res)
+                if (res.data.code === 1) {
+                    this.uploadImgSrc = res.data.data.url
+                    this.uploadUserImg()
+                } else if (res.data.code === -1) {
+                    this.$Message.error('登陆超时，请重新登录')
+                    localStorage.removeItem('userInfo')
+                    location.reload()
+                }
+          }).catch(err => {
+              this.$Message.error(err.data.message)
+          })
+        },
+        uploadUserImg () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                return
+            }
             let data = {
-                file: this.formData,
                 token: userInfo.token,
+                avatar_url: this.uploadImgSrc,
                 user_id: userInfo.user_id
             }
-            ajaxHttp.uploadImgFeath(data).then(res => {
-                console.log(res)
-                this.$Message.success('上传成功')
+            ajaxHttp.updateUserImgFeath(data).then(res => {
+                this.$Message.success('图片上传成功')
             }).catch(err => {
                 this.$Message.error(err.message)
             })
@@ -346,6 +378,7 @@ export default {
                 console.log(res)
                 this.userInfoTxt = res.data.user_info
                 this.userInfoEdit = res.data.user_info
+                this.uploadImgSrc = res.data.user_info.avatar
             }).catch(err => {
                 this.$Message.error(err.message)
             })
@@ -357,6 +390,9 @@ export default {
                 break;
                 case 'name':
                     this.userNameShow = false
+                break;
+                case 'sex':
+                    this.userSexShow = false
                 break;
             }
         },
@@ -372,9 +408,7 @@ export default {
                     let dataP = {
                         token: userInfo.token,
                         user_id: userInfo.user_id,
-                        mobile: this.userInfoEdit.mobile,
-                        gender: this.userInfoTxt.gender ? this.userInfoTxt.gender : '',
-                        title: this.userInfoTxt.title
+                        mobile: this.userInfoEdit.mobile
                     }
                     ajaxHttp.changeUserInfoFeath(dataP).then(res => {
                         this.$Message.success('更新成功')
@@ -391,8 +425,6 @@ export default {
                     let dataN = {
                         token: userInfo.token,
                         user_id: userInfo.user_id,
-                        mobile: this.userInfoTxt.mobile,
-                        gender: this.userInfoTxt.gender ? this.userInfoTxt.gender : '',
                         title: this.userInfoEdit.title
                     }
                     ajaxHttp.changeUserInfoFeath(dataN).then(res => {
@@ -401,11 +433,36 @@ export default {
                         this.$Message.error(err.message)
                     })
                 break;
+                case 'sex':
+                    this.userSexShow = true
+                    if (!userInfo) {
+                        this.$Message.error('用户状态失效，请重新登录')
+                        return
+                    }
+                    let dataS = {
+                        token: userInfo.token,
+                        user_id: userInfo.user_id,
+                        gender: this.radiotxtBtn?'男':'女'
+                    }
+                    ajaxHttp.changeUserInfoFeath(dataP).then(res => {
+                        this.$Message.success('更新成功')
+                    }).catch(err => {
+                        this.$Message.error(err.message)
+                    })
+                break;
             }
         },
-        radioSex (e) {
-            console.log(e)
-        }
+        radioSex () {
+            this.radiotxtBtn = !this.radiotxtBtn
+        },
+        toLoginOut () {
+            this.loginOutBoxShow = true
+        },
+        sureLoginOut () {
+            localStorage.removeItem('userInfo')
+            this.$router.push('/index')
+            location.reload()
+        },
     }
 }
 </script>

@@ -28,7 +28,7 @@ export default {
 
   body {
     margin: 0;
-    min-width: 1200px;
+    min-width: 1400px;
   }
 
   a {

@@ -271,7 +271,7 @@ export default {
             })
         },
         changePage (e) {
-            this.pageF = e
+            this.pageS = e
         }
     }
 }
