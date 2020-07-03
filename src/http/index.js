@@ -48,6 +48,9 @@ function apiAxios (method, url, params={}) {
               Message.error('登陆超时，请重新登录')
               localStorage.removeItem('userInfo')
               location.reload()
+              setTimeout(() =>{
+                this.$router.push('/idnex')
+              }, 500)
             } else {
               reject(res.data)
             }

@@ -37,17 +37,17 @@
                                 <div class="item_box">
                                     <div class="l_label_box">
                                         <div class="h_txt">密码</div>
-                                        <div class="h_info_txt" v-if="false">123456789</div>
+                                        <div class="h_info_txt" v-if="userPassShow">{{userInfoEdit.passwd === 1 ? '已设置' : '未设置'}}</div>
                                         <div class="pass_input_box" v-else>
-                                            <div class="pass_txt" v-if="userInfoEdit.passwd !== 1">未设置</div>
-                                            <input class="r_input" type="text" placeholder="当前密码" v-else>
-                                            <input class="r_input" type="text" placeholder="新密码">
-                                            <input class="r_input" type="text" placeholder="确认新密码">
+                                            <div class="pass_txt" v-if="userInfoEdit.passwd !== 0">{{userInfoEdit.passwd === 1 ? '已设置' : '未设置'}}</div>
+                                            <input class="r_input" type="password" placeholder="原密码" v-model="password" v-else>
+                                            <input class="r_input" type="password" placeholder="新密码" v-model="userInfoEdit.pass" @blur="seePassOryz('first')">
+                                            <input class="r_input" type="password" placeholder="确认新密码" v-model="userInfoEdit.passs" @blur="seePassOryz('second')">
                                         </div>
                                     </div>
                                     <div class="btn_a_box">
                                         <a class="r_txt" @click="editUserInfo('pass')">编辑</a>
-                                        <a class="r_txt" v-if="!userNameShow" @click="changeSuccessInfo('pass')">完成</a>
+                                        <a class="r_txt" v-if="!userPassShow" @click="changeSuccessInfo('pass')">完成</a>
                                     </div>
                                 </div>
                                 <div class="item_box">
@@ -64,7 +64,7 @@
                                 <div class="item_box">
                                     <div class="l_label_box">
                                         <div class="h_txt">性别</div>
-                                        <div class="h_info_txt" v-if="userSexShow">{{userInfoTxt.gender?userInfoTxt.gender:'未选择'}}</div>
+                                        <div class="h_info_txt" v-if="userSexShow">{{userInfoTxt.gender?userInfoTxt.gender === 1 ? '男' : '女' :'未选择'}}</div>
                                         <div class="h_info_radio_box" v-else>
                                             <div class="item_radio" @click="radioSex">
                                                 <input type="radio" :checked="radiotxtBtn">
@@ -215,7 +215,9 @@ export default {
             userNameShow: true,
             userPhoneShow: true,
             userSexShow: true,
-            loginOutBoxShow: false
+            loginOutBoxShow: false,
+            userPassShow: true,
+            password: ''
         }
     },
     components: {
@@ -394,12 +396,21 @@ export default {
                 case 'sex':
                     this.userSexShow = false
                 break;
+                case 'pass': 
+                    this.userPassShow = false
+                break;
             }
         },
         changeSuccessInfo (str) {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
              switch (str) {
                 case 'phone':
+                    if(!(/^1[3456789]\d{9}$/.test(this.userInfoEdit.phone))){ 
+                        this.$Message.warning("手机号码有误，请重填");
+                        this.userInfoEdit.phone = ''
+                        console.log(this.userInfoEdit.phone)
+                        return
+                    }
                     this.userPhoneShow = true
                     if (!userInfo) {
                         this.$Message.error('用户状态失效，请重新登录')
@@ -412,6 +423,7 @@ export default {
                     }
                     ajaxHttp.changeUserInfoFeath(dataP).then(res => {
                         this.$Message.success('更新成功')
+                        this.getUserInfoToHttp()
                     }).catch(err => {
                         this.$Message.error(err.message)
                     })
@@ -429,6 +441,7 @@ export default {
                     }
                     ajaxHttp.changeUserInfoFeath(dataN).then(res => {
                         this.$Message.success('更新成功')
+                        this.getUserInfoToHttp()
                     }).catch(err => {
                         this.$Message.error(err.message)
                     })
@@ -442,10 +455,30 @@ export default {
                     let dataS = {
                         token: userInfo.token,
                         user_id: userInfo.user_id,
-                        gender: this.radiotxtBtn?'男':'女'
+                        gender: this.radiotxtBtn ? 1 : 2
                     }
-                    ajaxHttp.changeUserInfoFeath(dataP).then(res => {
+                    ajaxHttp.changeUserInfoFeath(dataS).then(res => {
                         this.$Message.success('更新成功')
+                        this.getUserInfoToHttp()
+                    }).catch(err => {
+                        this.$Message.error(err.message)
+                    })
+                break;
+                case 'pass':
+                    this.userPassShow = true
+                    if (!userInfo) {
+                        this.$Message.error('用户状态失效，请重新登录')
+                        return
+                    }
+                    let dataSS = {
+                        token: userInfo.token,
+                        user_id: userInfo.user_id,
+                        passwd: this.password,
+                        passwd_new: this.userInfoEdit.passs
+                    }
+                    ajaxHttp.changePassFeath(dataSS).then(res => {
+                        this.$Message.success('更新成功')
+                        this.getUserInfoToHttp()
                     }).catch(err => {
                         this.$Message.error(err.message)
                     })
@@ -462,6 +495,27 @@ export default {
             localStorage.removeItem('userInfo')
             this.$router.push('/index')
             location.reload()
+        },
+        seePassOryz (str) {
+            if (str ==='first') {
+                if (this.userInfoEdit.pass.length < 8 || this.userInfoEdit.pass.length> 20) {
+                    this.$Message.error('密码个数在8-20位之间')
+                    this.userInfoEdit.pass = ''
+                    return
+                }
+            } else {
+                if (this.userInfoEdit.passs.length < 8 || this.userInfoEdit.passs.length> 20) {
+                    this.$Message.error('密码个数在8-20位之间')
+                    this.userInfoEdit.passs = ''
+                    return
+                }
+
+                if (this.userInfoEdit.pass !== this.userInfoEdit.passs) {
+                    this.$Message.error('两次密码不一致')
+                    this.userInfoEdit.passs = ''
+                    return
+                }
+            }
         },
     }
 }

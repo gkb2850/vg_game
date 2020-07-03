@@ -25,4 +25,5 @@ export default {
     getUserInfoFeath: (data) => apiAxios('POST', '/api/user/getUserInfo', data),//获取用户信息
     changeUserInfoFeath: (data) => apiAxios('POST', '/api/user/updateUserInfo', data),//更新用户信息
     updateUserImgFeath: (data) => apiAxios('POST', '/api/user/updateAvatar', data),//更新用户头像
+    changePassFeath: (data) => apiAxios('POST', '/api/user/changePasswd', data),//修改密码
 }

@@ -16,7 +16,7 @@
                             <div :class="{item_box: true, active: llabelIndex === 0}" @click="labelNavClick('first')">2020年最佳设备</div>
                             <div :class="{item_box: true, active: llabelIndex === 1}" @click="labelNavClick('second')">CS GO最佳设备</div>
                             <div class="llable_box">
-                                <div class="itxt active" v-for="(item, index) in deiceListData" :key="index" @click="toSeeDevicInfo(item)">{{item.title}}</div>
+                                <div :class="{itxt: true, active: secondLabelIndex === indexs ? true : false}" v-for="(item, indexs) in deiceListData" :key="indexs" @click="toSeeDevicInfo(item, indexs)">{{item.title}}</div>
                             </div>
                         </div>
                     </router-link>
@@ -167,7 +167,8 @@ export default {
             llabelIndex: 0,
             deiceListDataAll: [],
             navIndexShow: false,
-            navIndexTop: 0
+            navIndexTop: 0,
+            secondLabelIndex: 0
         }
     },
     created () {
@@ -298,12 +299,16 @@ export default {
                 passwd: this.loginData.pass
             }
             ajaxHttp.loginFeath(data).then(res => {
-                console.log()
                 this.$Message.success('登录成功')
                 this.loginBoxShowStutas = false
                 this.isLogin = true
                 localStorage.setItem('userInfo', JSON.stringify(res.data))
-
+                if (this.$route.path !== '/index') {
+                    this.$router.push('/index')
+                } else {
+                    this.$router.push('/')
+                }
+                
             }).catch(err => {
                 this.$Message.error(err.message)
                 
@@ -333,7 +338,9 @@ export default {
             }
             this.navIndexTop = index
         },
-        toSeeDevicInfo (item) {
+        toSeeDevicInfo (item, index) {
+            this.navIndexShow = false
+            this.secondLabelIndex = index
             this.$router.push({
                 path: '/productPageInfo',
                 query: {
