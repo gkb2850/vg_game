@@ -1,7 +1,11 @@
 <template>
     <div class="header_box">
         <div class="first_box">
-            <a v-if="!isLogin" class="txt" @click="loginBoxShow('show')">欢迎来到CS GO ~ 请登录你的游戏人生</a>
+            <div v-if="!isLogin" class="txt_box">
+                <div class="message_txt">欢迎访问Gamecfg</div>
+                <a class="login_a" href="javascript:;" @click="loginBoxShow('show')">登录</a>
+                <a href="javascript:;" @click="registerBoxShow('show')">注册</a>
+            </div>
             <a v-else class="txt" @click="toMyPage">欢迎用户</a>
         </div>
         <div class="nav_box">
@@ -12,7 +16,7 @@
                 <div class="header_nav_mask" v-if="navIndexShow" @mousemove="hideLabelsBox"></div>
                 <div class="nav_txt" v-for="(item, index) in navData" :key="index">
                     <router-link class="nav_link" :to="index !== 3 ? item.path: ''">
-                        <span :class="{active: navIndexTop === index}" @mousemove="toNavClick(index)">{{item.txt}}</span>
+                        <span :class="{active: navIndexTop === index, moveActive: navIndexTopMove === index}" @click="toNavClick(index)" @mousemove="toNavMove(index)" @mouseleave="toNavMove(999)">{{item.txt}}</span>
                         <div class="labels_box" v-if="index === 3 && navIndexShow">
                             <div :class="{item_box: true, active: llabelIndex === 0}" @mousemove="labelNavClick('first')">2020年最佳设备</div>
                             <div :class="{item_box: true, active: llabelIndex === 1}" @mousemove="labelNavClick('second')">CS GO最佳设备</div>
@@ -169,7 +173,8 @@ export default {
             deiceListDataAll: [],
             navIndexShow: false,
             navIndexTop: 0,
-            secondLabelIndex: 0
+            secondLabelIndex: 0,
+            navIndexTopMove: -1
         }
     },
     created () {
@@ -341,6 +346,9 @@ export default {
             }
             this.navIndexTop = index
         },
+        toNavMove (index) {
+            this.navIndexTopMove = index
+        },
         hideLabelsBox () {
             this.navIndexShow = false
         },
@@ -381,6 +389,32 @@ export default {
             height: 40px;
             display: flex;
             justify-content: flex-end;
+            .txt_box {
+                display: flex;
+                justify-content: flex-end;
+                height: 100%;
+                .message_txt {
+                    height: 100%;
+                    line-height: 40px;
+                    font-size:14px;
+                    font-family:PingFangSC-Regular,PingFang SC;
+                    font-weight:400;
+                    color:rgba(47,47,54,1);
+                    margin-right: 20px;
+                }
+                a {
+                    height: 100%;
+                    line-height: 40px;
+                    font-size:14px;
+                    font-family:PingFangSC-Regular,PingFang SC;
+                    font-weight:400;
+                    color:rgba(47,47,54,1);
+                }
+                .login_a {
+                    color: #894FA0;
+                    margin-right: 20px;
+                }
+            }
             .txt {
                 height: 100%;
                 line-height: 40px;
@@ -438,6 +472,9 @@ export default {
                             display: block;
                         }
                         span.active {
+                            background: #604876;
+                        }
+                        span.moveActive {
                             background: #604876;
                         }
                         .labels_box {

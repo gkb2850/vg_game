@@ -12,8 +12,8 @@
                         <div class="inside_box">
                             <img class="samll_img" src="../assets/images/sj_icon_bg.png" alt="">
                             <div class="txt_box">
-                                <div class="f_txt">不要处于劣势</div>
-                                <div class="s_txt">研究专业游戏玩家设置</div>
+                                <div class="f_txt">不处于劣势</div>
+                                <div class="s_txt">选择职业选手的设置和设备</div>
                             </div>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                             <img class="samll_img" src="../assets/images/xd_icon_bg.png" alt="">
                             <div class="txt_box">
                                 <div class="f_txt">处理数据</div>
-                                <div class="s_txt">获取详细的统计信息，详尽的指南，深入的分析和全面的评论33333333</div>
+                                <div class="s_txt">获取详细的统计信息，进行深入的分析，提供全面的评测</div>
                             </div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                             <img class="samll_img" src="../assets/images/yx_icon_bg.png" alt="">
                             <div class="txt_box">
                                 <div class="f_txt">选择自己喜欢的</div>
-                                <div class="s_txt">可以跟随专业人士的选择</div>
+                                <div class="s_txt">职业选手用的装备</div>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                 <div class="title">CS GO</div>
                 <div class="cont">
                     <div class="l_box">
-                        <img src="../assets/images/title_img.jpg" class="l_img" alt="">
+                        <img src="../assets/images/csgame.jpg" class="l_img" alt="">
                     </div>
                     <div class="r_box">
                         <div class="trem_box">
@@ -127,20 +127,29 @@
                 <div class="cont">
                     <div class="txt_box">
                         <div class="tit_box">
-                            <div class="t_txt">很多职业玩家都使用赞助设备，对吗?</div>
+                            <div class="t_txt">我们在做什么？</div>
                         </div>
                         <div class="c_box">
-                            <div class="js_f_txt">专业团队通常有装备赞助商。但是，在大多数情况下，玩家在比赛时仍可以使用自己的个人鼠标选择。仍然有玩家被迫使用赞助商装备的情况（例如，即使他们对赞助商必须提供的鼠标形状感到不舒服），但我们感到这种情况越来越少。当我们分析专业人士时，我们将始终考虑他们实际用于竞争的装备，而不是支付给他们做广告的装备。</div>
-                            <div class="js_s_txt">我们会尝试为您提供一个有趣的新角度，供您在购买下一个游戏外设时考虑，虽然职业玩家使用的几乎所有装备客观上都是一件很好的装备，但我们还是鼓励您细心研究我们的装备结果盐，并在购买新的鼠标，显示器或键盘之前始终进行自己的研究。</div>
+                            <div class="js_f_txt">为玩家提供电竞选手的游戏设置和设备，收集职业选手的显示器、鼠标等设置、设备数据并进行分析。</div>
+                            <div class="js_s_txt">为CS：GO之类的游戏选择最佳的设备可能有点麻烦，我们可以帮您。如果大量的职业玩家使用某种鼠标，那么对于普通玩家来说也是一个不错的选择。同样，我们认为拥有职业玩家使用的最常见游戏设置数据库可以帮助我们的用户决定如何调整其个人设置。</div>
+                            <div class="js_s_txt">因此，我们分析了数百名职业选手，以发现他们使用的设备和调整的设置等之间的共通性。目的是帮助玩家决定应该购买什么设备，或者需要改变哪些设置以获得竞争优势。</div>
                         </div>
                     </div>
                     <div class="txt_box">
                         <div class="tit_box">
-                            <div class="t_txt">很多职业玩家都使用赞助设备，对吗?</div>
+                            <div class="t_txt">职业选手都使用赞助的设备吗？</div>
                         </div>
                         <div class="c_box">
-                            <div class="js_f_txt">专业团队通常有装备赞助商。但是，在大多数情况下，玩家在比赛时仍可以使用自己的个人鼠标选择。仍然有玩家被迫使用赞助商装备的情况（例如，即使他们对赞助商必须提供的鼠标形状感到不舒服），但我们感到这种情况越来越少。当我们分析专业人士时，我们将始终考虑他们实际用于竞争的装备，而不是支付给他们做广告的装备。</div>
-                            <div class="js_s_txt">我们会尝试为您提供一个有趣的新角度，供您在购买下一个游戏外设时考虑，虽然职业玩家使用的几乎所有装备客观上都是一件很好的装备，但我们还是鼓励您细心研究我们的装备结果盐，并在购买新的鼠标，显示器或键盘之前始终进行自己的研究。</div>
+                            <div class="js_f_txt">职业战队通常有设备赞助商。在大多数情况下，选手在比赛时仍可以使用自己的鼠标。但仍有一些比赛迫使选手使用赞助商的设备（即使对赞助商提供的鼠标手感差），但这种情况很少。当我们分析职业选手时，将始终考虑他们实际用于比赛的设备，而不是做广告的设备。</div>
+                            <div class="js_s_txt">虽然客观上职业玩家使用的所有设备都是不错的选择，但我们还是鼓励您细心了解我们的数据，并在购买新的鼠标、显示器或键盘之前先尝试。</div>
+                        </div>
+                    </div>
+                    <div class="txt_box">
+                        <div class="tit_box">
+                            <div class="t_txt">数据一直是最新的吗？</div>
+                        </div>
+                        <div class="c_box">
+                            <div class="js_f_txt">职业选手一直在改变他们的设备和设置。即使我们努力确保数据是最新的，仍有可能短时间内过时。如果您发现我们在某些不是最新数据，请随时向我们反馈。我们非常感谢活跃和热情的玩家。</div>
                         </div>
                     </div>
                 </div>
