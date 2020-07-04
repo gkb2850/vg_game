@@ -42,7 +42,7 @@
             <div class="item_s_box" v-if="newProListData.length">
                 <div class="title">最近更新设备</div>
                 <div class="cont">
-                    <div class="trem_box" v-for="(item, index) in newProListData" :key="index" @click="seeAssessInfo(item)">
+                    <div :class="{trem_box: true, movelatelyActive: latelyBoxIndex === index ? true : false}" v-for="(item, index) in newProListData" :key="index" @click="seeAssessInfo(item)" @mousemove="seeAssessInfoMove(index)" @mouseleave="seeAssessInfoMove(999)">
                         <img class="order_img" :src="item.img" alt="">
                         <div class="f_txt">{{item.title}}</div>
                         <div class="s_txt">{{item.add_time}}</div>
@@ -52,7 +52,7 @@
             <div class="item_t_box" v-if="playeListData.length">
                 <div class="title">最近更新选手</div>
                 <div class="cont">
-                    <div class="trem_box" v-for="(item, index) in playeListData" :key="index" @click="seePlayeInfo(item)">
+                    <div :class="{trem_box: true, moveplayerActive: playerBoxIndex === index ? true : false}" v-for="(item, index) in playeListData" :key="index" @click="seePlayeInfo(item)" @mousemove="seePlayeInfoMove(index)" @mouseleave="seePlayeInfoMove(999)">
                         <div class="f_txt">{{item.name}}</div>
                         <div class="s_txt">{{item.add_time}}</div>
                     </div>
@@ -88,22 +88,18 @@
                     </div>
                     <div class="r_box">
                         <div class="trem_box">
-                            <div class="title_txt">GS GO 设置指南</div>
-                            <div class="txt active">GS GO 设置和装备列表</div>
-                            <div class="title_txt">GS GO 最佳设置指南</div>
-                            <div class="txt">GS GO 设置和装备列表</div>
+                            <div class="title_txt">GS GO 数据指南</div>
+                            <div class="txt active">GS GO 数据列表</div>
+                            <div class="title_txt">GS GO 选手指南</div>
+                            <div class="txt" v-if="gameGuideData.player_list && gameGuideData.player_list.length">{{gameGuideData.player_list[0].name}}</div>
                         </div>
-                        <div class="trem_box">
-                            <div class="title_txt">GS GO 硬件指南</div>
-                            <div class="txt">GS GO PC指南</div>
-                            <div class="txt">GS GO CPU指南</div>
-                            <div class="txt">GS GO 设置指南</div>
+                        <div class="trem_box" v-if="gamedevice_listF.length">
+                            <div class="title_txt">GS GO 装备</div>
+                            <div class="txt" v-for="(item, index) in gamedevice_listF" :key="index">{{item.title}}</div>
                         </div>
-                        <div class="trem_box">
+                        <div class="trem_box" v-if="gamedevice_listS.length">
                             <div class="title_txt"></div>
-                            <div class="txt">GS GO 鼠标指南</div>
-                            <div class="txt">GS GO 键盘指南</div>
-                            <div class="txt">GS GO 鼠标垫指南</div>
+                            <div class="txt" v-for="(item, index) in gamedevice_listS" :key="index">{{item.title}}</div>
                         </div>
                     </div>
                 </div>
@@ -111,7 +107,7 @@
             <div class="main_t_box" v-if="playeImgListData.length"> 
                 <div class="title">热门CS GO 队员</div>
                 <div class="cont">
-                    <div class="trem_box" v-for="(item, index) in playeImgListData" :key="index" @click="seePlayeInfo(item)">
+                    <div :class="{trem_box: true, moveholtActive: playerholtBoxIndex === index}" v-for="(item, index) in playeImgListData" :key="index" @click="seePlayeInfo(item)" @mousemove="seePlayeholtMove(index)" @mouseleave="seePlayeholtMove(999)">
                         <img class="top_img_p" :src="item.img" alt="">
                         <div class="js_txt">{{item.name}}</div>
                     </div>
@@ -120,7 +116,7 @@
             <div class="main_ff_box" v-if="holdProListData.length">
                 <div class="title">热门CS GO设备</div>
                 <div class="cont">
-                    <div class="trem_box" v-for="(item, index) in holdProListData" :key="index" @click="seeAssessInfo(item)">
+                    <div :class="{trem_box: true, moveholtProActive: proholtBoxIndex === index}" v-for="(item, index) in holdProListData" :key="index" @click="seeAssessInfo(item)" @mousemove="seeProholtMove(index)" @mouseleave="seeProholtMove(999)">
                         <img class="img_product" :src="item.img" alt="">
                         <div class="txt">{{item.title}}</div>
                     </div>
@@ -162,7 +158,14 @@ export default {
             playeListData: [],
             playeImgListData: [],
             newProListData: [],
-            holdProListData: []
+            holdProListData: [],
+            latelyBoxIndex: -1,
+            playerBoxIndex: -1,
+            playerholtBoxIndex: -1,
+            proholtBoxIndex: -1,
+            gameGuideData: '',
+            gamedevice_listF: [],
+            gamedevice_listS: []
         }
     },
     mounted () {
@@ -170,6 +173,7 @@ export default {
         this.getPlayeImgList()
         this.getNewProList()
         this.getHoldProList()
+        this.getGameGuideData()
     },
     methods: {
         getPlayeList() {
@@ -187,6 +191,18 @@ export default {
             }).catch(err => {
                 this.$Message.error(err.message)
             })
+        },
+        seeAssessInfoMove (index) {
+            this.latelyBoxIndex = index
+        },
+        seePlayeInfoMove (index) {
+            this.playerBoxIndex = index
+        },
+        seePlayeholtMove (index) {
+            this.playerholtBoxIndex = index
+        },
+        seeProholtMove (index) {
+            this.proholtBoxIndex = index
         },
         getNewProList () {
             ajaxHttp.indexgetNewProFeath().then(res => {
@@ -219,6 +235,26 @@ export default {
                 }
             })
         },
+        getGameGuideData () {
+            ajaxHttp.gameCuideFeath().then(res => {
+                console.log(res)
+                this.gameGuideData = res.data
+                if (res.data.device_list && res.data.device_list.length > 2) {
+                    res.data.device_list.forEach((i, oi) => {
+                        if (oi > 2) {
+                            this.$set(this.gamedevice_listS, oi-3, i)
+                        } else {
+                            this.$set(this.gamedevice_listF, oi, i)
+                        }
+                    });
+                } else {
+                    this.gamedevice_listF = res.data.device_list
+                    this.gamedevice_listS = []
+                } 
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        }
     },
     components: {
         spinItem

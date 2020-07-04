@@ -3,14 +3,14 @@
         <deviceOrSet title="CS GO 玩家们"></deviceOrSet>
         <div class="main_cont_box">
             <div class="people_box">
-                <div class="trem_box" v-for="(item, index) in playerListData" :key="index">
+                <div :class="{trem_box: true, movePlayerActive: playerSelectIndex === index}" v-for="(item, index) in playerListData" :key="index" @click="seePlayerInfo(item)" @mousemove="seePlayerInfoMove(index)" @mouseleave="seePlayerInfoMove(999)">
                     <div class="img_header">
                         <img :src="item.img" alt="">
                         <div class="top_name">CS GO</div>
                     </div>
                     <div class="c_box">
                         <div class="zd_name">{{item.name}}</div>
-                        <div class="other_box" @click="seePlayerInfo(item)">
+                        <div class="other_box">
                             <a href="javascript:;">
                                 <div>查看更多</div>
                                 <img src="../assets/images/toright_icon.png" alt="">
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="page_big_box">
-            <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" :limit="limit"></pageItem>
+            <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" :limit="limit" @changePage="changePage"></pageItem>
         </div>
     </div>
 </template>
@@ -40,7 +40,9 @@ export default {
         return {
             pageNumData: [],
             playerListData: [],
-            limit: 10
+            limit: 10,
+            page: 1,
+            playerSelectIndex: -1
         }
     },
     components: {
@@ -52,7 +54,11 @@ export default {
     },
     methods: {
         getPlayerList () {
-            ajaxHttp.playerPageListFeath().then(res => {
+            let data = {
+                page: this.page,
+                limit: this.limit
+            }
+            ajaxHttp.playerPageListFeath(data).then(res => {
                 this.playerListData = res.data.list
                 // this.pageNumData = new Array(res.data.list.length)
                 this.pageNumData = []
@@ -76,6 +82,12 @@ export default {
                     id: item.player_id
                 }
             })
+        },
+        changePage (e) {
+            this.page = e
+        },
+        seePlayerInfoMove (index) {
+            this.playerSelectIndex = index
         }
     }
 }

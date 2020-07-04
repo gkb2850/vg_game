@@ -9,12 +9,13 @@
                 <img src="../assets/images/logo@2x.png" alt="">
             </div>
             <div class="c_box">
+                <div class="header_nav_mask" v-if="navIndexShow" @mousemove="hideLabelsBox"></div>
                 <div class="nav_txt" v-for="(item, index) in navData" :key="index">
                     <router-link class="nav_link" :to="index !== 3 ? item.path: ''">
-                        <span :class="{active: navIndexTop === index}" @click="toNavClick(index)">{{item.txt}}</span>
+                        <span :class="{active: navIndexTop === index}" @mousemove="toNavClick(index)">{{item.txt}}</span>
                         <div class="labels_box" v-if="index === 3 && navIndexShow">
-                            <div :class="{item_box: true, active: llabelIndex === 0}" @click="labelNavClick('first')">2020年最佳设备</div>
-                            <div :class="{item_box: true, active: llabelIndex === 1}" @click="labelNavClick('second')">CS GO最佳设备</div>
+                            <div :class="{item_box: true, active: llabelIndex === 0}" @mousemove="labelNavClick('first')">2020年最佳设备</div>
+                            <div :class="{item_box: true, active: llabelIndex === 1}" @mousemove="labelNavClick('second')">CS GO最佳设备</div>
                             <div class="llable_box">
                                 <div :class="{itxt: true, active: secondLabelIndex === indexs ? true : false}" v-for="(item, indexs) in deiceListData" :key="indexs" @click="toSeeDevicInfo(item, indexs)">{{item.title}}</div>
                             </div>
@@ -205,7 +206,8 @@ export default {
                     this.$router.push({
                         path: '/searchPage',
                         query: {
-                            data: res.data.list? res.data : {list: [],total: 0}
+                            data: res.data.list? res.data : {list: [],total: 0},
+                            serarch: this.searchtxt
                         }
                     })
                 } else {
@@ -214,7 +216,8 @@ export default {
                         this.$router.push({
                             path: '/searchPage',
                             query: {
-                                data: res.data.list? res.data : {list: [],total: 0}
+                                data: res.data.list? res.data : {list: [],total: 0},
+                                serarch: this.searchtxt
                             }
                         })
                     },50)
@@ -332,21 +335,38 @@ export default {
         },
         toNavClick (index) {
             if (index === 3) {
-                this.navIndexShow = !this.navIndexShow
+                this.navIndexShow = true
             } else {
                 this.navIndexShow = false
             }
             this.navIndexTop = index
         },
+        hideLabelsBox () {
+            this.navIndexShow = false
+        },
         toSeeDevicInfo (item, index) {
             this.navIndexShow = false
             this.secondLabelIndex = index
-            this.$router.push({
-                path: '/productPageInfo',
-                query: {
-                    id: item.id
-                }
-            })
+            console.log(item)
+            if (this.$route.path !== '/productPageInfo') {
+                this.$router.push({
+                    path: '/productPageInfo',
+                    query: {
+                        id: item.id
+                    }
+                })
+            } else {
+                this.$router.push('/index')
+                setTimeout(() => {
+                    this.$router.push({
+                        path: '/productPageInfo',
+                        query: {
+                            id: item.id
+                        }
+                    })
+                }, 50)
+            }
+            
         }
     },
 }
@@ -393,8 +413,17 @@ export default {
                 display: flex;
                 height: 100%;
                 justify-content: flex-end;
+                .header_nav_mask {
+                    position: fixed;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 10;
+                }
                 .nav_txt {
                     position: relative;
+                    z-index: 12;
                     .nav_link {
                         text-decoration: none;
                         span {
@@ -415,11 +444,11 @@ export default {
                             position: absolute;
                             left: 50%;
                             bottom: -80px;
-                            width: 208px;
-                            z-index: 10;
+                            width:416px;
+                            z-index: 12;
                             transform: translateX(-50%);
-                            background:rgba(255,255,255,1);
-                            box-shadow:0px 2px 18px 0px rgba(199,189,203,0.47);
+                            margin-left: 104px;
+                            // background:rgba(255,255,255,1);
                             .item_box {
                                 height: 40px;
                                 line-height: 40px;
@@ -429,13 +458,15 @@ export default {
                                 font-weight:500;
                                 color:#220B37;
                                 background: #F3F3F3;
+                                width: 208px;
+                                box-shadow:0px 2px 18px 0px rgba(199,189,203,0.47);
                             }
                             .item_box.active {
                                 color: rgba(117, 79, 137, 1);
                             }
                             .llable_box {
                                 position: absolute;
-                                right: 0;
+                                right: 208px;
                                 transform: translateX(100%);
                                 top: 0;
                                 width: 208px;

@@ -61,7 +61,7 @@
                 <div class="first_box" v-if="playerInfoData && playerInfoData.device_list.length">
                     <div class="title">他的设备</div>
                     <div class="cont_box">
-                        <div class="trem_box" v-for="(item, index) in playerInfoData.device_list" :key="index">
+                        <div :class="{trem_box: true, moveDeviceActive: deviceBoxIndex === index}" v-for="(item, index) in playerInfoData.device_list" :key="index" @click="toSeeDeviceInfo(item)" @mousemove="toSeeDeviceInfoMove(index)" @mouseleave="toSeeDeviceInfoMove(999)">
                             <img class="product_img" :src="item.img" alt="">
                             <div class="name_box">
                                 <div class="line"></div>
@@ -77,7 +77,7 @@
                 <div class="second_box" v-if="playerInfoData && playerInfoData.player_list.length">
                     <div class="title">他的队友</div>
                     <div class="cont_box">
-                        <div class="trem_box" v-for="(item, index) in playerInfoData.player_list" :key="index">
+                        <div :class="{trem_box: true, movePlayerActive: playerBoxIndex === index}" v-for="(item, index) in playerInfoData.player_list" :key="index" @click="toSeePlayerInfo(item)" @mousemove="toSeePlayerInfoMove(index)" @mouseleave="toSeePlayerInfoMove(999)">
                             <img class="people_img" :src="item.img" alt="">
                             <div class="name">{{item.name}}</div>
                         </div>
@@ -151,7 +151,9 @@ export default {
             messageIndex: -1,
             messagePeopleTxt: '',
             messageTxt: '',
-            messageTotal: 0
+            messageTotal: 0,
+            deviceBoxIndex: -1,
+            playerBoxIndex: -1
         }
     },
     created () {
@@ -272,6 +274,25 @@ export default {
         },
         changePage (e) {
             this.pageS = e
+        },
+        toSeePlayerInfo (item) {
+            this.playerId = item.player_id
+            this.getPlayerInfo()
+            this.commentListData()
+        },
+        toSeeDeviceInfo (item) {
+            thi.$router.push({
+                path: '/answerInfoPage',
+                query: {
+                    id: item.device_id
+                }
+            })
+        },
+        toSeePlayerInfoMove (index) {
+            this.playerBoxIndex = index
+        },
+        toSeeDeviceInfoMove (index) {
+            this.deviceBoxIndex = index
         }
     }
 }

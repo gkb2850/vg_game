@@ -3,7 +3,7 @@
         <deviceOrSet title="评估测评"></deviceOrSet>
         <div class="main_cont_box">
             <div class="product_box">
-                <div class="trem_box" v-for="(item, index) in deviceListData" :key="index" @click="toSeeAssessInfo(item)">
+                <div :class="{trem_box: true, moveProActive: deviceBoxIndex === index}" v-for="(item, index) in deviceListData" :key="index" @click="toSeeAssessInfo(item)" @mousemove="toSeeAssessInfoMove(index)" @mouseleave="toSeeAssessInfoMove(999)">
                     <img class="img_header" :src="item.img" alt="">
                     <div class="pc_name">{{item.title}}</div>
                     <div class="time_txt">{{item.add_time}}</div>
@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="page_big_box">
-            <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" :limit="limit"></pageItem>
+            <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" :limit="limit" @changePage="changePage"></pageItem>
         </div>
     </div>
 </template>
@@ -25,7 +25,9 @@ export default {
         return {
             pageNumData: [],
             deviceListData: [],
-            limit: 10
+            page: 1,
+            limit: 10,
+            deviceBoxIndex: -1
         }
     },
     components: {
@@ -37,7 +39,11 @@ export default {
     },
     methods: {
         getDeviceList () {
-            ajaxHttp.proDeviceListFeath().then(res => {
+            let data = {
+                page: this.page,
+                limit: this.limit
+            }
+            ajaxHttp.proDeviceListFeath(data).then(res => {
                 console.log(res)
                 this.deviceListData = res.data.list
                 if (res.data.total > 10) {
@@ -58,6 +64,12 @@ export default {
                     id: item.device_id
                 }
             })
+        },
+        toSeeAssessInfoMove (index) {
+            this.deviceBoxIndex = index
+        },
+        changePage (e) {
+            this.page = e
         }
     }
 }

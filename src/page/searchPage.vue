@@ -27,7 +27,7 @@
             <div class="message_serarch_txt" v-else>暂无结果</div>
         </div>
         <div class="page_big_box">
-            <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" :limit="limit"></pageItem>
+            <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" :limit="limit" @changePage="changePage"></pageItem>
         </div>
     </div>
 </template>
@@ -41,7 +41,9 @@ export default {
         return {
             pageNumData: [],
             limit: 20,
-            searchData: []
+            searchData: [],
+            page: 1,
+            searchtxt: ''
         }
     },
     components: {
@@ -51,6 +53,7 @@ export default {
     created () {
         if (this.$route.query.data) {
             let data = this.$route.query.data
+            this.searchtxt = this.$route.query.serarch
             this.searchData = data.list
             this.pageNumData = []
              if (data.total > 20) {
@@ -85,7 +88,32 @@ export default {
                     id: item.player_id
                 }
             })
-        }
+        },
+        changePage (e) {
+            this.page = e
+            this.getSearchData()
+        },
+        getSearchData () {
+            let data = {
+                key_word: this.searchtxt,
+                page: this.page,
+                limit: this.limit
+            }
+            ajaxHttp.indexSearchFeath(data).then(res => {
+                let data = res.data
+                this.searchData = data.list
+                this.pageNumData = []
+                 if (data.total > 20) {
+                     for (let i = 1; i< Math.ceil((data.total)/20) + 1;i++){
+                         this.pageNumData.push(i)
+                     }
+                 } else if(data.total > 0 && data.total <=20) {
+                     this.pageNumData.push(1)
+                 }
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
     }
 }
 </script>

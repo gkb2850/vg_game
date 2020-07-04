@@ -10,7 +10,6 @@
                 width: 18%;
                 margin-right: 2.5%;
                 background:rgba(237,235,239,1);
-                box-shadow:0px 2px 14px 0px rgba(201,194,208,1);
                 border:1px solid rgba(77,54,98,1);
                 margin-bottom: 30px;
                 .img_header {
@@ -106,6 +105,9 @@
                         margin: 0 5px;
                     }
                 }
+            }
+            .movePlayerActive {
+                box-shadow:0px 2px 14px 0px rgba(201,194,208,1);
             }
             .trem_box:nth-child(5n + 5) {
                 margin-right: 0;

@@ -10,7 +10,7 @@
             <div class="sec_product_box" v-if="deviceInfoData.device_list && deviceInfoData.device_list.length">
                 <div class="title">前五名</div>
                 <div class="cont_box">
-                    <div class="trem_box" v-for="(item, index) in deviceInfoData.device_list" :key="index">
+                    <div :class="{trem_box: true, moveDeviceIndex: deviceBoxIndex === index}" v-for="(item, index) in deviceInfoData.device_list" :key="index" @mousemove="toSeeDevicePcMove(index)" @mouseleave="toSeeDevicePcMove(999)">
                         <img :src="item.img" alt="">
                         <div class="b_txt">
                             <span>{{index + 1}}.{{item.title}}</span>
@@ -26,11 +26,13 @@
 <script>
 import deviceOrSet from '@/components/topImgItem.vue'
 import ajaxHttp from '@/api/index'
+
 export default {
     data () {
         return {
             baseId: '',
-            deviceInfoData: ''
+            deviceInfoData: '',
+            deviceBoxIndex: -1
         }
     },
     created () {
@@ -47,14 +49,24 @@ export default {
     methods: {
         getBasDevInfo () {
             let data = {
-                base_id: this.base_id
+                base_id: this.baseId
             }
             ajaxHttp.bastDeviceInfoFeath(data).then(res => {
-                console.log(res)
                 this.deviceInfoData = res.data
             }).catch(err => {
                 this.$Message.error(err.message)
             })
+        },
+        toSeeDevicePc (item) {
+            this.$router.push({
+                path: '/answerInfoPage',
+                query: {
+                    id: item.id
+                }
+            })
+        },
+        toSeeDevicePcMove (index) {
+            this.deviceBoxIndex = index
         }
     }
 }

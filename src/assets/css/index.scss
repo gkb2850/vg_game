@@ -136,6 +136,9 @@
                         color:rgba(117,79,137,1);
                     }
                 }
+                .movelatelyActive {
+                    box-shadow:0px 2px 14px 0px rgba(201,194,208,1);
+                }
                 .trem_box:last-child {
                     margin: 0;
                 }
@@ -161,7 +164,6 @@
                     padding: 30px 24px;
                     box-sizing: border-box;
                     background: #4D3662;
-                    box-shadow:0px 2px 19px 0px rgba(169,150,178,1);
                     .f_txt {
                         overflow: hidden;
                         white-space: nowrap;
@@ -187,6 +189,9 @@
                         font-weight:400;
                         color:rgba(255,255,255,1);
                     }
+                }
+                .moveplayerActive {
+                    box-shadow:0px 2px 19px 0px rgba(169,150,178,1);
                 }
                 .trem_box:last-child {
                     margin: 0;
@@ -251,7 +256,7 @@
         }
         .main_s_box {
             margin: 85px 0;
-            padding: 0 150px 0 0;
+            padding: 0 150px;
             box-sizing: border-box;
             .title {
                 height: 40px;
@@ -334,7 +339,6 @@
                     flex: 1;
                     overflow: hidden;
                     margin-right: 30px;
-                    box-shadow:0px 2px 14px 0px rgba(169,150,178,1);
                     border:1px solid rgba(117,79,137,1);
                     .top_img_p {
                         width: 100%;
@@ -354,6 +358,9 @@
                         color:rgba(227,222,229,1);
                         background: #754F89;
                     }
+                }
+                .moveholtActive {
+                    box-shadow:0px 2px 14px 0px rgba(169,150,178,1);
                 }
                 .trem_box:last-child {
                     margin: 0;
@@ -379,7 +386,6 @@
                 .trem_box {
                     flex: 1;
                     margin-right: 32px;
-                    box-shadow:0px 2px 14px 0px rgba(201,194,208,1);
                     overflow: hidden;
                     .img_product {
                         width: 100%;
@@ -399,6 +405,9 @@
                         text-overflow: ellipsis;
                         white-space: nowrap;
                     }
+                }
+                .moveholtProActive {
+                    box-shadow:0px 2px 14px 0px rgba(201,194,208,1);
                 }
                 .trem_box:last-child {
                     margin-right: 0;

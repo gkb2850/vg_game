@@ -170,7 +170,6 @@
                     .trem_box {
                         flex: 1;
                         margin-right: 30px;
-                        box-shadow:0px 2px 14px 0px rgba(215,211,218,1);
                         border:1px solid rgba(212,212,212,1);
                         .product_img {
                             height: 204px;
@@ -219,6 +218,9 @@
                             }
                         }
                     }
+                    .moveDeviceActive {
+                        box-shadow:0px 2px 14px 0px rgba(215,211,218,1);
+                    }
                     .trem_box:last-child {
                         margin-right: 0;
                     }
@@ -240,7 +242,6 @@
                     .trem_box {
                         flex: 1;
                         margin-right: 33px;
-                        box-shadow:0px 2px 19px 0px rgba(169,150,178,1);
                         border:1px solid rgba(77,47,93,1);
                         .people_img {
                             height: 298px;
@@ -262,6 +263,9 @@
                             background: #4D2F5D;
                             text-align: center;
                         }
+                    }
+                    .movePlayerActive {
+                        box-shadow:0px 2px 19px 0px rgba(169,150,178,1);
                     }
                     .trem_box:last-child {
                         margin-right: 0;
