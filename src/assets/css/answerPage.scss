@@ -29,6 +29,9 @@
                         color:rgba(77,54,98,1);
                         line-height:25px;
                         margin-bottom: 8px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
                     }
                     .bot_box {
                         height: 18px;

@@ -7,22 +7,26 @@
             </div>
             <div class="cont_table_box">
                 <div class="title_box">
-                    <div class="btn" v-for="(item, index) in setTabelTitleData" :key="index">
+                    <a :class="{btn: true, moveActiveTtile: FTLabelIndex === index, active: CTtileIndex === index}" v-for="(item, index) in setTabelTitleData" :key="index" @click="clickFTlabel(index)" @mousemove="firstTitleLabelMove(index)" @mouseleave="firstTitleLabelMove(999)">
                         <span>{{item}}</span>
-                    </div>
+                        <div class="sort_box" v-if="index < 2">
+                            <img class="srot_top" :src="sortStatus === index+1 && sortType === 1 ? ftabelImgActive :ftabelImg" alt="" />
+                            <img class="srot_bot" :src="sortStatus === index+1 && sortType === 2 ? stabelImgActive : stabelImg" alt="" />
+                        </div>
+                    </a>
                 </div>
                 <div class="cont_box">
-                    <div class="trem_box" v-for="(item, index) in deviceConfigList" :key="index">
+                    <div :class="{trem_box: true, moveTabelActive: tableLindeIndex === index}" v-for="(item, index) in deviceConfigList" :key="index" @mousemove="tableLineMove(index)" @mouseleave="tableLineMove(999)">
                         <div class="line_box">
-                            <img :src="item.img" alt="">
+                            <img :src="item.team_logo" alt="">
                             <div class="txt">{{item.team}}</div>
                         </div>
                         <div class="line_box">
                             <img :src="item.nation_img" alt="">
-                            <div class="txt">{{item.nation}}</div>
+                            <div class="txt">{{item.name}}</div>
                         </div>
                         <div class="line_box">
-                            <div class="txt">{{item.name}}</div>
+                            <div class="txt">{{item.role}}</div>
                         </div>
                         <div class="line_box">
                             <div class="txt">{{item.鼠标}}</div>
@@ -79,43 +83,45 @@
                             <div class="txt">{{item.鼠标垫}}</div>
                         </div>
                         <div class="line_box">
-                            <a href="javascript:;" class="txt">详情</a>
+                            <a href="javascript:;" class="txt" @click="toSeePlayerInfo(item)">详情</a>
                         </div>
                     </div>
                 </div>
                 <pageItem v-if="pageNumDataF.length" :pageNumData="pageNumDataF" :limit="limitF" @changePage="changePage"></pageItem>
             </div>
-            <div class="comment_message_box" v-if="messageTotal > 0">
-                <div class="title">关于CS GO设备与设置的评论 ({{messageTotal}}条)</div>
-                <div class="cont_box">
-                    <div class="trem_box" v-for="(item, index) in commentListData" :key="index">
-                        <div class="people_box">
-                            <div class="l_box">
-                                <img class="people_img" :src="item.avatar" alt="">
-                            </div>
-                            <div class="r_box">
-                                <div class="name">
-                                    <div>{{item.user_title}}</div>
-                                    <div v-if="item.father_id !== 0">回复{{item.parent_user_title}}</div>
+            <div class="comment_message_box">
+                <div v-if="messageTotal > 0">
+                    <div class="title">关于CS GO设备与设置的评论 ({{messageTotal}}条)</div>
+                    <div class="cont_box">
+                        <div class="trem_box" v-for="(item, index) in commentListData" :key="index">
+                            <div class="people_box">
+                                <div class="l_box">
+                                    <img class="people_img" :src="item.avatar" alt="">
                                 </div>
-                                <div class="time_box">
-                                    <div class="t_txt">{{item.add_time}}</div>
-                                    <a href="javascript:;" @click="toTalkPeople(index)">回复Ta</a>
+                                <div class="r_box">
+                                    <div class="name">
+                                        <div>{{item.user_title}}</div>
+                                        <div v-if="item.father_id !== 0">回复{{item.parent_user_title}}</div>
+                                    </div>
+                                    <div class="time_box">
+                                        <div class="t_txt">{{item.add_time}}</div>
+                                        <a href="javascript:;" @click="toTalkPeople(index)">回复Ta</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="message_box">
-                            <img class="l_icon" src="" alt="">
-                            <!-- <div class="txt_box">{{item.father_id !== 0 ? item.parent_content : item.content}}</div> -->
-                            <div class="txt_box">{{item.content}}</div>
-                        </div>
-                        <div class="hf_message_box" v-if="messageIndex === index">
-                            <textarea placeholder="请输入你要回复的内容" v-model="messagePeopleTxt"></textarea>
-                            <a href="javascript:;" class="submit_btn" @click="toSubmitToPeople(item)">发表</a>
+                            <div class="message_box">
+                                <img class="l_icon" src="" alt="">
+                                <!-- <div class="txt_box">{{item.father_id !== 0 ? item.parent_content : item.content}}</div> -->
+                                <div class="txt_box">{{item.content}}</div>
+                            </div>
+                            <div class="hf_message_box" v-if="messageIndex === index">
+                                <textarea placeholder="请输入你要回复的内容" v-model="messagePeopleTxt"></textarea>
+                                <a href="javascript:;" class="submit_btn" @click="toSubmitToPeople(item)">发表</a>
+                            </div>
                         </div>
                     </div>
+                    <pageItem v-if="pageNumDataS.length" :pageNumData="pageNumDataS" @changePages="changePages" ItemIdex="2"></pageItem>
                 </div>
-                <pageItem v-if="pageNumDataS.length" :pageNumData="pageNumDataS" @changePages="changePages" ItemIdex="2"></pageItem>
             </div>
             <div class="submit_messages_box">
                 <div class="title">发表评论</div>
@@ -162,7 +168,7 @@ export default {
             pageNumDataF:[],
             pageNumDataS:[],
             deviceConfigList: [],
-            limitF: 10,
+            limitF: 12,
             limitS: 5,
             pageS: 1,
             pageF: 1,
@@ -170,7 +176,16 @@ export default {
             commentListData: [],
             messageIndex: -1,
             messagePeopleTxt: '',
-            messageTxt: ''
+            messageTxt: '',
+            FTLabelIndex: -1,
+            CTtileIndex: -1,
+            tableLindeIndex: -1,
+            sortStatus: 0,//排序对象
+            sortType: 0, //1升序2降序
+            ftabelImg: require('../assets/images/top_s_icon.png'),
+            ftabelImgActive: require('../assets/images/top_active_icon.png'),
+            stabelImg: require('../assets/images/below_s_icon.png'),
+            stabelImgActive: require('../assets/images/below_active_icon.png'),
         }
     },
     components: {
@@ -183,9 +198,13 @@ export default {
     },
     methods: {
         getDeviceConfig () {
-            ajaxHttp.deviceConfigListFeath().then(res => {
-                console.log(res)
+            let data = {
+                page: this.pageF,
+                limit: this.limitF
+            }
+            ajaxHttp.deviceConfigListFeath(data).then(res => {
                 this.deviceConfigList = res.data.list
+                this.pageNumDataF = []
                 if (res.data.total > 12) {
                     for (let i = 1; i< Math.ceil((res.data.total)/12) + 1; i++) {
                         this.pageNumDataF.push(i)
@@ -268,10 +287,56 @@ export default {
         },
         changePage (e) {
             this.pageF = e
+            this.getDeviceConfig()
         },
         changePages (e) {
             this.pageS = e
             this.getCommentList()
+        },
+        toSeePlayerInfo (item) {
+            this.$router.push({
+                path: '/grameUserInfo',
+                query: {
+                    id: item.player_id
+                }
+            })
+        },
+        firstTitleLabelMove (index) {
+            this.FTLabelIndex = index
+        },
+        clickFTlabel (index) {
+            this.CTtileIndex = index
+            this.sortType = this.sortType === 0 ? 1 : this.sortType === 1 ? 2 : this.sortType === 2 ? 0 : ''
+            this.sortStatus = index + 1
+            if (index === 0) {
+                this.changeSortFeach(2)
+            } else if (index === 1) {
+                this.changeSortFeach(1)
+            }
+        },
+        tableLineMove (index) {
+            this.tableLindeIndex = index
+        },
+        changeSortFeach (orderid, order) {
+            let data = {
+                page: this.pageF,
+                limit: this.limitF,
+                order_by: this.sortType ? orderid : '',
+                order: this.sortType ? this.sortType : ''
+            }
+            ajaxHttp.deviceConfigListFeath(data).then(res => {
+            this.deviceConfigList = res.data.list
+            this.pageNumDataF = []
+            if (res.data.total > 12) {
+                for (let i = 1; i< Math.ceil((res.data.total)/12) + 1; i++) {
+                    this.pageNumDataF.push(i)
+                }
+            } else {
+                this.pageNumDataF.push(1)
+            }
+        }).catch(err => {
+            this.$Message.error(err.message)
+        })
         }
     }
 }

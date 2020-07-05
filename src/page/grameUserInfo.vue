@@ -10,10 +10,10 @@
                             <img :src="playerInfoData && playerInfoData.info.nation_img" alt="">
                             <div>{{playerInfoData && playerInfoData.info.name}}</div>
                         </div>
-                        <div class="or_txt">又名：{{playerInfoData && playerInfoData.info.nickname}}</div>
+                        <!-- <div class="or_txt">又名：{{playerInfoData && playerInfoData.info.nickname}}</div> -->
                         <div class="zd_name_box">
-                            <img :src="playerInfoData && playerInfoData.info.nation_img" alt="">
-                            <div>{{playerInfoData && playerInfoData.info.nation}}</div>
+                            <img :src="playerInfoData && playerInfoData.info.team_logo" alt="">
+                            <div>{{playerInfoData && playerInfoData.info.team}}</div>
                         </div>
                         <div class="xx_txt">{{playerInfoData && playerInfoData.info.introduction}}</div>
                     </div>
@@ -84,37 +84,39 @@
                     </div>
                 </div>
             </div>
-            <div class="comment_message_box" v-if="messageTotal > 0">
-                <div class="title">关于CS GO设备与设置的评论 ({{messageTotal}}条)</div>
-                <div class="cont_box">
-                    <div class="trem_box" v-for="(item, index) in commentListData" :key="index">
-                        <div class="people_box">
-                            <div class="l_box">
-                                <img class="people_img" :src="item.avatar" alt="">
-                            </div>
-                            <div class="r_box">
-                                <div class="name">
-                                    <div>{{item.user_title}}</div>
-                                    <div v-if="item.father_id !== 0">回复{{item.parent_user_title}}</div>
+            <div class="comment_message_box">
+                <div v-if="messageTotal > 0">
+                    <div class="title">关于CS GO设备与设置的评论 ({{messageTotal}}条)</div>
+                    <div class="cont_box">
+                        <div class="trem_box" v-for="(item, index) in commentListData" :key="index">
+                            <div class="people_box">
+                                <div class="l_box">
+                                    <img class="people_img" :src="item.avatar" alt="">
                                 </div>
-                                <div class="time_box">
-                                    <div class="t_txt">{{item.add_time}}</div>
-                                    <a href="javascript:;" @click="toTalkPeople(index)">回复Ta</a>
+                                <div class="r_box">
+                                    <div class="name">
+                                        <div>{{item.user_title}}</div>
+                                        <div v-if="item.father_id !== 0">回复{{item.parent_user_title}}</div>
+                                    </div>
+                                    <div class="time_box">
+                                        <div class="t_txt">{{item.add_time}}</div>
+                                        <a href="javascript:;" @click="toTalkPeople(index)">回复Ta</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="message_box">
-                            <img class="l_icon" src="" alt="">
-                            <!-- <div class="txt_box">{{item.father_id !== 0 ? item.parent_content : item.content}}</div> -->
-                            <div class="txt_box">{{item.content}}</div>
-                        </div>
-                        <div class="hf_message_box" v-if="messageIndex === index">
-                            <textarea placeholder="请输入你要回复的内容" v-model="messagePeopleTxt"></textarea>
-                            <a href="javascript:;" class="submit_btn" @click="toSubmitToPeople(item)">发表</a>
+                            <div class="message_box">
+                                <img class="l_icon" src="" alt="">
+                                <!-- <div class="txt_box">{{item.father_id !== 0 ? item.parent_content : item.content}}</div> -->
+                                <div class="txt_box">{{item.content}}</div>
+                            </div>
+                            <div class="hf_message_box" v-if="messageIndex === index">
+                                <textarea placeholder="请输入你要回复的内容" v-model="messagePeopleTxt"></textarea>
+                                <a href="javascript:;" class="submit_btn" @click="toSubmitToPeople(item)">发表</a>
+                            </div>
                         </div>
                     </div>
+                    <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage"></pageItem>
                 </div>
-                <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage"></pageItem>
             </div>
             <div class="submit_messages_box">
                 <div class="title">发表评论</div>
@@ -175,7 +177,6 @@ export default {
                 player_id: this.playerId
             }
             ajaxHttp.seePlayerInfoFeath(data).then(res => {
-                console.log(res)
                 this.playerInfoData = res.data
                 res.data.mouse
                 let firstTitleF = []
@@ -274,6 +275,7 @@ export default {
         },
         changePage (e) {
             this.pageS = e
+            this.getCommentList()
         },
         toSeePlayerInfo (item) {
             this.playerId = item.player_id

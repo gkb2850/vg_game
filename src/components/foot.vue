@@ -9,11 +9,17 @@
                 </div>
             </div>
         </div>
-        <div class="js_message">© 2020 南京锦宏源科技</div>
-        <div class="js_message_box">
-            <img src="../assets/images/guihui.png" alt="">
-            <div class="txt">工商网监电子标识</div>
-            <div class="txt">备案号</div>
+        <div class="foot_message_box">
+            <div class="js_message_box"> 
+                <div class="txt">© 2020 南京锦宏源科技</div>
+                <div class="line"></div>
+                <img src="../assets/images/guohui.png" alt="">
+                <div class="txt">增值电信业务经营许可证：苏A0-00000000</div>
+            </div>
+            <div class="js_message_box">
+                <img src="../assets/images/guihui.png" alt="">
+                <div class="txt">苏公网安备 00000000000000号</div>
+            </div>
         </div>
     </div>
 </template>
@@ -109,11 +115,11 @@ export default {
 
 <style scoped lang="scss">
     .foot_bot_box {
-        background: #281C34;
-        padding: 40px 150px;
         .foot_box {
             padding-bottom: 10px;
             box-sizing: border-box;
+            background: #281C34;
+            padding: 40px 150px;
             display: flex;
             .item_box {
                 flex: 1;
@@ -144,35 +150,48 @@ export default {
                 flex: none;
             }
         }
-        .js_message {
-            height: 20px;
-            line-height: 20px;
-            font-size:14px;
-            font-family:PingFangSC-Medium,PingFang SC;
-            font-weight:500;
-            color:rgba(255,255,255,1);
-            text-align: center;
-        }
-        .js_message_box {
-            height: 30px;
+        .foot_message_box {
+            background: #191320;
+            height: 65px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            img {
-                height: 15px;
-                width: 15px;
-                margin-right: 5px;
-            }
-            .txt {
+            .js_message {
                 height: 20px;
                 line-height: 20px;
                 font-size:14px;
                 font-family:PingFangSC-Medium,PingFang SC;
                 font-weight:500;
                 color:rgba(255,255,255,1);
-                margin-right: 20px;
+                text-align: center;
+            }
+            .js_message_box {
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img {
+                    height: 15px;
+                    width: 15px;
+                    margin-right: 5px;
+                }
+                .txt {
+                    height: 20px;
+                    line-height: 20px;
+                    font-size:14px;
+                    font-family:PingFangSC-Medium,PingFang SC;
+                    font-weight:500;
+                    color:rgba(255,255,255,1);
+                }
+                .line {
+                    height: 14px;
+                    width: 1px;
+                    background: #fff;
+                    margin: 0 10px;
+                }
             }
         }
+        
     }
     
 </style>

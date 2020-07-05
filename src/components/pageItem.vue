@@ -2,13 +2,13 @@
     <div class="container">
         <div class="page_btn_box">
             <div class="f_btn btn" @click="pageToChange('left')">
-                <a class="icon iconfont icon-zuojiantou_huaban"></a>
+                <a class="icon iconfont icon-zuojiantou"></a>
             </div>
             <div class="btn" v-for="(item, index) in pageArrayList" :key="index" @click="pageIndexChange(item)">
                 <a :class="[pageIndex === item ? 'active' : '']">{{item}}</a>
             </div>
             <div class="l_btn btn" @click="pageToChange('right')">
-                <a href="javascript:;" class="icon iconfont icon-youjiantou"></a>
+                <a href="javascript:;" class="icon iconfont icon-youjiantou1"></a>
             </div>
         </div>
     </div>

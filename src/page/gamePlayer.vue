@@ -6,7 +6,7 @@
                 <div :class="{trem_box: true, movePlayerActive: playerSelectIndex === index}" v-for="(item, index) in playerListData" :key="index" @click="seePlayerInfo(item)" @mousemove="seePlayerInfoMove(index)" @mouseleave="seePlayerInfoMove(999)">
                     <div class="img_header">
                         <img :src="item.img" alt="">
-                        <div class="top_name">CS GO</div>
+                        <div class="top_name" v-if="item.game">{{item.game}}</div>
                     </div>
                     <div class="c_box">
                         <div class="zd_name">{{item.name}}</div>
@@ -20,7 +20,7 @@
                     <div class="bot_box">
                         <div class="txt">{{item.add_time}}</div>
                         <div class="line"></div>
-                        <div class="txt">1234666条评论</div>
+                        <div class="txt">{{item.comment > 0 ? item.comment + '条评论' : '暂无评论'}}</div>
                     </div>
                 </div>
             </div>
@@ -60,9 +60,7 @@ export default {
             }
             ajaxHttp.playerPageListFeath(data).then(res => {
                 this.playerListData = res.data.list
-                // this.pageNumData = new Array(res.data.list.length)
                 this.pageNumData = []
-                console.log(this.pageNumData)
                 if (res.data.total > 10) {
                     for (let i = 1; i< Math.ceil((res.data.total)/10) + 1;i++){
                         this.pageNumData.push(i)
@@ -85,6 +83,7 @@ export default {
         },
         changePage (e) {
             this.page = e
+            this.getPlayerList()
         },
         seePlayerInfoMove (index) {
             this.playerSelectIndex = index

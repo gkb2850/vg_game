@@ -98,7 +98,7 @@
                             <div class="txt" v-for="(item, index) in gamedevice_listF" :key="index">{{item.title}}</div>
                         </div>
                         <div class="trem_box" v-if="gamedevice_listS.length">
-                            <div class="title_txt"></div>
+                            <div class="title_txt">GS GO 装备</div>
                             <div class="txt" v-for="(item, index) in gamedevice_listS" :key="index">{{item.title}}</div>
                         </div>
                     </div>

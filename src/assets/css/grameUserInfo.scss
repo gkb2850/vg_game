@@ -40,6 +40,9 @@
                             line-height: 22px;
                         }
                     }
+                    .zd_name_box:first-child {
+                        margin-bottom: 10px;
+                    }
                     .or_txt {
                         font-size:16px;
                         font-family:PingFangSC-Semibold,PingFang SC;
@@ -147,6 +150,7 @@
                         font-weight:400;
                         color:rgba(77,54,98,1);
                         line-height:20px;
+                        word-wrap:break-word;
                     }
                 }
             }
@@ -171,6 +175,7 @@
                         flex: 1;
                         margin-right: 30px;
                         border:1px solid rgba(212,212,212,1);
+                        max-width: 250px;
                         .product_img {
                             height: 204px;
                             display: block;
@@ -243,6 +248,7 @@
                         flex: 1;
                         margin-right: 33px;
                         border:1px solid rgba(77,47,93,1);
+                        max-width: 250px;
                         .people_img {
                             height: 298px;
                             width: 100%;
@@ -440,6 +446,7 @@
                 color:rgba(34,11,55,1);
                 line-height:22px;
                 width: 100%;
+                outline: none;
             }
             .submit_btn {
                 margin: 40px 0 133px;

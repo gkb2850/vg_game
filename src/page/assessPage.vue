@@ -26,7 +26,7 @@ export default {
             pageNumData: [],
             deviceListData: [],
             page: 1,
-            limit: 10,
+            limit: 8,
             deviceBoxIndex: -1
         }
     },
@@ -44,10 +44,10 @@ export default {
                 limit: this.limit
             }
             ajaxHttp.proDeviceListFeath(data).then(res => {
-                console.log(res)
                 this.deviceListData = res.data.list
-                if (res.data.total > 10) {
-                    for (let i = 1; i< Math.ceil((res.data.total)/10) + 1; i++) {
+                this.pageNumData = []
+                if (res.data.total > 8) {
+                    for (let i = 1; i< Math.ceil((res.data.total)/8) + 1; i++) {
                         this.pageNumData.push(i)
                     }
                 } else {
@@ -70,6 +70,7 @@ export default {
         },
         changePage (e) {
             this.page = e
+            this.getDeviceList()
         }
     }
 }

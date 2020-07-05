@@ -556,6 +556,18 @@ export default {
                         border: none;
                         outline: none;
                     }
+                    input::-webkit-input-placeholder {
+                        color:#fff;
+                    }
+                    input::-moz-placeholder { 
+                        color:#fff;
+                    }
+                    input:-ms-input-placeholder {
+                        color:#fff;
+                    }
+                    input:-moz-placeholder {
+                        color:#fff;
+                    }
                     img {
                         height: 16px;
                         width: 16px;

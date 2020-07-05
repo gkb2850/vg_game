@@ -6,37 +6,39 @@
                 <div class="title">{{questionInfoData.title}}</div>
                 <div class="c_txt" v-html="questionInfoData.content"></div>
             </div>
-            <div class="comment_message_box" v-if="messageTotal > 0">
-                <div class="title">关于CS GO设备与设置的评论 ({{messageTotal}}条)</div>
-                <div class="cont_box">
-                    <div class="trem_box" v-for="(item, index) in commentListData" :key="index">
-                        <div class="people_box">
-                            <div class="l_box">
-                                <img class="people_img" :src="item.avatar" alt="">
-                            </div>
-                            <div class="r_box">
-                                <div class="name">
-                                    <div>{{item.user_title}}</div>
-                                    <div v-if="item.father_id !== 0">回复{{item.parent_user_title}}</div>
+            <div class="comment_message_box">
+                <div v-if="messageTotal > 0">
+                    <div class="title">关于CS GO设备与设置的评论 ({{messageTotal}}条)</div>
+                        <div class="cont_box">
+                            <div class="trem_box" v-for="(item, index) in commentListData" :key="index">
+                                <div class="people_box">
+                                    <div class="l_box">
+                                        <img class="people_img" :src="item.avatar" alt="">
+                                    </div>
+                                    <div class="r_box">
+                                        <div class="name">
+                                            <div>{{item.user_title}}</div>
+                                            <div v-if="item.father_id !== 0">回复{{item.parent_user_title}}</div>
+                                        </div>
+                                        <div class="time_box">
+                                            <div class="t_txt">2020年5月23日下午4:19</div>
+                                            <a href="javascript:;" @click="toTalkPeople(index)">回复Ta</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="time_box">
-                                    <div class="t_txt">2020年5月23日下午4:19</div>
-                                    <a href="javascript:;" @click="toTalkPeople(index)">回复Ta</a>
+                                <div class="message_box">
+                                    <img class="l_icon" src="" alt="">
+                                    <!-- <div class="txt_box">{{item.father_id !== 0 ? item.parent_content : item.content}}</div> -->
+                                    <div class="txt_box">{{item.content}}</div>
+                                </div>
+                                <div class="hf_message_box" v-if="messageIndex === index">
+                                    <textarea placeholder="请输入你要回复的内容" v-model="messagePeopleTxt"></textarea>
+                                    <a href="javascript:;" class="submit_btn" @click="toSubmitToPeople(item)">发表</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="message_box">
-                            <img class="l_icon" src="" alt="">
-                            <!-- <div class="txt_box">{{item.father_id !== 0 ? item.parent_content : item.content}}</div> -->
-                            <div class="txt_box">{{item.content}}</div>
-                        </div>
-                        <div class="hf_message_box" v-if="messageIndex === index">
-                            <textarea placeholder="请输入你要回复的内容" v-model="messagePeopleTxt"></textarea>
-                            <a href="javascript:;" class="submit_btn" @click="toSubmitToPeople(item)">发表</a>
-                        </div>
-                    </div>
+                        <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage" :limit="limit"></pageItem>
                 </div>
-                <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage" :limit="limit"></pageItem>
             </div>
             <div class="submit_messages_box">
                 <div class="title">发表评论</div>
