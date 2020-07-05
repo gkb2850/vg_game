@@ -1,0 +1,92 @@
+.articeTitle {
+    height: 40px;
+    line-height: 40px;
+    font-size: 28px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 600;
+    color: #4D3662;
+    margin-bottom: 45px;
+}
+
+.articeSecondTitle {
+    height: 33px;
+    line-height: 33px;
+    font-size: 26px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 560;
+    color: #4D3662;
+    margin-bottom: 40px;
+}
+
+.articeThirdTitle {
+    height: 30px;
+    line-height: 30px;
+    font-size: 24px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 560;
+    color: #4D3662;
+    margin-bottom: 40px;
+}
+
+.articeFourthTitle {
+    height: 28px;
+    line-height: 28px;
+    font-size: 18px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 560;
+    color: #4D3662;
+    margin-bottom: 20px;
+    margin-top: 40px;
+
+    &:first-child {
+        margin-top: 0px;
+    }
+}
+
+.articeText {
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #4D3662;
+    line-height: 24px;
+
+    p {
+        margin: 0 0 1.5em;
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+}
+//去亚马逊购买按钮
+.pay_btn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #8C6F9A;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 45px;
+    cursor: pointer;
+
+    &:hover {
+        background: #aa89ba;
+    }
+
+    img {
+        width: 54px;
+        height: 14px;
+        margin-right: 20px;
+    }
+
+    span {
+        height: 22px;
+        font-size: 16px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 1);
+        line-height: 22px;
+    }
+}

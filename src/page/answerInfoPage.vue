@@ -55,6 +55,8 @@
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
 import ajaxHttp from '@/api/index.js'
+import {mapMutations} from 'vuex'
+
 export default {
     data () {
         return {
@@ -74,6 +76,7 @@ export default {
         if (this.$route.query.id) {
             this.questionId = this.$route.query.id
         }
+        this.checkRoutePath(this.$route.path)
     },
     components: {
         deviceOrSet,
@@ -168,7 +171,10 @@ export default {
         changePage (e) {
             this.page = e
             this.getCommentList()
-        }
+        },
+        ...mapMutations([
+            'checkRoutePath'
+        ])
     }
 }
 </script>

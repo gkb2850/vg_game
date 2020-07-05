@@ -1,4 +1,5 @@
 .grameUserInfo_container {
+    background: #F7F7F7;
     .main_box {
         .js_title_box {
             margin-top: 68px;
@@ -67,20 +68,28 @@
                 }
                 .bot_box_people {
                     border-top: 1px solid #4D3662;
-                    height: 64px;
-                    padding: 0 16px;
+                    padding: 18px 16px 12px;
                     box-sizing: border-box;
-                    display: flex;
-                    align-items: center;
                     background: #EDEBEF;
-                    img {
-                        height: 26px;
-                        width: 26px;
-                        margin-right: 15px;
+                    .img_box {
+                        display: flex;
+                        align-items: center;
+                        a {
+                            img {
+                                height: 26px;
+                                width: 26px;
+                                margin-right: 15px;
+                            }
+                        }
+                    }
+                    .img_box:first-child {
+                        margin-bottom:20px;
                     }
                 }
             }
             .game_sz_info {
+                background: #fff;
+                padding-bottom: 29px;
                 flex: 1;
                 .table_info_st {
                     .title {
@@ -131,6 +140,7 @@
                 .str_info_st {
                     padding-left: 21px;
                     box-sizing: border-box;
+                    padding-right: 21px;
                     .title {
                         height: 22px;
                         line-height: 22px;
@@ -151,6 +161,16 @@
                         color:rgba(77,54,98,1);
                         line-height:20px;
                         word-wrap:break-word;
+                    }
+                    .download_box {
+                        height: 38px;
+                        line-height: 38px;
+                        font-size:14px;
+                        font-family:PingFangSC-Regular,PingFang SC;
+                        font-weight:400;
+                        color:rgba(255,255,255,1);
+                        text-align: center;
+                        background: #4D3662;
                     }
                 }
             }

@@ -9,12 +9,18 @@
 <script>
 import headerBox from '@/components/header.vue'
 import footBox from '@/components/foot.vue'
+
 export default {
   name: 'App',
+  data () {
+    return {
+
+    }
+  },
   components: {
     headerBox,
     footBox
-  },
+  }
 }
 </script>
 
@@ -24,10 +30,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  background-color: #F7F7F7;
 }
 
   body {
-    margin: 0;
+    margin: 0 auto;
     min-width: 1400px;
   }
 

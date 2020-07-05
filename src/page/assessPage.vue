@@ -1,10 +1,10 @@
 <template>
     <div class="assessPage_container">
-        <deviceOrSet title="评估测评"></deviceOrSet>
+        <deviceOrSet title="设备评测"></deviceOrSet>
         <div class="main_cont_box">
             <div class="product_box">
                 <div :class="{trem_box: true, moveProActive: deviceBoxIndex === index}" v-for="(item, index) in deviceListData" :key="index" @click="toSeeAssessInfo(item)" @mousemove="toSeeAssessInfoMove(index)" @mouseleave="toSeeAssessInfoMove(999)">
-                    <img class="img_header" :src="item.img" alt="">
+                    <div class="device-img"><img :src="item.img" alt=""></div>
                     <div class="pc_name">{{item.title}}</div>
                     <div class="time_txt">{{item.add_time}}</div>
                 </div>
@@ -20,6 +20,8 @@
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
 import ajaxHttp from '@/api/index'
+import {mapMutations} from 'vuex'
+
 export default {
     data () {
         return {
@@ -29,6 +31,9 @@ export default {
             limit: 8,
             deviceBoxIndex: -1
         }
+    },
+    created() {
+        this.checkRoutePath(this.$route.path)
     },
     components: {
         deviceOrSet,
@@ -71,7 +76,10 @@ export default {
         changePage (e) {
             this.page = e
             this.getDeviceList()
-        }
+        },
+        ...mapMutations([
+            'checkRoutePath'
+        ])
     }
 }
 </script>

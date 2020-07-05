@@ -17,11 +17,19 @@
                         </div>
                         <div class="xx_txt">{{playerInfoData && playerInfoData.info.introduction}}</div>
                     </div>
-                    <div class="bot_box_people">
-                        <img src="../assets/images/tt_icon.png" alt="">
-                        <img src="../assets/images/sz_icon.png" alt="">
-                        <img src="../assets/images/fb_icon.png" alt="">
-                        <img src="../assets/images/dx_icon.png" alt="">
+                    <div class="bot_box_people" v-if="playerInfoData.info">
+                        <div class="img_box" v-for="(itme, index) in playerInfoData.info.live_roome_list" :key="index">
+                            <a v-if="item.type === 1" :href="item.url" ><img src="../assets/images/tt_icon.png" alt=""></a>
+                            <a v-if="item.type === 2" :href="item.url" ><img src="../assets/images/sz_icon.png" alt=""></a>
+                            <a v-if="item.type === 3" :href="item.url" ><img src="../assets/images/fb_icon.png" alt=""></a>
+                            <a v-if="item.type === 4" :href="item.url" ><img src="../assets/images/dx_icon.png" alt=""></a>
+                        </div>
+                        <div class="img_box" v-for="(itme, index) in playerInfoData.info.live_roome_list" :key="index">
+                            <a v-if="item.type ===6" :href="item.url"><img src="../assets/images/blibli_icon.png" alt=""></a>
+                            <a v-if="item.type ===8" :href="item.url"><img src="../assets/images/weibo_icon.png" alt=""></a>
+                            <a v-if="item.type ===7" :href="item.url"><img src="../assets/images/tuite_icon.png" alt=""></a>
+                            <a v-if="item.type ===5" :href="item.url"><img src="../assets/images/shayu_icon.png" alt=""></a>
+                        </div>
                     </div>
                 </div>
                 <div class="game_sz_info">
@@ -44,16 +52,20 @@
                         </div>
                     </div>
                     <div class="str_info_st" v-if="playerInfoData && playerInfoData.info.crosshair">
-                        <div class="title">十字线</div>
+                        <div class="title">准星</div>
                         <div class="c_txt">{{playerInfoData.info.crosshair}}</div>
                     </div>
                     <div class="str_info_st" v-if="playerInfoData && playerInfoData.info.view_model">
-                        <div class="title">视图模型</div>
+                        <div class="title">视角</div>
                         <div class="c_txt">{{playerInfoData.info.view_model}}</div>
                     </div>
                     <div class="str_info_st" v-if="playerInfoData && playerInfoData.info.cl_bob">
-                        <div class="title">CL_BOB</div>
+                        <div class="title">手臂晃动方向与幅度</div>
                         <div class="c_txt">{{playerInfoData.info.cl_bob}}</div>
+                    </div>
+                    <div class="str_info_st" v-if="playerInfoData && playerInfoData.info.download">
+                        <div class="title">下载</div>
+                        <a :href="playerInfoData.info.download" download="gfg" class="download_box">CFG文件</a>
                     </div>
                 </div>
             </div>
@@ -115,7 +127,7 @@
                             </div>
                         </div>
                     </div>
-                    <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage"></pageItem>
+                    <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage" :limit="limit"></pageItem>
                 </div>
             </div>
             <div class="submit_messages_box">
@@ -133,6 +145,8 @@
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
 import ajaxHttp from '@/api/index.js'
+import {mapMutations} from 'vuex'
+
 export default {
     data () {
         return {
@@ -147,8 +161,8 @@ export default {
             pageNumData:[],
             playerId: '',
             playerInfoData: '',
-            pageS: 1,
-            limitS: 5,
+            page: 1,
+            limit: 5,
             commentListData: [],
             messageIndex: -1,
             messagePeopleTxt: '',
@@ -162,6 +176,7 @@ export default {
         if (this.$route.query.id) {
             this.playerId = this.$route.query.id
         }
+        this.checkRoutePath(this.$route.path)
     },
     components: {
         deviceOrSet,
@@ -205,8 +220,8 @@ export default {
             let data = {
                 type: '1',
                 data_id: this.playerId,
-                page: this.pageS,
-                limit: this.limitS
+                page: this.page,
+                limit: this.limit
             }
             ajaxHttp.commentListFeath(data).then(res => {
                 console.log(res)
@@ -295,7 +310,10 @@ export default {
         },
         toSeeDeviceInfoMove (index) {
             this.deviceBoxIndex = index
-        }
+        },
+        ...mapMutations([
+            'checkRoutePath'
+        ]),
     }
 }
 </script>

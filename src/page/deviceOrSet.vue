@@ -120,7 +120,7 @@
                             </div>
                         </div>
                     </div>
-                    <pageItem v-if="pageNumDataS.length" :pageNumData="pageNumDataS" @changePages="changePages" ItemIdex="2"></pageItem>
+                    <pageItem v-if="pageNumDataS.length" :pageNumData="pageNumDataS" @changePages="changePages" ItemIdex="2" :limit="limitS"></pageItem>
                 </div>
             </div>
             <div class="submit_messages_box">
@@ -138,6 +138,7 @@
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
 import ajaxHttp from '@/api/index'
+import {mapMutations} from 'vuex'
 export default {
     data () {
         return {
@@ -187,6 +188,9 @@ export default {
             stabelImg: require('../assets/images/below_s_icon.png'),
             stabelImgActive: require('../assets/images/below_active_icon.png'),
         }
+    },
+    created() {
+        this.checkRoutePath(this.$route.path)
     },
     components: {
         deviceOrSet,
@@ -337,7 +341,10 @@ export default {
         }).catch(err => {
             this.$Message.error(err.message)
         })
-        }
+        },
+        ...mapMutations([
+            'checkRoutePath'
+        ])
     }
 }
 </script>

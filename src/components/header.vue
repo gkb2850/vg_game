@@ -6,7 +6,10 @@
                 <a class="login_a" href="javascript:;" @click="loginBoxShow('show')">登录</a>
                 <a href="javascript:;" @click="registerBoxShow('show')">注册</a>
             </div>
-            <a v-else class="txt" @click="toMyPage">欢迎用户</a>
+            <a v-else class="txt_box">
+                <div class="message_txt" @click="toMyPage">{{userName}}</div>
+                <a href="javascript:;" @click="toLoginOut">退出</a>
+            </a>
         </div>
         <div class="nav_box">
             <div class="l_box">
@@ -30,7 +33,7 @@
             <div class="r_box">
                 <div class="search_box">
                     <input type="text" placeholder="请输入关键字"  @keyup.enter="getSearchData" v-model="searchtxt">
-                    <img src="../assets/images/search_icon.png" alt="">
+                    <img @click="getSearchData" src="../assets/images/search_icon.png" alt="">
                 </div>
             </div>
         </div>
@@ -89,7 +92,7 @@
                 </div>
                 <div class="c_box" v-if="true">
                     <div class="c_trem_box">
-                        <input type="number" placeholder="手机号" class="input_txt" v-model="loginData.phone">
+                        <input type="number" placeholder="手机号" class="input_txt" v-model="loginData.phone" @blur="loginPhoneChange">
                     </div>
                     <div class="c_trem_box">
                         <input type="password" placeholder="密码" class="input_txt" v-model="loginData.pass">
@@ -120,12 +123,20 @@
                 <a href="javascript:;" class="submit_btn" @click="toLogin">登陆</a>
             </div>
         </div>
+        <Modal
+            title="退出"
+            v-model="loginOutBoxShow"
+            @on-ok="sureLoginOut"
+            class-name="vertical-center-modal">
+            <p>确定退出登陆吗？</p>
+        </Modal>
     </div>
 </template>
 
 <script>
 import ajaxHttp from '@/api/index.js'
 import searchPage from '../page/searchPage.vue'
+import {mapGetters, mapState} from 'vuex'
 var content = searchPage
 export default {
     data () {
@@ -148,7 +159,7 @@ export default {
                     path: '/productPageInfo'
                 },
                 {
-                    txt: '评估评测',
+                    txt: '设备评测',
                     path: '/assessPage'
                 },
                 {
@@ -174,7 +185,9 @@ export default {
             navIndexShow: false,
             navIndexTop: 0,
             secondLabelIndex: 0,
-            navIndexTopMove: -1
+            navIndexTopMove: -1,
+            userName: '',
+            loginOutBoxShow: false
         }
     },
     created () {
@@ -186,6 +199,10 @@ export default {
         if (this.$route.path !== '/searchPage') {
             this.searchtxt = ''
         }
+        if (localStorage.getItem('userName')) {
+            this.userName = localStorage.getItem('userName')
+        }
+        console.log(this.navTLabelIndex)
     },
     mounted () {
         this.getDevListData()
@@ -316,7 +333,7 @@ export default {
                 } else {
                     this.$router.push('/')
                 }
-                
+                this.getUserInfoToHttp()
             }).catch(err => {
                 this.$Message.error(err.message)
                 
@@ -375,8 +392,50 @@ export default {
                 }, 50)
             }
             
+        },
+        loginPhoneChange () {
+            if(!(/^1[3456789]\d{9}$/.test(this.loginData.phone))){ 
+                this.$Message.warning("手机号码有误，请重填");
+                this.loginData.phone = ''
+                return
+            }
+        },
+        getUserInfoToHttp () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                return
+            }
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id
+            }
+            ajaxHttp.getUserInfoFeath(data).then(res => {
+                this.userName = res.data.user_info.title
+                localStorage.setItem('userName', res.data.user_info.title)
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        sureLoginOut () {
+            localStorage.removeItem('userInfo')
+            this.$router.push('/index')
+            location.reload()
+        },
+        toLoginOut () {
+            this.loginOutBoxShow = true
         }
     },
+    computed: {
+        ...mapState({
+            navIndexTops: 'navTLabelIndex'
+        })
+    },
+    watch: {
+        navIndexTops (val) {
+            this.navIndexTop = val
+        }
+    }
 }
 </script>
 
@@ -400,7 +459,8 @@ export default {
                     font-family:PingFangSC-Regular,PingFang SC;
                     font-weight:400;
                     color:rgba(47,47,54,1);
-                    margin-right: 20px;
+                    padding-right: 25px;
+                    padding-left: 25px;
                 }
                 a {
                     height: 100%;
@@ -412,7 +472,7 @@ export default {
                 }
                 .login_a {
                     color: #894FA0;
-                    margin-right: 20px;
+                    padding-right: 25px;
                 }
             }
             .txt {
@@ -542,6 +602,7 @@ export default {
                     box-sizing: border-box;
                     border: 1px solid #F2F4F5;
                     padding: 8px;
+                    align-items: center;
                     input {
                         flex: 1;
                         overflow: hidden;
@@ -571,6 +632,9 @@ export default {
                     img {
                         height: 16px;
                         width: 16px;
+                        border-top: 8px solid transparent;
+                        border-bottom: 8px solid transparent;
+                        box-sizing: content-box;
                     }
                 }
             }

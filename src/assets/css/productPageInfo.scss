@@ -1,72 +1,88 @@
-.deviceOrSet_container {
+.productPageInfo_container {
     .main_box {
-        .js_title_box {
-            padding: 60px 150px;
-            box-sizing: border-box;
-            .txt {
-                margin-bottom: 30px;
-                font-size:14px;
-                font-family:PingFangSC-Regular,PingFang SC;
-                font-weight:400;
-                color:rgba(77,54,98,1);
-            }
-            .txt:last-child {
-                margin-bottom: 0;
+        padding: 0 15%;
+        box-sizing: border-box;
+
+
+        $marginTop: 55px;
+
+        .intro-box {
+            margin: $marginTop 0;
+        }
+
+        .best-common-box {
+            .img-box {
+                margin-top: 25px;
+
+                img {
+                    width: 100%;
+                }
             }
         }
-        .sec_product_box {
-            padding: 0 150px;
+
+        .detail-img-box {
+            line-height: 0;
             box-sizing: border-box;
-            .title {
-                height: 40px;
-                line-height: 40px;
-                margin: 80px auto 45px;
-                font-size:28px;
-                font-family:PingFangSC-Medium,PingFang SC;
-                font-weight:500;
-                color:rgba(77,54,98,1);
+            height: 330px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: scale-down;
             }
+        }
+
+        .sec_product_box {
             .cont_box {
                 display: flex;
                 margin-bottom: 45px;
+
                 .trem_box {
-                    background:rgba(212,212,212,1);
+                    background: #D4D4D4;
                     overflow: hidden;
                     margin-right: 30px;
                     flex: 1;
-                    img {
-                        width: 100%;
-                        height: 204px;
-                        display: block;
+                    cursor: pointer;
+
+                    &:hover {
+                        box-shadow: 0px 2px 14px 0px #C9C2D0;
+
+                        .b_txt {
+                            color: #894FA0;
+                        }
                     }
+
+                    .b-img {
+                        background-color: #ffffff;
+                        line-height: 0;
+                        padding: 15px;
+                        box-sizing: border-box;
+                        height: 200px;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: scale-down;
+                        }
+                    }
+
                     .b_txt {
                         height: 70px;
                         display: flex;
                         align-items: center;
+                        justify-content: center;
                         padding: 0 10px;
                         box-sizing: border-box;
-                        span {
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            font-size:14px;
-                            font-family:PingFangSC-Regular,PingFang SC;
-                            font-weight:400;
-                            color:rgba(77,54,98,1);
-                            line-height:20px;
-                        }
+                        @extend .articeText;
                     }
                 }
-                .moveDeviceIndex {
-                    box-shadow:0px 2px 14px 0px rgba(201,194,208,1);
-                }
+
                 .trem_box:last-child {
                     margin-right: 0;
                 }
             }
         }
+
         .devicon_cont_txdt {
             padding: 0 150px;
             box-sizing: border-box;

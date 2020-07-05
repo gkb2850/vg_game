@@ -17,14 +17,24 @@
 
 <script>
 import deviceOrSet from '@/components/topImgItem.vue'
+import {mapMutations} from 'vuex'
+
 export default {
     data () {
         return {
 
         }
     },
+    created() {
+        this.checkRoutePath(this.$route.path)
+    },
     components: {
         deviceOrSet
+    },
+    methods: {
+        ...mapMutations([
+            'checkRoutePath'
+        ])
     }
 }
 </script>

@@ -26,6 +26,8 @@
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
 import ajaxHttp from '@/api/index'
+import {mapMutations} from 'vuex'
+
 export default {
     data () {
         return {
@@ -34,6 +36,9 @@ export default {
             limit: 10,
             questionList: []
         }
+    },
+    created() {
+        this.checkRoutePath(this.$route.path)
     },
     components: {
         deviceOrSet,
@@ -74,7 +79,10 @@ export default {
                     id: item.id
                 }
             })
-        }
+        },
+        ...mapMutations([
+            'checkRoutePath'
+        ]),
     },
 }
 </script>

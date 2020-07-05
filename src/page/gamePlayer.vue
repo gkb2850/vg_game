@@ -35,6 +35,7 @@
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
 import ajaxHttp from '@/api/index.js'
+import {mapMutations} from 'vuex'
 export default {
     data () {
         return {
@@ -48,6 +49,9 @@ export default {
     components: {
         deviceOrSet,
         pageItem
+    },
+    created() {
+        this.checkRoutePath(this.$route.path)
     },
     mounted () {
         this.getPlayerList()
@@ -87,7 +91,10 @@ export default {
         },
         seePlayerInfoMove (index) {
             this.playerSelectIndex = index
-        }
+        },
+        ...mapMutations([
+            'checkRoutePath'
+        ])
     }
 }
 </script>

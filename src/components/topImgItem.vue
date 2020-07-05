@@ -19,9 +19,9 @@ export default {
     },
     data () {
         return {
-
+            
         }
-    },
+    }
 }
 </script>
 
@@ -35,6 +35,7 @@ export default {
                 width: 100%;
                 height: 100%;
                 display: block;
+                object-fit: fill;
             }
             .sm_box {
                 position: absolute;

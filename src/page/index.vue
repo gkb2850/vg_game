@@ -161,6 +161,7 @@
 <script>
 import ajaxHttp from '@/api/index.js'
 import spinItem from '@/components/spinItem.vue'
+import {mapMutations} from 'vuex'
 export default {
     data () {
         return {
@@ -176,6 +177,9 @@ export default {
             gamedevice_listF: [],
             gamedevice_listS: []
         }
+    },
+    created () {
+        this.checkRoutePath(this.$route.path)
     },
     mounted () {
         this.getPlayeList()
@@ -263,7 +267,13 @@ export default {
             }).catch(err => {
                 this.$Message.error(err.message)
             })
-        }
+        },
+        ...mapMutations([
+            'checkRoutePath'
+        ]),
+    },
+    computed: {
+
     },
     components: {
         spinItem

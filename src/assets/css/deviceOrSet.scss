@@ -110,8 +110,11 @@
                             color:rgba(34,11,55,1);
                             overflow: hidden;
                             text-overflow: ellipsis;
-                            white-space: nowrap;
                             line-height: 18px;
+                            word-wrap:break-word;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 4;
                         }
                     }
                     .line_box:nth-child(1) {
@@ -127,28 +130,28 @@
                         width: 70px;
                     }
                     .line_box:nth-child(4) {
-                        .txt {
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            white-space: normal;
-                        }
+                        // .txt {
+                        //     display: -webkit-box;
+                        //     -webkit-box-orient: vertical;
+                        //     -webkit-line-clamp: 2;
+                        //     white-space: normal;
+                        // }
                     }
                     .line_box:nth-child(13) {
-                        .txt {
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            white-space: normal;
-                        }
+                        // .txt {
+                        //     display: -webkit-box;
+                        //     -webkit-box-orient: vertical;
+                        //     -webkit-line-clamp: 2;
+                        //     white-space: normal;
+                        // }
                     }
                     .line_box:nth-child(15) {
-                        .txt {
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            white-space: normal;
-                        }
+                        // .txt {
+                        //     display: -webkit-box;
+                        //     -webkit-box-orient: vertical;
+                        //     -webkit-line-clamp: 2;
+                        //     white-space: normal;
+                        // }
                     }
                     .line_box:last-child {
                         width: 58px;
