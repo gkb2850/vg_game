@@ -59,14 +59,12 @@ export default {
                 break;
                 case 'right':
                     if (10<this.pageIndex + 1 && this.pageIndex<this.pageNumData[this.pageNumData.length-1]) {
-                        console.log(this.pageArrayList)
                         let data = this.pageArrayList
                         data.forEach((i, oi) => {
                            this.$set(this.pageArrayList, oi, i+1)
                         })
                     }
                     this.pageIndex = ++this.pageIndex > this.pageNumData[this.pageNumData.length-1] ? this.pageNumData[this.pageNumData.length-1] : this.pageIndex
-                    console.log(this.pageIndex)
                 break;
             }
         },
@@ -80,7 +78,6 @@ export default {
             
         },
         changePageArray () {
-            console.log(this.pageDataChange)
             if (this.pageDataChange) {
                 return
             }

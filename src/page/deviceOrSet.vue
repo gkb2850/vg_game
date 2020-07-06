@@ -1,6 +1,6 @@
 <template>
     <div class="deviceOrSet_container">
-        <deviceOrSet title="CS GO 设备与设置列表"></deviceOrSet>
+        <deviceOrSet title="CS GO 数据"></deviceOrSet>
         <div class="main_box">
             <div class="js_title_box">
                 <div class="txt">CS:GO设置和设备列表提供了从鼠标的型号到配置文件等所有数据。我们将在该数据库中尽快更新信息。如果我们有任何错误，请随时反馈给我们。如果您还有其他疑问，也可以参考我们的问答。</div>
@@ -227,13 +227,11 @@ export default {
                 limit: this.limitS
             }
             ajaxHttp.commentListFeath(data).then(res => {
-                console.log(res)
                 this.commentListData = res.data.list
                 this.messageTotal = res.data.total
                 this.pageNumDataS = []
                 if (res.data.total > 5) {
                     for (let i = 1; i< Math.ceil((res.data.total)/5) + 1;i++){
-                        console.log(i)
                         this.pageNumDataS.push(i)
                     }
                 } else {
@@ -257,7 +255,6 @@ export default {
                 father_id: item.comment_id
             }
             ajaxHttp.submitPeocommenFeath(data).then(res => {
-                console.log(res)
                 this.$Message.success('回复成功')
                 this.getCommentList()
                 this.messageIndex = -1

@@ -53,7 +53,7 @@
                     <div class="phone_box">
                         <div class="h_txt">中国 +86</div>
                         <div class="line"></div>
-                        <input type="number" placeholder="手机号" class="input_txt" v-model="registerData.phone" @change="registerPhoneInput">
+                        <input type="number" placeholder="手机号" class="input_txt" v-model="registerData.phone" @change="registerPhoneInput" @keydown="handleRegisterPhoneInput">
                     </div>
                     <!-- <div class="item_box">
                         <input type="text" placeholder="请输入6位短信验证码" class="input_txt">
@@ -92,7 +92,7 @@
                 </div>
                 <div class="c_box" v-if="true">
                     <div class="c_trem_box">
-                        <input type="number" placeholder="手机号" class="input_txt" v-model="loginData.phone" @blur="loginPhoneChange">
+                        <input type="number" placeholder="手机号" class="input_txt" v-model="loginData.phone" @blur="loginPhoneChange" @keydown="handleLoginPhoneInput">
                     </div>
                     <div class="c_trem_box">
                         <input type="password" placeholder="密码" class="input_txt" v-model="loginData.pass">
@@ -136,7 +136,7 @@
 <script>
 import ajaxHttp from '@/api/index.js'
 import searchPage from '../page/searchPage.vue'
-import {mapGetters, mapState} from 'vuex'
+import {mapMutations, mapState} from 'vuex'
 var content = searchPage
 export default {
     data () {
@@ -191,10 +191,8 @@ export default {
         }
     },
     created () {
-        if (JSON.parse(localStorage.getItem('userInfo'))) {
-            this.isLogin = true
-        } else {
-            this.isLogin = false
+        if (localStorage.getItem('userInfo')) {
+            this.changeisLogin(true)
         }
         if (this.$route.path !== '/searchPage') {
             this.searchtxt = ''
@@ -202,7 +200,6 @@ export default {
         if (localStorage.getItem('userName')) {
             this.userName = localStorage.getItem('userName')
         }
-        console.log(this.navTLabelIndex)
     },
     mounted () {
         this.getDevListData()
@@ -224,32 +221,26 @@ export default {
                 key_word: this.searchtxt
             }
             ajaxHttp.indexSearchFeath(data).then(res => {
+                let data = res.data.list ? res.data : {list:[],total: 0}
+                this.changeSearchData(data)
+                this.changeSearchTxt(this.searchtxt)
+                let pageNumData = []
+                if (data.total > 20) {
+                 for (let i = 1; i< Math.ceil((data.total)/20) + 1;i++){
+                         pageNumData.push(i)
+                     }
+                 } else if(data.total > 0 && data.total <=20) {
+                     pageNumData.push(1)
+                 }
+                 this.changeSearchPage(pageNumData)
                 if (this.$route.path !== '/searchPage') {
-                    this.$router.push({
-                        path: '/searchPage',
-                        query: {
-                            data: res.data.list? res.data : {list: [],total: 0},
-                            serarch: this.searchtxt
-                        }
-                    })
-                } else {
-                    this.$router.push('/index')
-                    setTimeout(() => {
-                        this.$router.push({
-                            path: '/searchPage',
-                            query: {
-                                data: res.data.list? res.data : {list: [],total: 0},
-                                serarch: this.searchtxt
-                            }
-                        })
-                    },50)
+                    this.$router.push('/searchPage')
                 }
             }).catch(err => {
                 this.$Message.error(err.message)
             })
         },
         registerPhoneInput (e) {
-            console.log(e)
             if(!(/^1[3456789]\d{9}$/.test(this.registerData.phone))){ 
                 this.$Message.warning("手机号码有误，请重填");
                 this.registerData.phone = ''
@@ -282,7 +273,6 @@ export default {
                 passwd: this.registerData.pass
             }
             ajaxHttp.registerFeath(data).then(res => {
-                console.log(res)
                 this.$Message.success('注册成功')
                 this.loginBoxShowStutas = true
                 this.registerBoxShowStutas = false
@@ -325,14 +315,10 @@ export default {
             }
             ajaxHttp.loginFeath(data).then(res => {
                 this.$Message.success('登录成功')
-                this.loginBoxShowStutas = false
-                this.isLogin = true
                 localStorage.setItem('userInfo', JSON.stringify(res.data))
-                if (this.$route.path !== '/index') {
-                    this.$router.push('/index')
-                } else {
-                    this.$router.push('/')
-                }
+                this.loginBoxShowStutas = false
+                this.changeisLogin(true)
+                this.changeUserInfo(res.data)
                 this.getUserInfoToHttp()
             }).catch(err => {
                 this.$Message.error(err.message)
@@ -362,6 +348,7 @@ export default {
                 this.navIndexShow = false
             }
             this.navIndexTop = index
+            this.searchtxt = ''
         },
         toNavMove (index) {
             this.navIndexTopMove = index
@@ -372,7 +359,6 @@ export default {
         toSeeDevicInfo (item, index) {
             this.navIndexShow = false
             this.secondLabelIndex = index
-            console.log(item)
             if (this.$route.path !== '/productPageInfo') {
                 this.$router.push({
                     path: '/productPageInfo',
@@ -394,10 +380,31 @@ export default {
             
         },
         loginPhoneChange () {
+            if (this.loginData.phone === '') {
+                return
+            }
             if(!(/^1[3456789]\d{9}$/.test(this.loginData.phone))){ 
                 this.$Message.warning("手机号码有误，请重填");
                 this.loginData.phone = ''
                 return
+            }
+        },
+        handleLoginPhoneInput (e) {
+            if (!e.key) {
+                return
+            }
+            let a = e.key.replace(/[^\d]/g, "");
+            if (!a && e.keyCode !== 8) {
+              e.preventDefault();
+            }
+        },
+        handleRegisterPhoneInput (e) {
+            if (!e.key) {
+                return
+            }
+            let a = e.key.replace(/[^\d]/g, "");
+            if (!a && e.keyCode !== 8) {
+              e.preventDefault();
             }
         },
         getUserInfoToHttp () {
@@ -419,22 +426,29 @@ export default {
         },
         sureLoginOut () {
             localStorage.removeItem('userInfo')
-            this.$router.push('/index')
-            location.reload()
+            this.changeisLogin(false)
         },
         toLoginOut () {
             this.loginOutBoxShow = true
-        }
+        },
+        ...mapMutations([
+            'changeSearchData',
+            'changeSearchPage',
+            'changeSearchTxt',
+            'changeUserInfo',
+            'changeisLogin'
+        ])
     },
     computed: {
         ...mapState({
-            navIndexTops: 'navTLabelIndex'
+            navIndexTops: 'navTLabelIndex',
+            isLogin: 'isLogin'
         })
     },
     watch: {
         navIndexTops (val) {
             this.navIndexTop = val
-        }
+        },
     }
 }
 </script>

@@ -92,7 +92,6 @@ export default {
                 question_id: this.questionId
             }
             ajaxHttp.questionInfoFeath(data).then(res => {
-                console.log(res)
                 this.questionInfoData = res.data.info
             }).catch(err => {
                 this.$Message.error(err.message)
@@ -116,7 +115,6 @@ export default {
                 } else {
                     this.pageNumData.push(1)
                 }
-                console.log(this.pageNumData)
             }).catch(err => {
                 this.$Message.error(err.message)
             })

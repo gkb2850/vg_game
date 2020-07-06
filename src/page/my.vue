@@ -27,7 +27,7 @@
                                     <div class="l_label_box">
                                         <div class="h_txt">手机号</div>
                                         <div class="h_info_txt" v-if="userPhoneShow">{{userInfoTxt.mobile}}</div>
-                                        <input type="number" class="h_info_input" v-else v-model="userInfoEdit.mobile">
+                                        <input type="number" class="h_info_input" v-else v-model="userInfoEdit.phone" @keydown="changeSecondPhoneInput">
                                     </div>
                                     <div class="btn_a_box">
                                         <a class="r_txt" @click="editUserInfo('phone')">编辑</a>
@@ -39,7 +39,7 @@
                                         <div class="h_txt">密码</div>
                                         <div class="h_info_txt" v-if="userPassShow">{{userInfoEdit.passwd === 1 ? '已设置' : '未设置'}}</div>
                                         <div class="pass_input_box" v-else>
-                                            <div class="pass_txt" v-if="userInfoEdit.passwd !== 0">{{userInfoEdit.passwd === 1 ? '已设置' : '未设置'}}</div>
+                                            <div class="pass_txt" v-if="userInfoEdit.passwd !== 1">{{userInfoEdit.passwd === 1 ? '已设置' : '未设置'}}</div>
                                             <input class="r_input" type="password" placeholder="原密码" v-model="password" v-else>
                                             <input class="r_input" type="password" placeholder="新密码" v-model="userInfoEdit.pass" @blur="seePassOryz('first')">
                                             <input class="r_input" type="password" placeholder="确认新密码" v-model="userInfoEdit.passs" @blur="seePassOryz('second')">
@@ -173,7 +173,7 @@
                                     </div>
                                     <div class="btn_box">
                                         <button @click="toUploadImg">确定</button>
-                                        <button>取消</button>
+                                        <button @click="toQXUploadImg">取消</button>
                                     </div>
                                 </div>
                             </div>
@@ -198,6 +198,8 @@ import pageItem from '@/components/pageItem.vue'
 import ajaxHttp from '@/api/index'
 import Axios from 'axios'
 import Qs from 'qs';
+import {mapMutations} from 'vuex'
+
 export default {
     data () {
         return {
@@ -211,7 +213,12 @@ export default {
             uploadImgFile: '',
             uploadImgSrc: '',
             userInfoTxt: '',
-            userInfoEdit: '',
+            userInfoEdit: {
+                title: '',
+                phone: '',
+                pass: '',
+                passs:''
+            },
             userNameShow: true,
             userPhoneShow: true,
             userSexShow: true,
@@ -258,13 +265,21 @@ export default {
                 this.$Message.error(err.message)
             })
         },
+        changeSecondPhoneInput (e) {
+            if (!e.key) {
+                return
+            }
+            let a = e.key.replace(/[^\d]/g, "");
+            if (!a && e.keyCode !== 8) {
+              e.preventDefault();
+            }
+        },
         changePage (e) {
             this.page = e
             this.getUserCommentList()
         },
         lNavTitleChange (str) {
             this.lNavIndex = str
-            console.log(str)
             if (str === '2') {
                 this.getUserCommentList();
             } else if (str === '1') {
@@ -275,7 +290,6 @@ export default {
             if (this.radioShowBtn) {
                 let arr = []
                 this.userCommentList.forEach(i => {
-                    console.log(i)
                     if (i.radioShow) {
                         arr.push(i.comment_id)
                     }
@@ -301,7 +315,6 @@ export default {
             }
         },
         radioChange (index) {
-            console.log(22)
             let data = this.userCommentList[index]
             data.radioShow = !data.radioShow
             this.$set(this.userCommentList, index, data)
@@ -311,7 +324,6 @@ export default {
         },
         selectImgUpload () {
             let that = this
-            console.log(this.$refs.fileImg.files[0])
             this.uploadImgFile = this.$refs.fileImg.files[0]
             var reads= new FileReader();
             reads.readAsDataURL(this.uploadImgFile);
@@ -336,7 +348,6 @@ export default {
             file.append('user_id', userInfo.user_id);
             let headers = {'Content-Type': 'multipart/form-data'}
             Axios.post(process.env.API_ROOT + '/api/user/upFile', file, headers).then(res => {
-                console.log(res)
                 if (res.data.code === 1) {
                     this.uploadImgSrc = res.data.data.url
                     this.uploadUserImg()
@@ -377,9 +388,12 @@ export default {
                 user_id: userInfo.user_id
             }
             ajaxHttp.getUserInfoFeath(data).then(res => {
-                console.log(res)
                 this.userInfoTxt = res.data.user_info
-                this.userInfoEdit = res.data.user_info
+                // this.userInfoEdit = res.data.user_info
+                this.userInfoEdit.title = res.data.user_info.title
+                this.userInfoEdit.phone = res.data.user_info.mobile
+                this.userInfoEdit.title = res.data.user_info.title
+                this.$set(this.userInfoEdit, 'passwd', res.data.user_info.passwd)
                 this.uploadImgSrc = res.data.user_info.avatar
             }).catch(err => {
                 this.$Message.error(err.message)
@@ -405,10 +419,10 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
              switch (str) {
                 case 'phone':
+                    console.log(this.userInfoEdit.phone)
                     if(!(/^1[3456789]\d{9}$/.test(this.userInfoEdit.phone))){ 
                         this.$Message.warning("手机号码有误，请重填");
                         this.userInfoEdit.phone = ''
-                        console.log(this.userInfoEdit.phone)
                         return
                     }
                     this.userPhoneShow = true
@@ -419,7 +433,7 @@ export default {
                     let dataP = {
                         token: userInfo.token,
                         user_id: userInfo.user_id,
-                        mobile: this.userInfoEdit.mobile
+                        mobile: this.userInfoEdit.phone
                     }
                     ajaxHttp.changeUserInfoFeath(dataP).then(res => {
                         this.$Message.success('更新成功')
@@ -493,8 +507,8 @@ export default {
         },
         sureLoginOut () {
             localStorage.removeItem('userInfo')
+            this.changeisLogin(false)
             this.$router.push('/index')
-            location.reload()
         },
         seePassOryz (str) {
             if (str ==='first') {
@@ -517,6 +531,17 @@ export default {
                 }
             }
         },
+        toQXUploadImg () {
+            if (this.userInfoTxt.avatar !== this.uploadImgSrc) {
+                this.uploadImgSrc = this.userInfoTxt.avatar
+                this.$Message.success('已取消上传')
+            } else {
+                this.$Message.warning('你暂未添加图片')
+            }
+        },
+         ...mapMutations([
+            'changeisLogin'
+        ])
     }
 }
 </script>

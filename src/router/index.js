@@ -87,11 +87,16 @@ const router = new Router({
       name: 'searchPage',
       component: searchPage
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
 
 router.beforeEach((to, from, next) => {
   next();
 })
+
+router.afterEach((to, from, next) => { document.querySelector("body").setAttribute("style", "overflow: auto !important;") });
 
 export default router

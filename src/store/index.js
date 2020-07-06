@@ -5,7 +5,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        navTLabelIndex: 0
+        navTLabelIndex: 0,
+        searchData: {},
+        searchPageNum: [],
+        searchTxt: '',
+        userInfo: '',
+        isLogin: false
     },
     mutations: {
         checkRoutePath (state, path) {
@@ -22,9 +27,29 @@ export default new Vuex.Store({
             } else if (path === '/answerPage' || path === '/answerPageInfo') {
                 state.navTLabelIndex = 5
             }
+        },
+        changeSearchData (state, data) {
+            state.searchData = data
+        },
+        changeSearchPage (state, data) {
+            state.searchPageNum = data
+        },
+        changeSearchTxt (state, str) {
+            state.searchTxt = str
+        },
+        changeUserInfo (state, str) {
+            state.userInfo = str
+        },
+        changeisLogin (state, str) {
+            state.isLogin = str
         }
     },
     getters: {
-
+        searchData: (state) => {
+            return state.searchData
+        },
+        searchPageNum: (state) => {
+            return state.searchPageNum
+        }
     }
 })

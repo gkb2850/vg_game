@@ -191,10 +191,8 @@ export default {
     methods: {
         getPlayeList() {
             ajaxHttp.indexPlayeFeath().then(res => {
-                console.log(res)
                 this.playeListData = res.data.list
             }).catch(err => {
-                console.log(err)
                 this.$Message.error(err.message);
             })
         },
@@ -232,7 +230,6 @@ export default {
             })
         },
         seePlayeInfo (item) {
-            console.log(item.player_id)
             this.$router.push({
                 path: '/grameUserInfo',
                 query: {
@@ -250,7 +247,6 @@ export default {
         },
         getGameGuideData () {
             ajaxHttp.gameCuideFeath().then(res => {
-                console.log(res)
                 this.gameGuideData = res.data
                 if (res.data.device_list && res.data.device_list.length > 2) {
                     res.data.device_list.forEach((i, oi) => {

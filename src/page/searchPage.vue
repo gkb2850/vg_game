@@ -2,8 +2,8 @@
     <div class="searchPage_container">
         <deviceOrSet title="搜索结果"></deviceOrSet>
         <div class="main_cont_box">
-            <div class="people_box" v-if="searchData.length">
-                <div class="trem_box" v-for="(item, index) in searchData" :key="index">
+            <div class="people_box" v-if="searchData.list.length">
+                <div class="trem_box" v-for="(item, index) in searchData.list" :key="index" @click="setDeviceInfo(item)">
                     <div class="img_header">
                         <img :src="item.img" alt="">
                         <div class="top_name">CS GO</div>
@@ -20,7 +20,7 @@
                     <div class="bot_box">
                         <div class="txt">{{item.add_time}}</div>
                         <div class="line"></div>
-                        <div class="txt">{{item.click_num}}条评论</div>
+                        <div class="txt">{{item.click_num > 0 ? item.click_num + '条评论' : '暂无评论'}}</div>
                     </div>
                 </div>
             </div>
@@ -36,14 +36,13 @@
 import deviceOrSet from '@/components/topImgItem.vue'
 import pageItem from '@/components/pageItem.vue'
 import ajaxHttp from '@/api/index.js'
+import {mapState, mapGetters, mapMutations} from 'vuex'
+
 export default {
     data () {
         return {
-            pageNumData: [],
             limit: 20,
-            searchData: [],
-            page: 1,
-            searchtxt: ''
+            page: 1
         }
     },
     components: {
@@ -51,26 +50,13 @@ export default {
         pageItem
     },
     created () {
-        if (this.$route.query.data) {
-            let data = this.$route.query.data
-            this.searchtxt = this.$route.query.serarch
-            this.searchData = data.list
-            this.pageNumData = []
-             if (data.total > 20) {
-                 for (let i = 1; i< Math.ceil((data.total)/20) + 1;i++){
-                     this.pageNumData.push(i)
-                 }
-             } else if(data.total > 0 && data.total <=20) {
-                 this.pageNumData.push(1)
-             }
-        }
+
     },
     mounted () {
 
     },
     methods: {
         changeSearch (data) {
-            console.log(data)
             this.searchData = data.list
             this.pageNumData = []
              if (data.total > 20) {
@@ -100,20 +86,47 @@ export default {
                 limit: this.limit
             }
             ajaxHttp.indexSearchFeath(data).then(res => {
-                let data = res.data
-                this.searchData = data.list
-                this.pageNumData = []
-                 if (data.total > 20) {
-                     for (let i = 1; i< Math.ceil((data.total)/20) + 1;i++){
-                         this.pageNumData.push(i)
+                let data = res.data.list ? res.data : {list:[],total: 0}
+                this.changeSearchData(data)
+                this.changeSearchTxt(this.searchtxt)
+                let pageNumData = []
+                if (data.total > 20) {
+                 for (let i = 1; i< Math.ceil((data.total)/20) + 1;i++){
+                         pageNumData.push(i)
                      }
                  } else if(data.total > 0 && data.total <=20) {
-                     this.pageNumData.push(1)
+                     pageNumData.push(1)
                  }
+                 this.changeSearchPage(pageNumData)
             }).catch(err => {
                 this.$Message.error(err.message)
             })
         },
+        setDeviceInfo (item) {
+            this.$router.push({
+                path: '/assessPageInfo',
+                query: {
+                    id: item.id
+                }
+            })
+        },
+        ...mapMutations([
+            'changeSearchData',
+            'changeSearchPage',
+            'changeSearchTxt'
+        ]),
+    },
+    computed: {
+        ...mapState({
+            searchtxt: 'searchTxt'
+        }),
+        ...mapGetters({
+            searchData: 'searchData',
+            pageNumData: 'searchPageNum'
+        })
+    },
+    watch: {
+
     }
 }
 </script>

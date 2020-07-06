@@ -1,6 +1,6 @@
 <template>
     <div class="grameUserInfo_container">
-        <deviceOrSet title="CS GO 玩家们"></deviceOrSet>
+        <deviceOrSet title="CS GO 选手"></deviceOrSet>
         <div class="main_box">
             <div class="js_title_box">
                 <div class="people_box">
@@ -17,18 +17,22 @@
                         </div>
                         <div class="xx_txt">{{playerInfoData && playerInfoData.info.introduction}}</div>
                     </div>
-                    <div class="bot_box_people" v-if="playerInfoData.info">
-                        <div class="img_box" v-for="(itme, index) in playerInfoData.info.live_roome_list" :key="index">
-                            <a v-if="item.type === 1" :href="item.url" ><img src="../assets/images/tt_icon.png" alt=""></a>
-                            <a v-if="item.type === 2" :href="item.url" ><img src="../assets/images/sz_icon.png" alt=""></a>
-                            <a v-if="item.type === 3" :href="item.url" ><img src="../assets/images/fb_icon.png" alt=""></a>
-                            <a v-if="item.type === 4" :href="item.url" ><img src="../assets/images/dx_icon.png" alt=""></a>
+                    <div class="bot_box_people" v-if="playerInfoData.live_roome_list && playerInfoData.live_roome_list.length">
+                        <div class="img_box">
+                            <div v-for="(item, index) in playerInfoData.live_roome_list" :key="index">
+                                <a v-if="item.type === 1" :href="item.url" ><img src="../assets/images/tt_icon.png" alt=""></a>
+                                <a v-if="item.type === 2" :href="item.url" ><img src="../assets/images/sz_icon.png" alt=""></a>
+                                <a v-if="item.type === 3" :href="item.url" ><img src="../assets/images/fb_icon.png" alt=""></a>
+                                <a v-if="item.type === 4" :href="item.url" ><img src="../assets/images/dx_icon.png" alt=""></a>
+                                </div>
                         </div>
-                        <div class="img_box" v-for="(itme, index) in playerInfoData.info.live_roome_list" :key="index">
-                            <a v-if="item.type ===6" :href="item.url"><img src="../assets/images/blibli_icon.png" alt=""></a>
-                            <a v-if="item.type ===8" :href="item.url"><img src="../assets/images/weibo_icon.png" alt=""></a>
-                            <a v-if="item.type ===7" :href="item.url"><img src="../assets/images/tuite_icon.png" alt=""></a>
-                            <a v-if="item.type ===5" :href="item.url"><img src="../assets/images/shayu_icon.png" alt=""></a>
+                        <div class="img_box">
+                            <div v-for="(item, index) in playerInfoData.live_roome_list" :key="index">
+                                <a v-if="item.type ===6" :href="item.url"><img src="../assets/images/blibli_icon.png" alt=""></a>
+                                <a v-if="item.type ===8" :href="item.url"><img src="../assets/images/weibo_icon.png" alt=""></a>
+                                <a v-if="item.type ===7" :href="item.url"><img src="../assets/images/tuite_icon.png" alt=""></a>
+                                <a v-if="item.type ===5" :href="item.url"><img src="../assets/images/shayu_icon.png" alt=""></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -210,9 +214,7 @@ export default {
                 }
                 this.setTabelTitleSecond.title = secondTitleF
                 this.setTabelTitleSecond.conttxt = secondTitleS
-                console.log(this.setTabelTitleFirst)
             }).catch(err => {
-                console.log(err)
                 this.$Message.error(err.message)
             })
         },
@@ -224,13 +226,11 @@ export default {
                 limit: this.limit
             }
             ajaxHttp.commentListFeath(data).then(res => {
-                console.log(res)
                 this.commentListData = res.data.list
                 this.messageTotal = res.data.total
                 this.pageNumData = []
                 if (res.data.total > 5) {
                     for (let i = 1; i< Math.ceil((res.data.total)/5) + 1;i++){
-                        console.log(i)
                         this.pageNumData.push(i)
                     }
                 } else {
@@ -258,7 +258,6 @@ export default {
                 father_id: item.comment_id
             }
             ajaxHttp.submitPeocommenFeath(data).then(res => {
-                console.log(res)
                 this.$Message.success('回复成功')
                 this.getCommentList()
                 this.messageIndex = -1

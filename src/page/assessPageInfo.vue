@@ -194,7 +194,6 @@ export default {
             ajaxHttp
                 .proDeviceInfoFeath(data)
                 .then(res => {
-                    console.log(res);
                     this.assessmentData = res.data.info;
                 })
                 .catch(err => {
@@ -211,7 +210,6 @@ export default {
             ajaxHttp
                 .commentListFeath(data)
                 .then(res => {
-                    console.log(res);
                     this.commentListData = res.data.list;
                     this.messageTotal = res.data.total;
                     this.pageNumData = [];
@@ -221,7 +219,6 @@ export default {
                             i < Math.ceil(res.data.total / 5) + 1;
                             i++
                         ) {
-                            console.log(i);
                             this.pageNumData.push(i);
                         }
                     } else {
@@ -252,7 +249,6 @@ export default {
             ajaxHttp
                 .submitPeocommenFeath(data)
                 .then(res => {
-                    console.log(res);
                     this.$Message.success("回复成功");
                     this.getCommentList();
                     this.messageIndex = -1;

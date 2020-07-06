@@ -54,7 +54,6 @@ export default {
                 limit: this.limit
             }
             ajaxHttp.questionListFeath(data).then(res => {
-                console.log(res)
                 this.questionList = res.data.list
                 this.pageNumData = []
                 if (res.data.total > 10) {

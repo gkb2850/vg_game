@@ -4,7 +4,7 @@ import { Message } from 'view-design';
 import 'view-design/dist/styles/iview.css';
 
 // 配置API接口地址
-var root = process.env.API_ROOT
+var root = process.env.API_ROOT || process.env.ENV_CONFIG.API_ROOT
 // 引用axios
 var axios = require('axios')
 // 自定义判断元素类型JS
