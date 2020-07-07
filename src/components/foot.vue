@@ -132,7 +132,7 @@ export default {
                         span {
                             height: 100%;
                             line-height: 40px;
-                            font-size:14px;
+                            font-size:12px;
                             font-family:PingFangSC-Medium,PingFang SC;
                             font-weight:500;
                             color:rgba(255,255,255,1);
@@ -159,7 +159,7 @@ export default {
             .js_message {
                 height: 20px;
                 line-height: 20px;
-                font-size:14px;
+                font-size:12px;
                 font-family:PingFangSC-Medium,PingFang SC;
                 font-weight:500;
                 color:rgba(255,255,255,1);
@@ -178,7 +178,7 @@ export default {
                 .txt {
                     height: 20px;
                     line-height: 20px;
-                    font-size:14px;
+                    font-size:12px;
                     font-family:PingFangSC-Medium,PingFang SC;
                     font-weight:500;
                     color:rgba(255,255,255,1);

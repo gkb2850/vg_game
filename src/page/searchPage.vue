@@ -43,8 +43,8 @@ export default {
         return {
             limit: 20,
             page: 1,
-            imgHeight: 100,
-            imgWidths: 100
+            imgHeight: 0,
+            imgWidths: 0
         }
     },
     components: {
@@ -87,6 +87,9 @@ export default {
             })
         },
         changePage (e) {
+            if (this.page === e) {
+                return
+            }
             this.page = e
             this.getSearchData()
         },

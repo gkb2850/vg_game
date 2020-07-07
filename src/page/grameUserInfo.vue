@@ -174,8 +174,8 @@ export default {
             messageTotal: 0,
             deviceBoxIndex: -1,
             playerBoxIndex: -1,
-            imgHeight: 100,
-            imgHeights: 100
+            imgHeight: 0,
+            imgHeights: 0
         }
     },
     created () {
@@ -191,16 +191,6 @@ export default {
     mounted () {
         this.getPlayerInfo()
         this.getCommentList()
-        this.$nextTick(() => {
-            setTimeout(() =>{
-                if (this.$refs.devicerefbox) {
-                    this.imgHeight = (this.$refs.devicerefbox[0].offsetWidth) * 3 / 4
-                }
-                if (this.$refs.peoplerefbox) {
-                    this.imgHeights = (this.$refs.peoplerefbox[0].offsetWidth) * 4 / 3
-                }
-            }, 200)
-        })
     },
     methods: {
         getPlayerInfo () {
@@ -226,6 +216,14 @@ export default {
                 }
                 this.setTabelTitleSecond.title = secondTitleF
                 this.setTabelTitleSecond.conttxt = secondTitleS
+                this.$nextTick(() => {
+                        if (this.$refs.devicerefbox) {
+                            this.imgHeight = (this.$refs.devicerefbox[0].offsetWidth) * 3 / 4
+                        }
+                        if (this.$refs.peoplerefbox) {
+                            this.imgHeights = (this.$refs.peoplerefbox[0].offsetWidth) * 4 / 3
+                        }
+                })
             }).catch(err => {
                 this.$Message.error(err.message)
             })
@@ -300,6 +298,9 @@ export default {
             })
         },
         changePage (e) {
+            if (this.page === e) {
+                return
+            }
             this.pageS = e
             this.getCommentList()
         },

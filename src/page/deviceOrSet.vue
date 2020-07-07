@@ -287,10 +287,16 @@ export default {
             this.messageIndex = index
         },
         changePage (e) {
+            if (this.pageF === e) {
+                return
+            }
             this.pageF = e
             this.getDeviceConfig()
         },
         changePages (e) {
+            if (this.pageS === e) {
+                return
+            }
             this.pageS = e
             this.getCommentList()
         },

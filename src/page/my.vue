@@ -275,6 +275,9 @@ export default {
             }
         },
         changePage (e) {
+            if (this.page === e) {
+                return
+            }
             this.page = e
             this.getUserCommentList()
         },

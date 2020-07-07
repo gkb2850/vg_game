@@ -503,13 +503,13 @@ export default {
         .nav_box {
             padding: 0 150px;
             box-sizing: border-box;
-            height: 75px;
+            height: 55px;
             display: flex;
             align-items: center;
             background: #4D3662;
             .l_box {
-                height: 64px;
-                width: 147px;
+                height: 44px;
+                width: 102px;
                 img {
                     width: 100%;
                     height: 100%;
@@ -536,9 +536,9 @@ export default {
                         text-decoration: none;
                         span {
                             padding: 0 23px;
-                            height: 75px;
-                            line-height: 75px;
-                            font-size:18px;
+                            height: 55px;
+                            line-height: 55px;
+                            font-size:14px;
                             font-family:PingFangSC-Regular,PingFang SC;
                             font-weight:400;
                             color:rgba(255,255,255,1);

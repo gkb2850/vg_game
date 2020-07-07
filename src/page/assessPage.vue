@@ -30,7 +30,7 @@ export default {
             page: 1,
             limit: 8,
             deviceBoxIndex: -1,
-            imgHeight: 100
+            imgHeight: 0
         }
     },
     created() {
@@ -42,11 +42,6 @@ export default {
     },
     mounted () {
         this.getDeviceList()
-        this.$nextTick(() => {
-            setTimeout(() =>{
-                 this.imgHeight = (this.$refs.devicerefbox[0].offsetWidth) * 3 / 4
-            }, 200)
-        })
     },
     methods: {
         getDeviceList () {
@@ -64,6 +59,11 @@ export default {
                 } else {
                     this.pageNumData.push(1)
                 }
+                this.$nextTick(() => {
+                    if (this.$refs.devicerefbox) {
+                        this.imgHeight = (this.$refs.devicerefbox[0].offsetWidth) * 3 / 4
+                    }
+                })
             }).catch(err => {
                 this.$Message.error(err.message)
             })
@@ -80,6 +80,9 @@ export default {
             this.deviceBoxIndex = index
         },
         changePage (e) {
+            if (this.page === e) {
+                return
+            }
             this.page = e
             this.getDeviceList()
         },

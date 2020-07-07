@@ -56,6 +56,11 @@ export default {
                            this.$set(this.pageArrayList, oi, i+-1)
                         })
                     }
+                    if (this.ItemIdex === '1') {
+                        this.$emit('changePage', this.pageIndex)
+                    } else if (this.ItemIdex === '2') {
+                        this.$emit('changePages', this.pageIndex)
+                    }
                 break;
                 case 'right':
                     if (10<this.pageIndex + 1 && this.pageIndex<this.pageNumData[this.pageNumData.length-1]) {
@@ -65,6 +70,11 @@ export default {
                         })
                     }
                     this.pageIndex = ++this.pageIndex > this.pageNumData[this.pageNumData.length-1] ? this.pageNumData[this.pageNumData.length-1] : this.pageIndex
+                    if (this.ItemIdex === '1') {
+                        this.$emit('changePage', this.pageIndex)
+                    } else if (this.ItemIdex === '2') {
+                        this.$emit('changePages', this.pageIndex)
+                    }
                 break;
             }
         },

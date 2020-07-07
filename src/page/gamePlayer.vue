@@ -44,7 +44,7 @@ export default {
             limit: 10,
             page: 1,
             playerSelectIndex: -1,
-            imgHeight: 100
+            imgHeight: 0
         }
     },
     components: {
@@ -56,11 +56,6 @@ export default {
     },
     mounted () {
         this.getPlayerList()
-        this.$nextTick(() => {
-            setTimeout(() =>{
-                 this.imgHeight = (this.$refs.peoplerefbox[0].offsetWidth) * 4 / 3
-            }, 200)
-        })
     },
     methods: {
         getPlayerList () {
@@ -78,6 +73,11 @@ export default {
                 } else {
                     this.pageNumData.push(1)
                 }
+                this.$nextTick(() => {
+                        if (this.$refs.peoplerefbox) {
+                            this.imgHeight = (this.$refs.peoplerefbox[0].offsetWidth) * 4 / 3
+                        }
+                })
             }).catch(err => {
                 this.$Message.error(err.message)
             })
@@ -91,6 +91,9 @@ export default {
             })
         },
         changePage (e) {
+            if (this.page === e) {
+                return
+            }
             this.page = e
             this.getPlayerList()
         },

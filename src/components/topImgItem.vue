@@ -50,7 +50,7 @@ export default {
                     height: 67px;
                     line-height: 67px;
                     margin-top: 93px;
-                    font-size:48px;
+                    font-size:32px;
                     font-family:PingFangSC-Medium,PingFang SC;
                     font-weight:500;
                     color:rgba(255,255,255,1);

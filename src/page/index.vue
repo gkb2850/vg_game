@@ -176,9 +176,9 @@ export default {
             gameGuideData: '',
             gamedevice_listF: [],
             gamedevice_listS: [],
-            imgHeighthotdevice: 100,
-            imgHeighthotsspeople: 100,
-            imgHeighthotssdevice: 100
+            imgHeighthotdevice: 0,
+            imgHeighthotsspeople: 0,
+            imgHeighthotssdevice: 0
         }
     },
     created () {
@@ -191,7 +191,6 @@ export default {
         this.getHoldProList()
         this.getGameGuideData()
         this.$nextTick(() => {
-            setTimeout(() =>{
                 if (this.$refs.hotdevicerefbox) {
                     this.imgHeighthotdevice = (this.$refs.hotdevicerefbox[0].offsetWidth) * 3 / 4
                 }
@@ -201,7 +200,6 @@ export default {
                 if (this.$refs.hotssdevicerefbox) {
                     this.imgHeighthotssdevice = (this.$refs.hotssdevicerefbox[0].offsetWidth) * 3 / 4
                 }
-            }, 200)
         })
     },
     methods: {
@@ -215,6 +213,11 @@ export default {
         getPlayeImgList () {
             ajaxHttp.indexPlayeImgFeath().then(res => {
                 this.playeImgListData = res.data.list
+                this.$nextTick(() => {
+                        if (this.$refs.hotsspeoplerefbox) {
+                            this.imgHeighthotsspeople = (this.$refs.hotsspeoplerefbox[0].offsetWidth) * 4 / 3
+                        }
+                })
             }).catch(err => {
                 this.$Message.error(err.message)
             })
@@ -234,6 +237,11 @@ export default {
         getNewProList () {
             ajaxHttp.indexgetNewProFeath().then(res => {
                 this.newProListData = res.data.list
+                this.$nextTick(() => {
+                        if (this.$refs.hotdevicerefbox) {
+                            this.imgHeighthotdevice = (this.$refs.hotdevicerefbox[0].offsetWidth) * 3 / 4
+                        }
+                })
             }).catch(err => {
                 this.$Message.error(err.message)
             })
@@ -241,6 +249,13 @@ export default {
         getHoldProList () {
             ajaxHttp.indexgetholdProFeath().then(res => {
                 this.holdProListData = res.data.list
+
+                this.$nextTick(() => {
+                        if (this.$refs.hotssdevicerefbox) {
+                            this.imgHeighthotssdevice = (this.$refs.hotssdevicerefbox[0].offsetWidth) * 3 / 4
+                        }
+                })
+
             }).catch(err => {
                 this.$Message.error(err.message)
             })
