@@ -4,7 +4,7 @@
         <div class="main_cont_box">
             <div class="people_box">
                 <div :class="{trem_box: true, movePlayerActive: playerSelectIndex === index}" v-for="(item, index) in playerListData" :key="index" @click="seePlayerInfo(item)" @mousemove="seePlayerInfoMove(index)" @mouseleave="seePlayerInfoMove(999)">
-                    <div class="img_header">
+                    <div class="img_header" :style="{height: imgHeight + 'px'}" ref="peoplerefbox">
                         <img :src="item.img" alt="">
                         <div class="top_name" v-if="item.game">{{item.game}}</div>
                     </div>
@@ -43,7 +43,8 @@ export default {
             playerListData: [],
             limit: 10,
             page: 1,
-            playerSelectIndex: -1
+            playerSelectIndex: -1,
+            imgHeight: 100
         }
     },
     components: {
@@ -55,6 +56,11 @@ export default {
     },
     mounted () {
         this.getPlayerList()
+        this.$nextTick(() => {
+            setTimeout(() =>{
+                 this.imgHeight = (this.$refs.peoplerefbox[0].offsetWidth) * 4 / 3
+            }, 200)
+        })
     },
     methods: {
         getPlayerList () {
@@ -72,7 +78,6 @@ export default {
                 } else {
                     this.pageNumData.push(1)
                 }
-                
             }).catch(err => {
                 this.$Message.error(err.message)
             })

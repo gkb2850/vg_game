@@ -43,7 +43,7 @@
                 <div class="title">最近更新设备</div>
                 <div class="cont">
                     <div :class="{trem_box: true, movelatelyActive: latelyBoxIndex === index ? true : false}" v-for="(item, index) in newProListData" :key="index" @click="seeAssessInfo(item)" @mousemove="seeAssessInfoMove(index)" @mouseleave="seeAssessInfoMove(999)">
-                        <img class="order_img" :src="item.img" alt="">
+                        <img class="order_img" :src="item.img" alt="" :style="{height: imgHeighthotdevice + 'px'}" ref="hotdevicerefbox">
                         <div class="f_txt">{{item.title}}</div>
                         <div class="s_txt">{{item.add_time}}</div>
                     </div>
@@ -108,7 +108,7 @@
                 <div class="title">热门CS GO 队员</div>
                 <div class="cont">
                     <div :class="{trem_box: true, moveholtActive: playerholtBoxIndex === index}" v-for="(item, index) in playeImgListData" :key="index" @click="seePlayeInfo(item)" @mousemove="seePlayeholtMove(index)" @mouseleave="seePlayeholtMove(999)">
-                        <img class="top_img_p" :src="item.img" alt="">
+                        <img class="top_img_p" :src="item.img" alt="" :style="{height: imgHeighthotsspeople + 'px'}" ref="hotsspeoplerefbox">
                         <div class="js_txt">{{item.name}}</div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                 <div class="title">热门CS GO设备</div>
                 <div class="cont">
                     <div :class="{trem_box: true, moveholtProActive: proholtBoxIndex === index}" v-for="(item, index) in holdProListData" :key="index" @click="seeAssessInfo(item)" @mousemove="seeProholtMove(index)" @mouseleave="seeProholtMove(999)">
-                        <img class="img_product" :src="item.img" alt="">
+                        <img class="img_product" :src="item.img" alt="" :style="{height: imgHeighthotssdevice + 'px'}" ref="hotssdevicerefbox">
                         <div class="txt">{{item.title}}</div>
                     </div>
                 </div>
@@ -175,7 +175,10 @@ export default {
             proholtBoxIndex: -1,
             gameGuideData: '',
             gamedevice_listF: [],
-            gamedevice_listS: []
+            gamedevice_listS: [],
+            imgHeighthotdevice: 100,
+            imgHeighthotsspeople: 100,
+            imgHeighthotssdevice: 100
         }
     },
     created () {
@@ -187,6 +190,19 @@ export default {
         this.getNewProList()
         this.getHoldProList()
         this.getGameGuideData()
+        this.$nextTick(() => {
+            setTimeout(() =>{
+                if (this.$refs.hotdevicerefbox) {
+                    this.imgHeighthotdevice = (this.$refs.hotdevicerefbox[0].offsetWidth) * 3 / 4
+                }
+                if (this.$refs.hotsspeoplerefbox) {
+                    this.imgHeighthotsspeople = (this.$refs.hotsspeoplerefbox[0].offsetWidth) * 4 / 3
+                }
+                if (this.$refs.hotssdevicerefbox) {
+                    this.imgHeighthotssdevice = (this.$refs.hotssdevicerefbox[0].offsetWidth) * 3 / 4
+                }
+            }, 200)
+        })
     },
     methods: {
         getPlayeList() {

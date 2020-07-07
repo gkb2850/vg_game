@@ -78,7 +78,7 @@
                     <div class="title">他的设备</div>
                     <div class="cont_box">
                         <div :class="{trem_box: true, moveDeviceActive: deviceBoxIndex === index}" v-for="(item, index) in playerInfoData.device_list" :key="index" @click="toSeeDeviceInfo(item)" @mousemove="toSeeDeviceInfoMove(index)" @mouseleave="toSeeDeviceInfoMove(999)">
-                            <img class="product_img" :src="item.img" alt="">
+                            <img class="product_img" :src="item.img" alt="" :style="{height: imgHeight + 'px'}" ref="devicerefbox">
                             <div class="name_box">
                                 <div class="line"></div>
                                 <div class="txt">{{item.category}}</div>
@@ -94,7 +94,7 @@
                     <div class="title">他的队友</div>
                     <div class="cont_box">
                         <div :class="{trem_box: true, movePlayerActive: playerBoxIndex === index}" v-for="(item, index) in playerInfoData.player_list" :key="index" @click="toSeePlayerInfo(item)" @mousemove="toSeePlayerInfoMove(index)" @mouseleave="toSeePlayerInfoMove(999)">
-                            <img class="people_img" :src="item.img" alt="">
+                            <img class="people_img" :src="item.img" alt="" :style="{height: imgHeight + 'px'}" ref="peoplerefbox">
                             <div class="name">{{item.name}}</div>
                         </div>
                     </div>
@@ -173,7 +173,9 @@ export default {
             messageTxt: '',
             messageTotal: 0,
             deviceBoxIndex: -1,
-            playerBoxIndex: -1
+            playerBoxIndex: -1,
+            imgHeight: 100,
+            imgHeights: 100
         }
     },
     created () {
@@ -189,6 +191,16 @@ export default {
     mounted () {
         this.getPlayerInfo()
         this.getCommentList()
+        this.$nextTick(() => {
+            setTimeout(() =>{
+                if (this.$refs.devicerefbox) {
+                    this.imgHeight = (this.$refs.devicerefbox[0].offsetWidth) * 3 / 4
+                }
+                if (this.$refs.peoplerefbox) {
+                    this.imgHeights = (this.$refs.peoplerefbox[0].offsetWidth) * 4 / 3
+                }
+            }, 200)
+        })
     },
     methods: {
         getPlayerInfo () {

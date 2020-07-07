@@ -7,13 +7,13 @@
             </div>
             <div class="cont_table_box">
                 <div class="title_box">
-                    <a :class="{btn: true, moveActiveTtile: FTLabelIndex === index, active: CTtileIndex === index}" v-for="(item, index) in setTabelTitleData" :key="index" @click="clickFTlabel(index)" @mousemove="firstTitleLabelMove(index)" @mouseleave="firstTitleLabelMove(999)">
-                        <span>{{item}}</span>
+                    <button :class="{btn: true, moveActiveTtile: FTLabelIndex === index, active: CTtileIndex === index}" v-for="(item, index) in setTabelTitleData" :key="index" @click="clickFTlabel(index)" @mousemove="firstTitleLabelMove(index)" @mouseleave="firstTitleLabelMove(999)">
+                        <button>{{item}}</button>
                         <div class="sort_box" v-if="index < 2">
                             <img class="srot_top" :src="sortStatus === index+1 && sortType === 1 ? ftabelImgActive :ftabelImg" alt="" />
                             <img class="srot_bot" :src="sortStatus === index+1 && sortType === 2 ? stabelImgActive : stabelImg" alt="" />
                         </div>
-                    </a>
+                    </button>
                 </div>
                 <div class="cont_box">
                     <div :class="{trem_box: true, moveTabelActive: tableLindeIndex === index}" v-for="(item, index) in deviceConfigList" :key="index" @mousemove="tableLineMove(index)" @mouseleave="tableLineMove(999)">

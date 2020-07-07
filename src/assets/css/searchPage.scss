@@ -14,8 +14,11 @@
                 border:1px solid rgba(77,54,98,1);
                 margin-bottom: 30px;
                 .img_header {
-                    height: 230px;
                     position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;
                     img {
                         height: 100%;
                         width: 100%;

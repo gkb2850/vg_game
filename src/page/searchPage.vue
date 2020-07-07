@@ -4,8 +4,8 @@
         <div class="main_cont_box">
             <div class="people_box" v-if="searchData.list.length">
                 <div class="trem_box" v-for="(item, index) in searchData.list" :key="index" @click="setDeviceInfo(item)">
-                    <div class="img_header">
-                        <img :src="item.img" alt="">
+                    <div class="img_header" :style="{height: imgHeight + 'px'}">
+                        <img :src="item.img" alt="" :style="{height: imgHeight + 'px', width: item.type === 'player' ? '100%' : imgWidths + 'px'}" ref="peoplerefbox">
                         <div class="top_name">CS GO</div>
                     </div>
                     <div class="c_box">
@@ -42,7 +42,9 @@ export default {
     data () {
         return {
             limit: 20,
-            page: 1
+            page: 1,
+            imgHeight: 100,
+            imgWidths: 100
         }
     },
     components: {
@@ -53,7 +55,16 @@ export default {
 
     },
     mounted () {
-
+        this.$nextTick(() => {
+            setTimeout(() =>{
+                if (this.$refs.peoplerefbox) {
+                    this.imgHeight = (this.$refs.peoplerefbox[0].offsetWidth) * 4 / 3
+                }
+                if (this.$refs.peoplerefbox) {
+                    this.imgWidths = (this.imgHeight) * 4 / 3
+                }
+            }, 200)
+        })
     },
     methods: {
         changeSearch (data) {

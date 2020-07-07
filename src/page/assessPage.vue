@@ -4,7 +4,7 @@
         <div class="main_cont_box">
             <div class="product_box">
                 <div :class="{trem_box: true, moveProActive: deviceBoxIndex === index}" v-for="(item, index) in deviceListData" :key="index" @click="toSeeAssessInfo(item)" @mousemove="toSeeAssessInfoMove(index)" @mouseleave="toSeeAssessInfoMove(999)">
-                    <div class="device-img"><img :src="item.img" alt=""></div>
+                    <div class="device-img" :style="{height: imgHeight + 'px'}" ref="devicerefbox"><img :src="item.img" alt=""></div>
                     <div class="pc_name">{{item.title}}</div>
                     <div class="time_txt">{{item.add_time}}</div>
                 </div>
@@ -29,7 +29,8 @@ export default {
             deviceListData: [],
             page: 1,
             limit: 8,
-            deviceBoxIndex: -1
+            deviceBoxIndex: -1,
+            imgHeight: 100
         }
     },
     created() {
@@ -41,6 +42,11 @@ export default {
     },
     mounted () {
         this.getDeviceList()
+        this.$nextTick(() => {
+            setTimeout(() =>{
+                 this.imgHeight = (this.$refs.devicerefbox[0].offsetWidth) * 3 / 4
+            }, 200)
+        })
     },
     methods: {
         getDeviceList () {

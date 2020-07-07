@@ -31,13 +31,19 @@
                     justify-content: center;
                     background: #4D3662;
                     position: relative;
-                    span {
+                    border: none;
+                    outline: none;
+                    button {
+                        display: inline-block;
+                        border: none;
                         line-height: 20px;
                         font-size:14px;
                         font-family:PingFangSC-Semibold,PingFang SC;
                         font-weight:600;
                         color:rgba(255,246,221,1);
                         width: 2em;
+                        outline: none;
+                        background: transparent;
                     }
                     .sort_box {
                         position: absolute;
