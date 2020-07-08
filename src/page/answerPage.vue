@@ -3,7 +3,7 @@
         <deviceOrSet title="问答"></deviceOrSet>
         <div class="main_cont_box">
             <div class="product_box">
-                <a class="trem_box" v-for="(item, index) in questionList" :key="index" @click="toSeeQuestionInfo(item)">
+                <a :class="{trem_box:true, moveActive: itemBoxIndex === index}" v-for="(item, index) in questionList" :key="index" @click="toSeeQuestionInfo(item)" @mousemove="toSeeQuestionMove(index)" @mouseleave="toSeeQuestionMove(-1)">
                     <div class="title">{{item.title}}</div>
                     <div class="c_box">
                         <div class="c_txt">{{item.content}}</div>
@@ -34,7 +34,8 @@ export default {
             pageNumData: [],
             page: 1,
             limit: 10,
-            questionList: []
+            questionList: [],
+            itemBoxIndex: -1
         }
     },
     created() {
@@ -85,6 +86,9 @@ export default {
         ...mapMutations([
             'checkRoutePath'
         ]),
+        toSeeQuestionMove (index) {
+            this.itemBoxIndex = index
+        }
     },
 }
 </script>
