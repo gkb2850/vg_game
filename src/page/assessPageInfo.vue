@@ -236,6 +236,7 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem("userInfo"));
             if (!userInfo) {
                 this.$Message.error("用户状态失效，请重新登录");
+                this.$router.push('/index')
                 return;
             }
             let data = {
@@ -262,6 +263,7 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem("userInfo"));
             if (!userInfo) {
                 this.$Message.error("用户状态失效，请重新登录");
+                this.$router.push('/index')
                 return;
             }
             let data = {

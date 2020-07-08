@@ -24,7 +24,7 @@ export default new Vuex.Store({
                 state.navTLabelIndex = 3
             } else if (path === '/assessPage' || path === '/assessPageInfo') {
                 state.navTLabelIndex = 4
-            } else if (path === '/answerPage' || path === '/answerPageInfo') {
+            } else if (path === '/answerPage' || path === '/answerInfoPage') {
                 state.navTLabelIndex = 5
             }
         },

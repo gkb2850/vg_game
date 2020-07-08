@@ -239,6 +239,7 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
             if (!userInfo) {
                 this.$Message.error('用户状态失效，请重新登录')
+                this.$router.push('/index')
                 return
             }
             let data = {
@@ -300,6 +301,7 @@ export default {
                 let userInfo = JSON.parse(localStorage.getItem('userInfo'))
                 if (!userInfo) {
                     this.$Message.error('用户状态失效，请重新登录')
+                    this.$router.push('/index')
                     return
                 }
                 let data = {
@@ -343,6 +345,7 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
             if (!userInfo) {
                 this.$Message.error('用户状态失效，请重新登录')
+                this.$router.push('/index')
                 return
             }
             let file = new FormData()
@@ -367,6 +370,7 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
             if (!userInfo) {
                 this.$Message.error('用户状态失效，请重新登录')
+                this.$router.push('/index')
                 return
             }
             let data = {
@@ -384,6 +388,7 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
             if (!userInfo) {
                 this.$Message.error('用户状态失效，请重新登录')
+                this.$router.push('/index')
                 return
             }
             let data = {
@@ -431,6 +436,7 @@ export default {
                     this.userPhoneShow = true
                     if (!userInfo) {
                         this.$Message.error('用户状态失效，请重新登录')
+                        this.$router.push('/index')
                         return
                     }
                     let dataP = {
@@ -449,6 +455,7 @@ export default {
                     this.userNameShow = true
                     if (!userInfo) {
                         this.$Message.error('用户状态失效，请重新登录')
+                        this.$router.push('/index')
                         return
                     }
                     let dataN = {
@@ -467,6 +474,7 @@ export default {
                     this.userSexShow = true
                     if (!userInfo) {
                         this.$Message.error('用户状态失效，请重新登录')
+                        this.$router.push('/index')
                         return
                     }
                     let dataS = {
@@ -485,6 +493,7 @@ export default {
                     this.userPassShow = true
                     if (!userInfo) {
                         this.$Message.error('用户状态失效，请重新登录')
+                        this.$router.push('/index')
                         return
                     }
                     let dataSS = {

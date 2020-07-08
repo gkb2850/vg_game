@@ -11,7 +11,7 @@
             height: 987px;
             .l_nav_user {
                 background: #fff;
-                width: 298px;
+                width: 156px;
                 .user_info {
                     padding: 28px 0;
                     border-bottom: 1px solid #C9C2D0;
@@ -20,28 +20,28 @@
                         width: 76px;
                         display: block;
                         border-radius: 50%;
-                        margin:  0 auto 14px;
+                        margin:  0 auto 11px;
                     }
                     .name {
-                        height: 33px;
-                        line-height: 33px;
+                        height: 25px;
+                        line-height: 25px;
                         text-align: center;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
-                        font-size:24px;
+                        font-size:18px;
                         font-family:PingFangSC-Regular,PingFang SC;
                         font-weight:400;
                         color:rgba(77,54,98,1);
                     }
                 }
                 .trem_txt {
-                    height: 85px;
-                    line-height: 84px;
+                    height: 55px;
+                    line-height: 54px;
                     box-sizing: border-box;
                     border-top: 1px solid #fff;
                     background: #fff;
-                    font-size:24px;
+                    font-size:18px;
                     font-family:PingFangSC-Medium,PingFang SC;
                     font-weight:400;
                     color:rgba(77,54,98,1);

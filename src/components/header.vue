@@ -411,6 +411,9 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
             if (!userInfo) {
                 this.$Message.error('用户状态失效，请重新登录')
+                if (this.$route.path !== '/index') {
+                    this.$router.push('/index')
+                }
                 return
             }
             let data = {

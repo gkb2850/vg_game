@@ -149,6 +149,24 @@
                         font-weight:600;
                         color:rgba(77,54,98,1);
                         margin: 40px 0 13px;
+                        display: flex;
+                        span {
+                            height: 22px;
+                            line-height: 22px;
+                            font-size:16px;
+                            font-family:PingFangSC-Semibold,PingFang SC;
+                            font-weight:600;
+                            color:rgba(77,54,98,1);
+                            margin-right: 20px;
+                        }
+                        a {
+                            height: 22px;
+                            line-height: 22px;
+                            font-size: 14px;
+                            font-family: PingFangSC-Semibold,PingFang SC;
+                            font-weight: 600;
+                            color:rgba(77,54,98,1);
+                        }
                     }
                     .c_txt {
                         border: 1px solid #C9C2D0;
@@ -183,7 +201,7 @@
                     height: 40px;
                     line-height: 40px;
                     margin-bottom: 45px;
-                    font-size:28px;
+                    font-size:21px;
                     font-family:PingFangSC-Medium,PingFang SC;
                     font-weight:500;
                     color:rgba(77,54,98,1);
@@ -195,6 +213,7 @@
                         flex: 1;
                         margin-right: 30px;
                         border:1px solid rgba(212,212,212,1);
+                        cursor: pointer;
                         .product_img {
                             height: 204px;
                             display: block;
@@ -255,7 +274,7 @@
                     height: 40px;
                     line-height: 40px;
                     margin-bottom: 45px;
-                    font-size:28px;
+                    font-size:21px;
                     font-family:PingFangSC-Medium,PingFang SC;
                     font-weight:500;
                     color:rgba(77,54,98,1);
@@ -267,6 +286,7 @@
                         flex: 1;
                         margin-right: 33px;
                         border:1px solid rgba(77,47,93,1);
+                        cursor: pointer;
                         .people_img {
                             height: 298px;
                             width: 100%;
@@ -304,7 +324,7 @@
                 height: 40px;
                 line-height: 40px;
                 margin-bottom: 50px;
-                font-size:28px;
+                font-size:21px;
                 font-family:PingFangSC-Medium,PingFang SC;
                 font-weight:500;
                 color:rgba(77,54,98,1);
@@ -335,7 +355,7 @@
                                 display: flex;
                                 div {
                                     line-height: 28px;
-                                    font-size:20px;
+                                    font-size:18px;
                                     font-family:PingFangSC-Medium,PingFang SC;
                                     font-weight:500;
                                     color:rgba(77,54,98,1);
@@ -387,7 +407,7 @@
                             flex: 1;
                             box-sizing: border-box;
                             border-radius:0px 6px 6px 6px;
-                            border:3px solid rgba(140,111,154,1);
+                            border:2px solid rgba(140,111,154,1);
                             padding: 17px 20px 20px;
                             font-size:16px;
                             font-family:PingFangSC-Regular,PingFang SC;
@@ -446,7 +466,7 @@
                 height: 40px;
                 line-height: 40px;
                 margin-bottom: 50px;
-                font-size:28px;
+                font-size:21px;
                 font-family:PingFangSC-Medium,PingFang SC;
                 font-weight:500;
                 color:rgba(34,11,55,1);
@@ -454,7 +474,7 @@
             .sr_messages {
                 background:rgba(237,235,239,1);
                 border-radius:6px;
-                border:3px solid rgba(140,111,154,1);
+                border:2px solid rgba(140,111,154,1);
                 padding: 20px;
                 box-sizing: border-box;
                 height: 289px;

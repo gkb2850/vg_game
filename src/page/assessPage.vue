@@ -28,7 +28,7 @@ export default {
             pageNumData: [],
             deviceListData: [],
             page: 1,
-            limit: 8,
+            limit: 10,
             deviceBoxIndex: -1,
             imgHeight: 0
         }
@@ -52,8 +52,8 @@ export default {
             ajaxHttp.proDeviceListFeath(data).then(res => {
                 this.deviceListData = res.data.list
                 this.pageNumData = []
-                if (res.data.total > 8) {
-                    for (let i = 1; i< Math.ceil((res.data.total)/8) + 1; i++) {
+                if (res.data.total > 10) {
+                    for (let i = 1; i< Math.ceil((res.data.total)/10) + 1; i++) {
                         this.pageNumData.push(i)
                     }
                 } else {

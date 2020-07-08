@@ -47,10 +47,9 @@ function apiAxios (method, url, params={}) {
             } else if (res.data.code === -1) {//需要登录
               Message.error('登陆超时，请重新登录')
               localStorage.removeItem('userInfo')
-              location.reload()
-              setTimeout(() =>{
-                this.$router.push('/idnex')
-              }, 500)
+              if (this.$route.path !== '/index') {
+                this.$router.push('/index')
+              } 
             } else {
               reject(res.data)
             }

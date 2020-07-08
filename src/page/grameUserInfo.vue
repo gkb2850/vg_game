@@ -68,7 +68,10 @@
                         <div class="c_txt">{{playerInfoData.info.cl_bob}}</div>
                     </div>
                     <div class="str_info_st" v-if="playerInfoData && playerInfoData.info.download">
-                        <div class="title">下载</div>
+                        <div class="title">
+                            <span>下载</span>
+                            <a href="javascript:;" @click="toSeeAnswerInfo">cfg文件使用方法</a>
+                        </div>
                         <a :href="playerInfoData.info.download" download="gfg" class="download_box">CFG文件</a>
                     </div>
                 </div>
@@ -175,7 +178,8 @@ export default {
             deviceBoxIndex: -1,
             playerBoxIndex: -1,
             imgHeight: 0,
-            imgHeights: 0
+            imgHeights: 0,
+            questionList:[]
         }
     },
     created () {
@@ -191,6 +195,7 @@ export default {
     mounted () {
         this.getPlayerInfo()
         this.getCommentList()
+        this.getQuestionList()
     },
     methods: {
         getPlayerInfo () {
@@ -257,6 +262,7 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
             if (!userInfo) {
                 this.$Message.error('用户状态失效，请重新登录')
+                this.$router.push('/index')
                 return
             }
             let data = {
@@ -280,6 +286,7 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
             if (!userInfo) {
                 this.$Message.error('用户状态失效，请重新登录')
+                this.$router.push('/index')
                 return
             }
             let data = {
@@ -310,8 +317,8 @@ export default {
             this.commentListData()
         },
         toSeeDeviceInfo (item) {
-            thi.$router.push({
-                path: '/answerInfoPage',
+            this.$router.push({
+                path: '/assessPageInfo',
                 query: {
                     id: item.device_id
                 }
@@ -326,6 +333,28 @@ export default {
         ...mapMutations([
             'checkRoutePath'
         ]),
+        toSeeAnswerInfo () {
+            if (this.questionList.length) {
+                this.$router.push({
+                    path: '/answerInfoPage',
+                    query: {
+                        id: this.questionList[0].id
+                    }
+                })
+            }
+            
+        },
+        getQuestionList () {
+            let data = {
+                page: 1,
+                limit: 10
+            }
+            ajaxHttp.questionListFeath(data).then(res => {
+                this.questionList = res.data.list
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
     }
 }
 </script>
