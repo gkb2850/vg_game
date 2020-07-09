@@ -7,7 +7,16 @@
                 <a href="javascript:;" @click="registerBoxShow('show')">注册</a>
             </div>
             <a v-else class="txt_box">
-                <div class="message_txt" @click="toMyPage">{{userName}}</div>
+                <div class="message_txt_user" @click="toMyPage" @mousemove="toSeeMessageNum('in')" @mouseleave="toSeeMessageNum('out')">{{userName}}
+                    <div class="rigint_num_txt">99+</div>
+                    <div class="mask_num_box" v-if="specificMessageShow" @click.stop="toSeeMyComment">
+                        <img src="../assets/images/message_bg.png" alt="">
+                        <div class="txt_num_box">
+                            <div>收到的评论</div>
+                            <div>100</div>
+                        </div>
+                    </div>
+                </div>
                 <a href="javascript:;" @click="toLoginOut">退出</a>
             </a>
         </div>
@@ -37,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="register_box" v-if="registerBoxShowStutas">
+        <div class="register_box" v-if="registerBoxShowStutas" @mousewheel.prevent>
             <div class="mask_bg"></div>
             <div class="cont_box">
                 <div class="title_box">
@@ -74,7 +83,7 @@
                 <a href="javascript:;" class="submit_btn" @click="toRegister">注册</a>
             </div>
         </div>
-        <div class="login_box" v-if="loginBoxShowStutas">
+        <div class="login_box" v-if="loginBoxShowStutas" @mousewheel.prevent>
             <div class="mask_bg"></div>
             <div class="cont_box">
                 <div class="title_box">
@@ -123,13 +132,15 @@
                 <a href="javascript:;" class="submit_btn" @click="toLogin">登陆</a>
             </div>
         </div>
-        <Modal
-            title="退出"
-            v-model="loginOutBoxShow"
-            @on-ok="sureLoginOut"
-            class-name="vertical-center-modal">
-            <p>确定退出登陆吗？</p>
-        </Modal>
+        <div class="message_mask_loginout_box" @mousewheel.prevent v-if="loginOutBoxShow">
+        <div class="cont_box">
+                <div class="title">确定要退出么？</div>
+                <div class="btn_box">
+                    <button @click="sureLoginOut">确定</button>
+                    <button @click="tohideLoginOutBox">取消</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -187,7 +198,8 @@ export default {
             secondLabelIndex: 0,
             navIndexTopMove: -1,
             userName: '',
-            loginOutBoxShow: false
+            loginOutBoxShow: false,
+            specificMessageShow: false
         }
     },
     created () {
@@ -428,11 +440,35 @@ export default {
             })
         },
         sureLoginOut () {
+            this.loginOutBoxShow = false
             localStorage.removeItem('userInfo')
             this.changeisLogin(false)
+            if (this.$route.path !== '/index') {
+                this.$router.push({
+                    path: '/index'
+                })
+            }
         },
         toLoginOut () {
             this.loginOutBoxShow = true
+        },
+        toSeeMessageNum (str) {
+            if (str === 'in') {
+                this.specificMessageShow = true
+            } else {
+                this.specificMessageShow = false
+            }
+        },
+        toSeeMyComment () {
+            this.$router.push({
+                path: '/my',
+                query: {
+                    message: true
+                }
+            })
+        },
+        tohideLoginOutBox () {
+            this.loginOutBoxShow = false
         },
         ...mapMutations([
             'changeSearchData',
@@ -478,6 +514,78 @@ export default {
                     color:rgba(47,47,54,1);
                     padding-right: 25px;
                     padding-left: 25px;
+                }
+                .message_txt_user {
+                    height: 100%;
+                    line-height: 40px;
+                    font-size:14px;
+                    font-family:PingFangSC-Regular,PingFang SC;
+                    font-weight:400;
+                    color:rgba(47,47,54,1);
+                    padding-right: 25px;
+                    padding-left: 25px;
+                    position: relative;
+                    .rigint_num_txt {
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        margin-right: -10px;
+                        transform: translate(-80%, -100%);
+                        background: #8C6F9A;
+                        border-radius: 2px;
+                        padding: 0 3px;
+                        height: 12px;
+                        line-height: 12px;
+                        font-size:10px;
+                        font-family:PingFangSC-Regular,PingFang SC;
+                        font-weight:400;
+                        color:rgba(255,255,255,1);
+                    }
+                    .mask_num_box {
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+                        transform: translateY(100%);
+                        width: 140px;
+                        height: 47px;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                        }
+                        .txt_num_box {
+                           position: absolute;
+                           left: 0;
+                           top: 0;
+                           width: 100%;
+                           height: 100%;
+                           display: flex;
+                           padding: 9px 8px 0;
+                           box-sizing: border-box;
+                           display: flex;
+                           align-items: center;
+                           justify-content: space-between;
+                           div:first-child {
+                               height:20px;
+                               font-size:14px;
+                               font-family:PingFangSC-Regular,PingFang SC;
+                               font-weight:400;
+                               color:rgba(77,54,98,1);
+                               line-height:20px;
+                           }
+                           div:nth-child(2) {
+                               height: 12px;
+                               line-height: 12px;
+                               border-radius: 2px;
+                               background: #8C6F9A;
+                               padding: 0 3px;
+                               font-size:10px;
+                               font-family:PingFangSC-Regular,PingFang SC;
+                               font-weight:400;
+                               color:rgba(255,255,255,1);
+                           }
+                        }
+                    }
                 }
                 a {
                     height: 100%;
@@ -1030,6 +1138,64 @@ export default {
                     font-weight:500;
                     color:rgba(255,255,255,1);
                     line-height: 50px;
+                }
+            }
+        }
+        .message_mask_loginout_box {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background:rgba(0,0,0,0.4);
+            left: 0;
+            top: 0;
+            z-index: 10;
+            .cont_box {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                background: #fff;
+                border-radius: 4px;
+                width: 270px;
+                padding: 26px 36px 18px;
+                box-sizing: border-box;
+                .title {
+                    height:26px;
+                    font-size:16px;
+                    font-family:PingFangSC-Regular,PingFang SC;
+                    font-weight:400;
+                    color:rgba(47,47,54,1);
+                    line-height:26px;
+                    text-align: center;
+                    margin-bottom: 28px;
+                }
+                .btn_box {
+                    display: flex;
+                    justify-content: space-between;
+                    button {
+                        width: 64px;
+                        height: 31px;
+                        text-align: center;
+                        line-height: 29px;
+                        outline: none;
+                        border-radius: 2px;
+                    }
+                    button:first-child {
+                        font-size:16px;
+                        font-family:PingFangSC-Medium,PingFang SC;
+                        font-weight:500;
+                        color:rgba(255,255,255,1);
+                        background: #8C6F9A;
+                        border: 1px solid #8C6F9A;
+                    }
+                    button:nth-child(2) {
+                        font-size:16px;
+                        font-family:PingFangSC-Regular,PingFang SC;
+                        font-weight:400;
+                        color:rgba(129,129,135,1);
+                        background: #F7F9FA;
+                        border: 1px solid #AFB0B1;
+                    }
                 }
             }
         }

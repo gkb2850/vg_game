@@ -9,17 +9,18 @@
                         <div class="name">{{userInfoTxt.title}}</div>
                     </div>
                     <a href="javascript:;" :class="{trem_txt: true, active: lNavIndex === '1'}" @click="lNavTitleChange('1')">我的资料</a>
-                    <a href="javascript:;" :class="{trem_txt: true, active: lNavIndex === '2'}" @click="lNavTitleChange('2')">我的评论</a>
-                    <a href="javascript:;" :class="{trem_txt: true, active: lNavIndex === '3'}" @click="lNavTitleChange('3')">头像设置</a>
+                    <a href="javascript:;" :class="{trem_txt: true, active: lNavIndex === '2'}" @click="lNavTitleChange('2')">发出的评论</a>
+                    <a href="javascript:;" :class="{trem_txt: true, active: lNavIndex === '3'}" @click="lNavTitleChange('3')">收到的评论</a>
+                    <a href="javascript:;" :class="{trem_txt: true, active: lNavIndex === '4'}" @click="lNavTitleChange('4')">头像设置</a>
                 </div>
                 <div class="r_cont_box">
                     <div class="user_data_box">
                         <div class="title_box">
-                            <div class="l_name">{{lNavIndex === '1' ? '我的资料' : lNavIndex === '2' ? '我的评论' : '头像设置'}}</div>
-                            <div class="a_btn_box">
+                            <div class="l_name">{{lNavIndex === '1' ? '我的资料' : lNavIndex === '2' ? '发出的评论' : lNavIndex === '2' ? '收到的评论' : '头像设置'}}</div>
+                            <!-- <div class="a_btn_box">
                                 <a class="bj_btn" v-if="lNavIndex === '2'" href="javascript:;" @click="toEnidMessage">{{radioShowBtn?'删除':'编辑'}}</a>
                                 <a class="bj_btn" v-if="radioShowBtn && lNavIndex === '2'" href="javascript:;" @click="toEnidChangeSuccess">完成</a>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="c_box" v-if="lNavIndex === '1'">
                             <div class="inset_first_box" v-if="true">
@@ -129,7 +130,7 @@
                         </div>
                         <div class="c_box" v-if="lNavIndex === '2'">
                             <div class="message_user_box">
-                                <div class="trem_box" v-for="(item, index) in userCommentList" :key="index">
+                                <!-- <div class="trem_box" v-for="(item, index) in userCommentList" :key="index">
                                     <div class="people_box">
                                         <div class="l_box">
                                             <img class="people_img" :src="item.acatar" alt="">
@@ -148,13 +149,32 @@
                                         <img class="l_icon" src="" alt="">
                                         <div class="txt_box">{{item.content}}</div>
                                     </div>
+                                </div> -->
+                                <div class="trem_box">
+                                    <div class="title_box">
+                                        <div class="l_box">
+                                            <div class="name">柠檬茶</div>    
+                                            <div class="time">2020-07-09</div>    
+                                        </div>
+                                        <div class="r_box">
+                                            <a href="javascript:;" @click="toSeeMessageBox">删除</a>    
+                                        </div>   
+                                    </div>
+                                    <div class="setout_message_box">
+                                        <span class="fh_txt">回复<span class="people_name">益禾堂</span></span>
+                                        <span class="my_fh_message">：啦啦啦啦啦啦啦啦啦</span>
+                                    </div>
+                                    <div class="comment_main">
+                                        <span class="f_txt">益禾堂的评论:</span>
+                                        <span class="c_txt">这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶</span>
+                                    </div>
                                 </div>
                                 <div class="page_big_box">
                                     <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage" :limit="limit"></pageItem>
                                 </div>
                             </div>
                         </div>
-                        <div class="c_box" v-if="lNavIndex === '3'">
+                        <div class="c_box" v-if="lNavIndex === '4'">
                             <div class="select_user_img">
                                 <div class="select_img">
                                     <div class="inset_img">
@@ -182,13 +202,31 @@
                 </div>
             </div>
         </div>
-        <Modal
+        <!-- <Modal
         title="退出"
         v-model="loginOutBoxShow"
         @on-ok="sureLoginOut"
         class-name="vertical-center-modal">
         <p>确定退出登陆吗？</p>
-    </Modal>
+    </Modal> -->
+    <div class="message_mask_box" @mousewheel.prevent v-if="messageBoxMaskShow" @click="tohideMessageBox">
+        <div class="cont_box">
+            <div class="title">确定要删除该回复么？</div>
+            <div class="btn_box">
+                <button>确定</button>
+                <button>取消</button>
+            </div>
+        </div>
+    </div>
+    <div class="message_mask_box" @mousewheel.prevent v-if="loginOutBoxShow" @click="tohideLoginOutBox">
+        <div class="cont_box">
+            <div class="title">确定要退出么？</div>
+            <div class="btn_box">
+                <button @click="sureLoginOut">确定</button>
+                <button @click="tohideLoginOutBox">取消</button>
+            </div>
+        </div>
+    </div>
     </div>
 </template>
 
@@ -224,7 +262,8 @@ export default {
             userSexShow: true,
             loginOutBoxShow: false,
             userPassShow: true,
-            password: ''
+            password: '',
+            messageBoxMaskShow: false
         }
     },
     components: {
@@ -290,43 +329,43 @@ export default {
                 this.getUserInfoToHttp();
             }
         },
-        toEnidMessage () {
-            if (this.radioShowBtn) {
-                let arr = []
-                this.userCommentList.forEach(i => {
-                    if (i.radioShow) {
-                        arr.push(i.comment_id)
-                    }
-                })
-                let userInfo = JSON.parse(localStorage.getItem('userInfo'))
-                if (!userInfo) {
-                    this.$Message.error('用户状态失效，请重新登录')
-                    this.$router.push('/index')
-                    return
-                }
-                let data = {
-                    token: userInfo.token,
-                    user_id: userInfo.user_id,
-                    comment_id: arr.join(',')
-                }
-                ajaxHttp.delCommentInfoFeath(data).then(res => {
-                    this.$Message.success('删除成功')
-                    this.getUserCommentList()
-                }).catch(err => {
-                    this.$Message.error(err.message)
-                })
-            } else {
-                this.radioShowBtn = true
-            }
-        },
+        // toEnidMessage () {
+        //     if (this.radioShowBtn) {
+        //         let arr = []
+        //         this.userCommentList.forEach(i => {
+        //             if (i.radioShow) {
+        //                 arr.push(i.comment_id)
+        //             }
+        //         })
+        //         let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+        //         if (!userInfo) {
+        //             this.$Message.error('用户状态失效，请重新登录')
+        //             this.$router.push('/index')
+        //             return
+        //         }
+        //         let data = {
+        //             token: userInfo.token,
+        //             user_id: userInfo.user_id,
+        //             comment_id: arr.join(',')
+        //         }
+        //         ajaxHttp.delCommentInfoFeath(data).then(res => {
+        //             this.$Message.success('删除成功')
+        //             this.getUserCommentList()
+        //         }).catch(err => {
+        //             this.$Message.error(err.message)
+        //         })
+        //     } else {
+        //         this.radioShowBtn = true
+        //     }
+        // },
         radioChange (index) {
             let data = this.userCommentList[index]
             data.radioShow = !data.radioShow
             this.$set(this.userCommentList, index, data)
         },
-        toEnidChangeSuccess () {
-            this.radioShowBtn = false
-        },
+        // toEnidChangeSuccess () {
+        //     this.radioShowBtn = false
+        // },
         selectImgUpload () {
             let that = this
             this.uploadImgFile = this.$refs.fileImg.files[0]
@@ -518,9 +557,13 @@ export default {
             this.loginOutBoxShow = true
         },
         sureLoginOut () {
+            this.loginOutBoxShow = false
             localStorage.removeItem('userInfo')
             this.changeisLogin(false)
             this.$router.push('/index')
+        },
+        tohideLoginOutBox () {
+            this.loginOutBoxShow = false
         },
         seePassOryz (str) {
             if (str ==='first') {
@@ -550,6 +593,12 @@ export default {
             } else {
                 this.$Message.warning('你暂未添加图片')
             }
+        },
+        toSeeMessageBox () {
+            this.messageBoxMaskShow = true
+        },
+        tohideMessageBox () {
+            this.messageBoxMaskShow = false
         },
          ...mapMutations([
             'changeisLogin'
