@@ -157,7 +157,34 @@
                                             <div class="time">2020-07-09</div>    
                                         </div>
                                         <div class="r_box">
-                                            <a href="javascript:;" @click="toSeeMessageBox">删除</a>    
+                                            <a class="txt_a" href="javascript:;" @click="toSeeMessageBox">删除</a>    
+                                        </div>   
+                                    </div>
+                                    <div class="setout_message_box">
+                                        <span class="fh_txt">回复<span class="people_name">益禾堂</span></span>
+                                        <span class="my_fh_message">：啦啦啦啦啦啦啦啦啦</span>
+                                    </div>
+                                    <div class="comment_main">
+                                        <span class="f_txt">益禾堂的评论:</span>
+                                        <span class="c_txt">这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶</span>
+                                    </div>
+                                </div>
+                                <div class="page_big_box">
+                                    <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage" :limit="limit"></pageItem>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="c_box" v-if="lNavIndex === '3'">
+                            <div class="message_user_box">
+                                <div class="trem_box">
+                                    <div class="title_box">
+                                        <div class="l_box">
+                                            <div class="name">柠檬茶</div>    
+                                            <div class="time">2020-07-09</div>    
+                                        </div>
+                                        <div class="r_box" @mousemove="jbBtnMove('in')" @mouseleave="jbBtnMove('out')">
+                                            <img :src="bjBtnActive ? jbBtnImgActive : jbBtnImg" alt="">
+                                            <a class="btn" href="javascript:;" v-if="bjBtnActive">举报</a>   
                                         </div>   
                                     </div>
                                     <div class="setout_message_box">
@@ -241,6 +268,9 @@ import {mapMutations} from 'vuex'
 export default {
     data () {
         return {
+            jbBtnImgActive: require('../assets/images/jt_tobot_active_icon.png'),
+            jbBtnImg: require('../assets/images/jt_tobot_icon.png'),
+            bjBtnActive: false,
             radiotxtBtn: true,
             pageNumData:[],
             page: 1,
@@ -599,6 +629,13 @@ export default {
         },
         tohideMessageBox () {
             this.messageBoxMaskShow = false
+        },
+        jbBtnMove (str) {
+            if (str === 'in') {
+                this.bjBtnActive = true
+            } else {
+                this.bjBtnActive = false
+            }
         },
          ...mapMutations([
             'changeisLogin'

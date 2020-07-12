@@ -670,7 +670,6 @@ export default {
                             z-index: 12;
                             transform: translateX(-50%);
                             margin-left: 104px;
-                            // background:rgba(255,255,255,1);
                             .item_box {
                                 height: 40px;
                                 line-height: 40px;
@@ -679,12 +678,13 @@ export default {
                                 font-family:PingFangSC-Medium,PingFang SC;
                                 font-weight:500;
                                 color:#220B37;
-                                background: #F3F3F3;
+                                background: #FFF;
                                 width: 208px;
-                                box-shadow:0px 2px 18px 0px rgba(199,189,203,0.47);
                             }
                             .item_box.active {
                                 color: rgba(117, 79, 137, 1);
+                                background: #F3F3F3;
+                                box-shadow:0px 2px 18px 0px rgba(199,189,203,0.47);
                             }
                             .llable_box {
                                 position: absolute;
@@ -693,8 +693,7 @@ export default {
                                 top: 0;
                                 width: 208px;
                                 z-index: 10;
-                                background:rgba(255,255,255,1);
-                                box-shadow:0px 2px 18px 0px rgba(199,189,203,0.47);
+                                background:#fff;
                                 .itxt {
                                     height: 40px;
                                     line-height: 40px;
@@ -703,10 +702,12 @@ export default {
                                     font-family:PingFangSC-Medium,PingFang SC;
                                     font-weight:500;
                                     color:#220B37;
-                                    background: #F3F3F3;
+                                    background: #fff;
                                 }
                                 .itxt.active {
                                     color:rgba(117,79,137,1);
+                                    background: #F3F3F3;
+                                    box-shadow:0px 2px 18px 0px rgba(199,189,203,0.47);
                                 }
                             }
                         }

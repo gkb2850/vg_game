@@ -124,7 +124,7 @@
                                 </div>
                             </div>
                             <div class="message_box">
-                                <img class="l_icon" src="" alt="">
+                                <img class="l_icon" src="../assets/images/dsj_icon.png" alt="">
                                 <!-- <div class="txt_box">{{item.father_id !== 0 ? item.parent_content : item.content}}</div> -->
                                 <div class="txt_box">{{item.content}}</div>
                             </div>

@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="item_s_box" v-if="newProListData.length">
-                <div class="title">最近更新设备</div>
+                <div class="title">最近游戏硬件评论</div>
                 <div class="cont">
                     <div :class="{trem_box: true, movelatelyActive: latelyBoxIndex === index ? true : false}" v-for="(item, index) in newProListData" :key="index" @click="seeAssessInfo(item)" @mousemove="seeAssessInfoMove(index)" @mouseleave="seeAssessInfoMove(999)">
                         <img class="order_img" :src="item.img" alt="" :style="{height: imgHeighthotdevice + 'px'}" ref="hotdevicerefbox">
@@ -89,17 +89,17 @@
                     <div class="r_box">
                         <div class="trem_box">
                             <div class="title_txt">GS GO 数据指南</div>
-                            <div class="txt active">GS GO 数据列表</div>
+                            <a href="javascript:;" :class="{txt: true, active: lookIndexItem === 0}" @click="toSeeSJInfo" @mousemove="lookItemZNInfo(0)" @mouseleave="lookItemZNInfo(-1)">GS GO 数据列表</a>
                             <div class="title_txt">GS GO 选手指南</div>
-                            <div class="txt" v-if="gameGuideData.player_list && gameGuideData.player_list.length">{{gameGuideData.player_list[0].name}}</div>
+                            <a href="javascript:;" :class="{txt: true, active: lookIndexItem === 1}" v-if="gameGuideData.player_list && gameGuideData.player_list.length" @click="toSeePeopleInfo(gameGuideData.player_list[0])" @mousemove="lookItemZNInfo(1)" @mouseleave="lookItemZNInfo(-1)">{{gameGuideData.player_list[0].name}}</a>
                         </div>
                         <div class="trem_box" v-if="gamedevice_listF.length">
                             <div class="title_txt">GS GO 装备</div>
-                            <div class="txt" v-for="(item, index) in gamedevice_listF" :key="index">{{item.title}}</div>
+                            <a href="javascript:;" @click="toSeeDeciveInfo(item)" @mousemove="lookItemZNInfo(index + 2)" @mouseleave="lookItemZNInfo(-1)" :class="{txt: true, active: lookIndexItem === index + 2}" v-for="(item, index) in gamedevice_listF" :key="index">{{item.title}}</a>
                         </div>
                         <div class="trem_box" v-if="gamedevice_listS.length">
                             <div class="title_txt">GS GO 装备</div>
-                            <div class="txt" v-for="(item, index) in gamedevice_listS" :key="index">{{item.title}}</div>
+                            <a href="javascript:;" @click="toSeeDeciveInfo(item)" :class="{txt: true, active: lookIndexItem === index + gamedevice_listF.length + 2}" @mousemove="lookItemZNInfo(index + gamedevice_listF.length + 2)" @mouseleave="lookItemZNInfo(-1)" v-for="(item, index) in gamedevice_listS" :key="index">{{item.title}}</a>
                         </div>
                     </div>
                 </div>
@@ -178,7 +178,8 @@ export default {
             gamedevice_listS: [],
             imgHeighthotdevice: 0,
             imgHeighthotsspeople: 0,
-            imgHeighthotssdevice: 0
+            imgHeighthotssdevice: 0,
+            lookIndexItem: -1
         }
     },
     created () {
@@ -275,6 +276,28 @@ export default {
                     id: item.device_id
                 }
             })
+        },
+        toSeeSJInfo () {
+            this.$router.push('/deviceOrSet')
+        },
+        toSeePeopleInfo (item) {
+            this.$router.push({
+                path: '/grameUserInfo',
+                query: {
+                    id: item.player_id
+                }
+            })
+        },
+        toSeeDeciveInfo (item) {
+            this.$router.push({
+                path: '/assessPageInfo',
+                query: {
+                    id: item.device_id
+                }
+            })
+        },
+        lookItemZNInfo (index) {
+            this.lookIndexItem = index
         },
         getGameGuideData () {
             ajaxHttp.gameCuideFeath().then(res => {

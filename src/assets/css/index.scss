@@ -101,7 +101,7 @@
                     margin-right: 30px;
                     box-sizing: border-box;
                     padding: 10px;
-                    background: #D4D4D4;
+                    background: #E1E1E1;
                     overflow: hidden;
                     cursor: pointer;
                     .order_img {
@@ -118,10 +118,10 @@
                         width: 100%;
                         height: 25px;
                         line-height: 25px;
-                        font-size:18px;
+                        font-size:16px;
                         font-family:PingFangSC-Medium,PingFang SC;
                         font-weight:500;
-                        color:rgba(137,79,160,1);
+                        color:#4D3662;
                         margin-bottom: 8px;
                     }
                     .s_txt {
@@ -134,11 +134,17 @@
                         font-size:14px;
                         font-family:PingFangSC-Regular,PingFang SC;
                         font-weight:400;
-                        color:rgba(117,79,137,1);
+                        color:#4D3662;
                     }
                 }
                 .movelatelyActive {
                     box-shadow:0px 2px 14px 0px rgba(201,194,208,1);
+                    .f_txt {
+                        color: #894FA0;
+                    }
+                    .s_txt {
+                        color: #894FA0;
+                    }
                 }
                 .trem_box:last-child {
                     margin: 0;
@@ -359,11 +365,14 @@
                         font-family:PingFangSC-Regular,PingFang SC;
                         font-weight:400;
                         color:rgba(227,222,229,1);
-                        background: #754F89;
+                        background: #4D2F5D;
                     }
                 }
                 .moveholtActive {
                     box-shadow:0px 2px 14px 0px rgba(169,150,178,1);
+                    .js_txt {
+                        background: #754F89;
+                    }
                 }
                 .trem_box:last-child {
                     margin: 0;
@@ -391,6 +400,8 @@
                     margin-right: 32px;
                     overflow: hidden;
                     cursor: pointer;
+                    border: 1px solid #E1E1E1;
+                    background: #E1E1E1;
                     .img_product {
                         width: 100%;
                         height: 159px;
@@ -400,26 +411,26 @@
                         height: 53px;
                         line-height: 53px;
                         text-align: center;
-                        background: #D4D4D4;
+                        background: #E1E1E1;
                         font-size:14px;
                         font-family:PingFangSC-Medium,PingFang SC;
                         font-weight:500;
-                        color:rgba(77,54,98,1);
+                        color:#4D3662 ;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
+                        padding: 0 12px;
+                        box-sizing: border-box;
                     }
                 }
                 .moveholtProActive {
                     box-shadow:0px 2px 14px 0px rgba(201,194,208,1);
-                }
-                .trem_box:last-child {
-                    margin-right: 0;
-                }
-                .trem_box:first-child {
                     .txt {
                         color: #894FA0;
                     }
+                }
+                .trem_box:last-child {
+                    margin-right: 0;
                 }
             }
         }

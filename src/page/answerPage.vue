@@ -54,7 +54,9 @@ export default {
                 page: this.page,
                 limit: this.limit
             }
+            this.$Spin.show();
             ajaxHttp.questionListFeath(data).then(res => {
+                this.$Spin.hide();
                 this.questionList = res.data.list
                 this.pageNumData = []
                 if (res.data.total > 10) {
@@ -65,6 +67,7 @@ export default {
                     this.pageNumData.push(1)
                 }
             }).catch(err => {
+                this.$Spin.hide();
                 this.$Message.error(err.message)
             })
         },

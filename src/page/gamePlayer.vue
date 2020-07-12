@@ -63,7 +63,9 @@ export default {
                 page: this.page,
                 limit: this.limit
             }
+            this.$Spin.show();
             ajaxHttp.playerPageListFeath(data).then(res => {
+                this.$Spin.hide();
                 this.playerListData = res.data.list
                 this.pageNumData = []
                 if (res.data.total > 10) {
@@ -79,6 +81,7 @@ export default {
                         }
                 })
             }).catch(err => {
+                this.$Spin.hide();
                 this.$Message.error(err.message)
             })
         },
