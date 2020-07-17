@@ -1,6 +1,6 @@
 <template>
     <div class="gamePlayer_container">
-        <deviceOrSet title="CS GO 选手"></deviceOrSet>
+        <deviceOrSet title="CS:GO 选手"></deviceOrSet>
         <div class="main_cont_box">
             <div class="people_box">
                 <div :class="{trem_box: true, movePlayerActive: playerSelectIndex === index}" v-for="(item, index) in playerListData" :key="index" @click="seePlayerInfo(item)" @mousemove="seePlayerInfoMove(index)" @mouseleave="seePlayerInfoMove(999)">

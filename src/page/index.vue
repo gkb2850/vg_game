@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="item_s_box" v-if="newProListData.length">
-                <div class="title">最近游戏硬件评论</div>
+                <div class="title">最近更新设备</div>
                 <div class="cont">
                     <div :class="{trem_box: true, movelatelyActive: latelyBoxIndex === index ? true : false}" v-for="(item, index) in newProListData" :key="index" @click="seeAssessInfo(item)" @mousemove="seeAssessInfoMove(index)" @mouseleave="seeAssessInfoMove(999)">
                         <img class="order_img" :src="item.img" alt="" :style="{height: imgHeighthotdevice + 'px'}" ref="hotdevicerefbox">
@@ -64,48 +64,48 @@
                 <img class="main_f_img" src="../assets/images/title_img.jpg" alt="">
                 <div class="main_f_txtbox">
                     <div class="trem_box">
-                        <div class="f_txt">分析了</div>
-                        <div class="s_txt">2888</div>
-                        <div class="t_txt">职业玩家</div>
+                        <div class="f_txt">共有</div>
+                        <div class="s_txt">399</div>
+                        <div class="t_txt">名职业玩家</div>
                     </div>
                     <div class="trem_box">
                         <div class="f_txt">共有</div>
-                        <div class="s_txt">2000</div>
-                        <div class="t_txt">队伍</div>
+                        <div class="s_txt">100</div>
+                        <div class="t_txt">支战队</div>
                     </div>
                     <div class="trem_box">
                         <div class="f_txt">共有</div>
-                        <div class="s_txt">80</div>
-                        <div class="t_txt">游戏类型</div>
+                        <div class="s_txt">1</div>
+                        <div class="t_txt">个游戏</div>
                     </div>
                 </div>
             </div>
             <div class="main_s_box">
-                <div class="title">CS GO</div>
+                <div class="title">CS:GO</div>
                 <div class="cont">
                     <div class="l_box">
                         <img src="../assets/images/csgame.jpg" class="l_img" alt="">
                     </div>
                     <div class="r_box">
                         <div class="trem_box">
-                            <div class="title_txt">GS GO 数据指南</div>
-                            <a href="javascript:;" :class="{txt: true, active: lookIndexItem === 0}" @click="toSeeSJInfo" @mousemove="lookItemZNInfo(0)" @mouseleave="lookItemZNInfo(-1)">GS GO 数据列表</a>
-                            <div class="title_txt">GS GO 选手指南</div>
+                            <div class="title_txt">CS:GO 数据指南</div>
+                            <a href="javascript:;" :class="{txt: true, active: lookIndexItem === 0}" @click="toSeeSJInfo" @mousemove="lookItemZNInfo(0)" @mouseleave="lookItemZNInfo(-1)">CS:GO 数据列表</a>
+                            <div class="title_txt">CS:GO 选手指南</div>
                             <a href="javascript:;" :class="{txt: true, active: lookIndexItem === 1}" v-if="gameGuideData.player_list && gameGuideData.player_list.length" @click="toSeePeopleInfo(gameGuideData.player_list[0])" @mousemove="lookItemZNInfo(1)" @mouseleave="lookItemZNInfo(-1)">{{gameGuideData.player_list[0].name}}</a>
                         </div>
                         <div class="trem_box" v-if="gamedevice_listF.length">
-                            <div class="title_txt">GS GO 装备</div>
+                            <div class="title_txt">CS:GO 装备</div>
                             <a href="javascript:;" @click="toSeeDeciveInfo(item)" @mousemove="lookItemZNInfo(index + 2)" @mouseleave="lookItemZNInfo(-1)" :class="{txt: true, active: lookIndexItem === index + 2}" v-for="(item, index) in gamedevice_listF" :key="index">{{item.title}}</a>
                         </div>
                         <div class="trem_box" v-if="gamedevice_listS.length">
-                            <div class="title_txt">GS GO 装备</div>
+                            <div class="title_txt"></div>
                             <a href="javascript:;" @click="toSeeDeciveInfo(item)" :class="{txt: true, active: lookIndexItem === index + gamedevice_listF.length + 2}" @mousemove="lookItemZNInfo(index + gamedevice_listF.length + 2)" @mouseleave="lookItemZNInfo(-1)" v-for="(item, index) in gamedevice_listS" :key="index">{{item.title}}</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="main_t_box" v-if="playeImgListData.length"> 
-                <div class="title">热门CS GO 队员</div>
+                <div class="title">热门CS:GO 队员</div>
                 <div class="cont">
                     <div :class="{trem_box: true, moveholtActive: playerholtBoxIndex === index}" v-for="(item, index) in playeImgListData" :key="index" @click="seePlayeInfo(item)" @mousemove="seePlayeholtMove(index)" @mouseleave="seePlayeholtMove(999)">
                         <img class="top_img_p" :src="item.img" alt="" :style="{height: imgHeighthotsspeople + 'px'}" ref="hotsspeoplerefbox">
@@ -114,7 +114,7 @@
                 </div>
             </div>
             <div class="main_ff_box" v-if="holdProListData.length">
-                <div class="title">热门CS GO设备</div>
+                <div class="title">热门CS:GO设备</div>
                 <div class="cont">
                     <div :class="{trem_box: true, moveholtProActive: proholtBoxIndex === index}" v-for="(item, index) in holdProListData" :key="index" @click="seeAssessInfo(item)" @mousemove="seeProholtMove(index)" @mouseleave="seeProholtMove(999)">
                         <img class="img_product" :src="item.img" alt="" :style="{height: imgHeighthotssdevice + 'px'}" ref="hotssdevicerefbox">
@@ -161,7 +161,7 @@
 <script>
 import ajaxHttp from '@/api/index.js'
 import spinItem from '@/components/spinItem.vue'
-import {mapMutations} from 'vuex'
+import {mapMutations, mapGetters, mapState} from 'vuex'
 export default {
     data () {
         return {
@@ -202,6 +202,7 @@ export default {
                     this.imgHeighthotssdevice = (this.$refs.hotssdevicerefbox[0].offsetWidth) * 3 / 4
                 }
         })
+        this.getHFNumFeach()
     },
     methods: {
         getPlayeList() {
@@ -209,6 +210,23 @@ export default {
                 this.playeListData = res.data.list
             }).catch(err => {
                 this.$Message.error(err.message);
+            })
+        },
+        getHFNumFeach () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                this.changeisLogin(false)
+                return
+            }
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id
+            }
+            ajaxHttp.getReplyNumFeath(data).then(res => {
+                this.changeReplyNum(res.data.reply_num)
+            }).catch(err => {
+                console.log(err)
             })
         },
         getPlayeImgList () {
@@ -319,7 +337,9 @@ export default {
             })
         },
         ...mapMutations([
-            'checkRoutePath'
+            'checkRoutePath',
+            'changeReplyNum',
+            'changeisLogin'
         ]),
     },
     computed: {

@@ -10,16 +10,16 @@
             </div>
         </div>
         <div class="foot_message_box">
-            <div class="js_message_box"> 
+            <div class="js_message_box">
+                <img src="../assets/images/guihui.png" alt="">
+                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32011302320986" class="txt">苏公网安备 32011302320986号</a>
+            </div>
+            <!-- <div class="js_message_box"> 
                 <div class="txt">© 2020 南京锦宏源科技</div>
                 <div class="line"></div>
                 <img src="../assets/images/guohui.png" alt="">
                 <div class="txt">增值电信业务经营许可证：苏A0-00000000</div>
-            </div>
-            <div class="js_message_box">
-                <img src="../assets/images/guihui.png" alt="">
-                <div class="txt">苏公网安备 00000000000000号</div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -49,7 +49,7 @@ export default {
                         path: '/deviceOrSet'
                     },
                     {
-                        txt:'CS GO',
+                        txt:'CS:GO',
                         path: '/deviceOrSet'
                     }
                 ],
@@ -59,7 +59,7 @@ export default {
                         path: '/gamePlayer'
                     },
                     {
-                        txt:'CS GO',
+                        txt:'CS:GO',
                         path: '/gamePlayer'
                     }
                 ],
@@ -92,15 +92,15 @@ export default {
                 [
                     {
                         txt:'法律信息',
-                        path: '/index'
+                        path: '/privacyPage'
                     },
                     {
-                        txt:'服务协议',
-                        path: '/index'
+                        txt:'隐私政策',
+                        path: '/lawMessagePage'
                     },
                     {
-                        txt:'服务政策',
-                        path: '/index'
+                        txt:'法律声明',
+                        path: '/privacyPage'
                     },
                     {
                         txt:'联系我们',

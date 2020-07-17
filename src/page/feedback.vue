@@ -11,6 +11,10 @@
             <div class="btn_box">
                 <button>发布</button>
             </div>
+            <div class="lx_about_me">
+                <div class="txt">联系我们：</div>
+                <a class="txt" href="contact@gamecfg.com">contact@gamecfg.com</a>
+            </div>
         </div>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div class="productPageInfo_container">
-        <deviceOrSet title="CS GO 最佳显示器"></deviceOrSet>
+        <deviceOrSet title="CS:GO 最佳显示器"></deviceOrSet>
         <div class="main_box">
             <div class="intro-box">
                 <div class="articeText">

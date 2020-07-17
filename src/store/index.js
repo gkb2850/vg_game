@@ -10,7 +10,8 @@ export default new Vuex.Store({
         searchPageNum: [],
         searchTxt: '',
         userInfo: '',
-        isLogin: false
+        isLogin: false,
+        replyNum: 0
     },
     mutations: {
         checkRoutePath (state, path) {
@@ -42,6 +43,9 @@ export default new Vuex.Store({
         },
         changeisLogin (state, str) {
             state.isLogin = str
+        },
+        changeReplyNum (state, str) {
+            state.replyNum = str
         }
     },
     getters: {

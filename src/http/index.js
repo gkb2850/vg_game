@@ -2,6 +2,7 @@ import Qs from 'qs';
 import Vue from 'vue'
 import { Message } from 'view-design';
 import 'view-design/dist/styles/iview.css';
+import router from '../router'
 
 // 配置API接口地址
 var root = process.env.API_ROOT || process.env.ENV_CONFIG.API_ROOT
@@ -45,14 +46,14 @@ function apiAxios (method, url, params={}) {
             if (res.data.code === 1) {
                 resolve(res.data)
             } else if (res.data.code === -1) {//需要登录
-              Message.error('登陆超时，请重新登录')
               localStorage.removeItem('userInfo')
-              if (this.$route.path !== '/index') {
-                this.$router.push('/index')
-              } 
+              router.push('/index');
+              reject(res.data)
             } else {
               reject(res.data)
             }
+            console.log(res.data)
+
           }).catch(function (err) {
             reject(err.data)
           })

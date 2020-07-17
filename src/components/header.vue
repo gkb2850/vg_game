@@ -8,12 +8,12 @@
             </div>
             <a v-else class="txt_box">
                 <div class="message_txt_user" @click="toMyPage" @mousemove="toSeeMessageNum('in')" @mouseleave="toSeeMessageNum('out')">{{userName}}
-                    <div class="rigint_num_txt">99+</div>
-                    <div class="mask_num_box" v-if="specificMessageShow" @click.stop="toSeeMyComment">
+                    <div class="rigint_num_txt" v-if="replyNum > 0">{{replyNum > 99 ? '99+' : replyNum}}</div>
+                    <div class="mask_num_box" v-if="specificMessageShow && replyNum > 0" @click.stop="toSeeMyComment">
                         <img src="../assets/images/message_bg.png" alt="">
                         <div class="txt_num_box">
                             <div>收到的评论</div>
-                            <div>100</div>
+                            <div>{{replyNum}}</div>
                         </div>
                     </div>
                 </div>
@@ -28,10 +28,10 @@
                 <div class="header_nav_mask" v-if="navIndexShow" @mousemove="hideLabelsBox"></div>
                 <div class="nav_txt" v-for="(item, index) in navData" :key="index">
                     <router-link class="nav_link" :to="index !== 3 ? item.path: ''">
-                        <span :class="{active: navIndexTop === index, moveActive: navIndexTopMove === index}" @click="toNavClick(index)" @mousemove="toNavMove(index)" @mouseleave="toNavMove(999)">{{item.txt}}</span>
+                        <span :class="{active: navIndexTop === index, moveActive: navIndexTopMove === index}" @click="toNavClick(index)" @mousemove="toNavMove(index)" @mouseleave="toNavMove(-1)">{{item.txt}}</span>
                         <div class="labels_box" v-if="index === 3 && navIndexShow">
                             <div :class="{item_box: true, active: llabelIndex === 0}" @mousemove="labelNavClick('first')">2020年最佳设备</div>
-                            <div :class="{item_box: true, active: llabelIndex === 1}" @mousemove="labelNavClick('second')">CS GO最佳设备</div>
+                            <div :class="{item_box: true, active: llabelIndex === 1}" @mousemove="labelNavClick('second')">CS:GO最佳设备</div>
                             <div class="llable_box">
                                 <div :class="{itxt: true, active: secondLabelIndex === indexs ? true : false}" v-for="(item, indexs) in deiceListData" :key="indexs" @click="toSeeDevicInfo(item, indexs)">{{item.title}}</div>
                             </div>
@@ -158,11 +158,11 @@ export default {
                     path: '/index'
                 },
                 {
-                    txt: 'CS GO数据',
+                    txt: 'CS:GO数据',
                     path: '/deviceOrSet'
                 },
                 {
-                    txt: 'CS GO选手',
+                    txt: 'CS:GO选手',
                     path: '/gamePlayer'
                 },
                 {
@@ -364,6 +364,11 @@ export default {
         },
         toNavMove (index) {
             this.navIndexTopMove = index
+            if (index === 3) {
+                this.navIndexShow = true
+            } else if (index !== -1) {
+                this.navIndexShow = false
+            }
         },
         hideLabelsBox () {
             this.navIndexShow = false
@@ -423,6 +428,7 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
             if (!userInfo) {
                 this.$Message.error('用户状态失效，请重新登录')
+                this.changeisLogin(false)
                 if (this.$route.path !== '/index') {
                     this.$router.push('/index')
                 }
@@ -440,14 +446,32 @@ export default {
             })
         },
         sureLoginOut () {
-            this.loginOutBoxShow = false
-            localStorage.removeItem('userInfo')
-            this.changeisLogin(false)
-            if (this.$route.path !== '/index') {
-                this.$router.push({
-                    path: '/index'
-                })
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                if (this.$route.path !== '/index') {
+                    this.$router.push('/index')
+                }
+                this.loginOutBoxShow = false
+                this.changeisLogin(false)
+                return
             }
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id
+            }
+            ajaxHttp.loginOutFeath(data).then(res => {
+                this.loginOutBoxShow = false
+                localStorage.removeItem('userInfo')
+                this.changeisLogin(false)
+                if (this.$route.path !== '/index') {
+                    this.$router.push({
+                        path: '/index'
+                    })
+                }
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
         },
         toLoginOut () {
             this.loginOutBoxShow = true
@@ -481,7 +505,8 @@ export default {
     computed: {
         ...mapState({
             navIndexTops: 'navTLabelIndex',
-            isLogin: 'isLogin'
+            isLogin: 'isLogin',
+            replyNum: 'replyNum'
         })
     },
     watch: {

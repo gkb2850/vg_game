@@ -12,6 +12,8 @@ import feedback from '@/page/feedback'
 import productPageInfo from '@/page/productPageInfo'
 import answerInfoPage from '@/page/answerInfoPage'
 import searchPage from '@/page/searchPage'
+import privacyPage from '@/page/privacyPage'
+import lawMessagePage from '@/page/lawMessagePage'
 
 Vue.use(Router)
 
@@ -86,6 +88,16 @@ const router = new Router({
       path: '/searchPage',
       name: 'searchPage',
       component: searchPage
+    },
+    {
+      path:'/privacyPage',
+      name: 'privacyPage',
+      component: privacyPage
+    },
+    {
+      path: '/lawMessagePage',
+      name: 'lawMessagePage',
+      component: lawMessagePage
     }
   ],
   scrollBehavior (to, from, savedPosition) {

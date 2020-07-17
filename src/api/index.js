@@ -27,4 +27,8 @@ export default {
     updateUserImgFeath: (data) => apiAxios('POST', '/api/user/updateAvatar', data),//更新用户头像
     changePassFeath: (data) => apiAxios('POST', '/api/user/changePasswd', data),//修改密码
     gameCuideFeath: (data) => apiAxios('POST', '/api/player/gameGuide', data),//csgo游戏信息指导
+    getReplyNumFeath: (data) => apiAxios('POST', '/api/user/get_reply_num', data),//回复数量
+    loginOutFeath: (data) => apiAxios('POST', '/api/user/login_out', data),//注销token
+    getReplyListFeath: (data) => apiAxios('POST', '/api/comment/get_reply_list', data),//回复列
+    reportMessageFeath: (data) => apiAxios('POST', '/api/comment/report', data),//举报评论
 }

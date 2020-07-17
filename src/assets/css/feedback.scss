@@ -26,7 +26,7 @@
         .textarea_txt {
             background:rgba(237,235,239,1);
             border-radius:6px;
-            border:3px solid rgba(201,194,208,1);
+            border:2px solid rgba(201,194,208,1);
             height: 300px;
             padding: 28px;
             box-sizing: border-box;
@@ -42,7 +42,7 @@
         .input_txt {
             background:rgba(237,235,239,1);
             border-radius:6px;
-            border:3px solid rgba(201,194,208,1);
+            border:2px solid rgba(201,194,208,1);
             padding: 27px 28px;
             box-sizing: border-box;
             height: 76px;
@@ -74,6 +74,10 @@
                 color:rgba(255,255,255,1);
                 width: 180px;
             }
+        }
+        .lx_about_me {
+            display: flex;
+            margin-bottom: 30px;
         }
     }
 }

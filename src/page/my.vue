@@ -16,7 +16,7 @@
                 <div class="r_cont_box">
                     <div class="user_data_box">
                         <div class="title_box">
-                            <div class="l_name">{{lNavIndex === '1' ? '我的资料' : lNavIndex === '2' ? '发出的评论' : lNavIndex === '2' ? '收到的评论' : '头像设置'}}</div>
+                            <div class="l_name">{{lNavIndex === '1' ? '我的资料' : lNavIndex === '2' ? '发出的评论' : lNavIndex === '3' ? '收到的评论' : '头像设置'}}</div>
                             <!-- <div class="a_btn_box">
                                 <a class="bj_btn" v-if="lNavIndex === '2'" href="javascript:;" @click="toEnidMessage">{{radioShowBtn?'删除':'编辑'}}</a>
                                 <a class="bj_btn" v-if="radioShowBtn && lNavIndex === '2'" href="javascript:;" @click="toEnidChangeSuccess">完成</a>
@@ -130,74 +130,54 @@
                         </div>
                         <div class="c_box" v-if="lNavIndex === '2'">
                             <div class="message_user_box">
-                                <!-- <div class="trem_box" v-for="(item, index) in userCommentList" :key="index">
-                                    <div class="people_box">
-                                        <div class="l_box">
-                                            <img class="people_img" :src="item.acatar" alt="">
-                                        </div>
-                                        <div class="r_box">
-                                            <div class="name">{{item.user_title}}</div>
-                                            <div class="time_box">
-                                                <div class="t_txt">{{item.add_time}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="rr_box" v-if="radioShowBtn">
-                                            <input type="radio" :checked="item.radioShow" @click="radioChange(index)">
-                                        </div>
-                                    </div>
-                                    <div class="message_box">
-                                        <img class="l_icon" src="" alt="">
-                                        <div class="txt_box">{{item.content}}</div>
-                                    </div>
-                                </div> -->
-                                <div class="trem_box">
+                                <div class="trem_box" v-for="(item, index) in userCommentList" :key="index">
                                     <div class="title_box">
                                         <div class="l_box">
-                                            <div class="name">柠檬茶</div>    
-                                            <div class="time">2020-07-09</div>    
+                                            <div class="name">{{item.user_title}}</div>    
+                                            <div class="time">{{item.add_time}}</div>    
                                         </div>
                                         <div class="r_box">
-                                            <a class="txt_a" href="javascript:;" @click="toSeeMessageBox">删除</a>    
+                                            <a class="txt_a_btn" href="javascript:;" @click="toSeeMessageBox(item.comment_id)">删除</a>    
                                         </div>   
                                     </div>
                                     <div class="setout_message_box">
-                                        <span class="fh_txt">回复<span class="people_name">益禾堂</span></span>
-                                        <span class="my_fh_message">：啦啦啦啦啦啦啦啦啦</span>
+                                        <span class="fh_txt" v-if="item.comment_type !== 2">回复<span class="people_name">{{item.parent_user_title}}</span>：</span>
+                                        <span class="my_fh_message">{{item.content}}</span>
                                     </div>
                                     <div class="comment_main">
-                                        <span class="f_txt">益禾堂的评论:</span>
-                                        <span class="c_txt">这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶</span>
+                                        <span class="f_txt">{{item.comment_type === 2 ? '评论此文章' : item.parent_user_title + '的评论'}}</span>
+                                        <span class="c_txt">{{item.comment_type === 2 ? item.article_title : item.parent_content}}</span>
                                     </div>
                                 </div>
                                 <div class="page_big_box">
-                                    <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage" :limit="limit"></pageItem>
+                                    <pageItem v-if="pageNumDataF.length" :pageNumData="pageNumDataF" @changePage="changePage" :limit="limitF"></pageItem>
                                 </div>
                             </div>
                         </div>
                         <div class="c_box" v-if="lNavIndex === '3'">
                             <div class="message_user_box">
-                                <div class="trem_box">
+                                <div class="trem_box" v-for="(item, index) in hfMessageList" :key="index">
                                     <div class="title_box">
                                         <div class="l_box">
-                                            <div class="name">柠檬茶</div>    
-                                            <div class="time">2020-07-09</div>    
+                                            <div class="name">{{item.user_title}}</div>    
+                                            <div class="time">{{item.add_time}}</div>
                                         </div>
-                                        <div class="r_box" @mousemove="jbBtnMove('in')" @mouseleave="jbBtnMove('out')">
+                                        <div class="r_box" @mousemove="jbBtnMove(index)" @mouseleave="jbBtnMove(-1)" v-if="item.report !== 1">
                                             <img :src="bjBtnActive ? jbBtnImgActive : jbBtnImg" alt="">
-                                            <a class="btn" href="javascript:;" v-if="bjBtnActive">举报</a>   
+                                            <a class="btn" href="javascript:;" v-if="bjBtnActive === index" @click="toJBMessages(item)">举报</a>   
                                         </div>   
                                     </div>
                                     <div class="setout_message_box">
-                                        <span class="fh_txt">回复<span class="people_name">益禾堂</span></span>
-                                        <span class="my_fh_message">：啦啦啦啦啦啦啦啦啦</span>
+                                        <span class="fh_txt">回复<span class="people_name">{{item.parent_user_title}}</span></span>
+                                        <span class="my_fh_message">：{{item.content}}</span>
                                     </div>
                                     <div class="comment_main">
-                                        <span class="f_txt">益禾堂的评论:</span>
-                                        <span class="c_txt">这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶这是中国的奶茶</span>
+                                        <span class="f_txt">{{item.parent_user_title}}的评论:</span>
+                                        <span class="c_txt">{{item.parent_content}}</span>
                                     </div>
                                 </div>
                                 <div class="page_big_box">
-                                    <pageItem v-if="pageNumData.length" :pageNumData="pageNumData" @changePage="changePage" :limit="limit"></pageItem>
+                                    <pageItem v-if="pageNumDataS.length" :pageNumData="pageNumDataS" @changePages="changePages" :limit="limitS" ItemIdex='2'></pageItem>
                                 </div>
                             </div>
                         </div>
@@ -236,12 +216,21 @@
         class-name="vertical-center-modal">
         <p>确定退出登陆吗？</p>
     </Modal> -->
-    <div class="message_mask_box" @mousewheel.prevent v-if="messageBoxMaskShow" @click="tohideMessageBox">
+    <div class="message_mask_box" @mousewheel.prevent v-if="messageBoxMaskShow">
         <div class="cont_box">
             <div class="title">确定要删除该回复么？</div>
             <div class="btn_box">
-                <button>确定</button>
-                <button>取消</button>
+                <button @click.stop="toSureDelMessageUser">确定</button>
+                <button @click="tohideMessageBox">取消</button>
+            </div>
+        </div>
+    </div>
+    <div class="message_mask_box" @mousewheel.prevent v-if="messageBoxJBMaskShow">
+        <div class="cont_box">
+            <div class="title">确定要举报该评论么？</div>
+            <div class="btn_box">
+                <button @click.stop="reportToMessageChange">确定</button>
+                <button @click="tohideMessageBoxJB">取消</button>
             </div>
         </div>
     </div>
@@ -270,11 +259,14 @@ export default {
         return {
             jbBtnImgActive: require('../assets/images/jt_tobot_active_icon.png'),
             jbBtnImg: require('../assets/images/jt_tobot_icon.png'),
-            bjBtnActive: false,
+            bjBtnActive: -1,
             radiotxtBtn: true,
-            pageNumData:[],
-            page: 1,
-            limit: 4,
+            pageNumDataF:[],
+            pageNumDataS:[],
+            pageF: 1,
+            limitF: 4,
+            pageS: 1,
+            limitS: 4,
             lNavIndex: '1',
             userCommentList:[],
             radioShowBtn: false,
@@ -293,7 +285,11 @@ export default {
             loginOutBoxShow: false,
             userPassShow: true,
             password: '',
-            messageBoxMaskShow: false
+            messageBoxMaskShow: false,
+            hfMessageList: [],
+            userCommentId: '',
+            userMessageCommentId: '',
+            messageBoxJBMaskShow: false
         }
     },
     components: {
@@ -308,14 +304,15 @@ export default {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
             if (!userInfo) {
                 this.$Message.error('用户状态失效，请重新登录')
+                this.changeisLogin(false)
                 this.$router.push('/index')
                 return
             }
             let data = {
                 token: userInfo.token,
                 user_id: userInfo.user_id,
-                page: this.page,
-                limit: this.limit
+                page: this.pageF,
+                limit: this.limitF
             }
             ajaxHttp.usercommenFeath(data).then(res => {
                 let data = res.data.list
@@ -323,13 +320,13 @@ export default {
                     i.radioShow = false
                 });
                 this.userCommentList = data
-                this.pageNumData = []
+                this.pageNumDataF = []
                 if (res.data.total > 4) {
                     for (let i = 1; i< Math.ceil((res.data.total)/4) + 1;i++){
-                        this.pageNumData.push(i)
+                        this.pageNumDataF.push(i)
                     }
                 } else if (res.data.total > 0 && res.data.total <= 4) {
-                    this.pageNumData.push(1)
+                    this.pageNumDataF.push(1)
                 }
             }).catch(err => {
                 this.$Message.error(err.message)
@@ -345,11 +342,18 @@ export default {
             }
         },
         changePage (e) {
-            if (this.page === e) {
+            if (this.pageF === e) {
                 return
             }
-            this.page = e
+            this.pageF = e
             this.getUserCommentList()
+        },
+        changePages (e) {
+            if (this.pageS === e) {
+                return
+            }
+            this.pageS = e
+            this.getHFMessageList()
         },
         lNavTitleChange (str) {
             this.lNavIndex = str
@@ -357,6 +361,8 @@ export default {
                 this.getUserCommentList();
             } else if (str === '1') {
                 this.getUserInfoToHttp();
+            } else if (str === '3') {
+                this.getHFMessageList();
             }
         },
         // toEnidMessage () {
@@ -587,10 +593,27 @@ export default {
             this.loginOutBoxShow = true
         },
         sureLoginOut () {
-            this.loginOutBoxShow = false
-            localStorage.removeItem('userInfo')
-            this.changeisLogin(false)
-            this.$router.push('/index')
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                this.$router.push('/index')
+                this.loginOutBoxShow = false
+                this.changeisLogin(false)
+                return
+            }
+
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id
+            }
+            ajaxHttp.loginOutFeath(data).then(res => {
+                this.loginOutBoxShow = false
+                localStorage.removeItem('userInfo')
+                this.changeisLogin(false)
+                this.$router.push({path: '/index'})
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
         },
         tohideLoginOutBox () {
             this.loginOutBoxShow = false
@@ -624,18 +647,95 @@ export default {
                 this.$Message.warning('你暂未添加图片')
             }
         },
-        toSeeMessageBox () {
+        toSeeMessageBox (id) {
             this.messageBoxMaskShow = true
+            this.userCommentId = id
         },
         tohideMessageBox () {
             this.messageBoxMaskShow = false
         },
-        jbBtnMove (str) {
-            if (str === 'in') {
-                this.bjBtnActive = true
-            } else {
-                this.bjBtnActive = false
+        tohideMessageBoxJB () {
+            this.messageBoxJBMaskShow = false
+        },
+        jbBtnMove (index) {
+            this.bjBtnActive = index
+        },
+        getHFMessageList () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                this.$router.push('/index')
+                this.changeisLogin(false)
+                return
             }
+
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id,
+                page: this.pageS,
+                limit: this.limitS
+            }
+            ajaxHttp.getReplyListFeath(data).then(res => {
+                console.log(res)
+                this.hfMessageList = res.data.list
+                this.pageNumDataS = []
+                if (res.data.total > 4) {
+                    for (let i = 1; i< Math.ceil((res.data.total)/4) + 1;i++){
+                        this.pageNumDataS.push(i)
+                    }
+                } else if (res.data.total > 0 && res.data.total <= 4) {
+                    this.pageNumDataS.push(1)
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+        toSureDelMessageUser () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                this.changeisLogin(false)
+                this.$router.push('/index')
+                return
+            }
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id,
+                comment_id: this.userCommentId
+            }
+            ajaxHttp.delCommentInfoFeath(data).then(res => {
+                this.$Message.success('删除成功')
+                this.messageBoxMaskShow = false
+                this.getUserCommentList()
+            }).catch(err => {
+                this.messageBoxMaskShow = false
+                this.$Message.error(err.message)
+            })
+        },
+        toJBMessages (item) {
+            this.userMessageCommentId = item.comment_id
+            this.messageBoxJBMaskShow = true
+        },
+        reportToMessageChange () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                this.changeisLogin(false)
+                this.$router.push('/index')
+                return
+            }
+            this.messageBoxJBMaskShow = false
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id,
+                comment_id: this.userMessageCommentId
+            }
+            ajaxHttp.reportMessageFeath(data).then(res => {
+                this.$Message.error('举报成功')
+                this.getHFMessageList()
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
         },
          ...mapMutations([
             'changeisLogin'

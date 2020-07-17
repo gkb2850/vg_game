@@ -108,7 +108,7 @@
             </div>
             <div class="comment_message_box">
                 <div v-if="messageTotal > 0">
-                    <div class="title">关于CS GO设备与设置的评论 ({{messageTotal}}条)</div>
+                    <div class="title">关于CS:GO设备与设置的评论 ({{messageTotal}}条)</div>
                     <div class="cont_box">
                         <div class="trem_box" v-for="(item, index) in commentListData" :key="index">
                             <div class="people_box">
@@ -125,6 +125,10 @@
                                         <a href="javascript:;" @click="toTalkPeople(index)">回复Ta</a>
                                     </div>
                                 </div>
+                                <div class="rs_box" @mousemove="jbBtnMove(index)" @mouseleave="jbBtnMove(-1)" v-if="item.report !== 1">
+                                    <img :src="bjBtnActive ? jbBtnImgActive : jbBtnImg" alt="">
+                                    <a class="btn" href="javascript:;" v-if="bjBtnActive === index" @click="toJBMessages(item)">举报</a>   
+                                </div> 
                             </div>
                             <div class="message_box">
                                 <img class="l_icon" src="../assets/images/dsj_icon.png" alt="">
@@ -148,6 +152,15 @@
                 </div>
             </div>
         </div>
+        <div class="message_mask_box" @mousewheel.prevent v-if="messageBoxJBMaskShow">
+            <div class="cont_box">
+                <div class="title">确定要举报该评论么？</div>
+                <div class="btn_box">
+                    <button @click.stop="reportToMessageChange">确定</button>
+                    <button @click="tohideMessageBoxJB">取消</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -160,6 +173,8 @@ import {mapMutations} from 'vuex';
 export default {
     data() {
         return {
+            jbBtnImgActive: require('../assets/images/jt_tobot_active_icon.png'),
+            jbBtnImg: require('../assets/images/jt_tobot_icon.png'),
             pageNumData: [],
             deviceId: "",
             page: 1,
@@ -169,7 +184,10 @@ export default {
             messagePeopleTxt: "",
             messageTxt: "",
             messageTotal: 0,
-            assessmentData: ""
+            assessmentData: "",
+            bjBtnActive: -1,
+            userMessageCommentId: '',
+            messageBoxJBMaskShow: false
         };
     },
     components: {
@@ -290,6 +308,37 @@ export default {
             }
             this.page = e
             this.getCommentList()
+        },
+        jbBtnMove (index) {
+            this.bjBtnActive = index
+        },
+        toJBMessages (item) {
+            this.userMessageCommentId = item.comment_id
+            this.messageBoxJBMaskShow = true
+        },
+        reportToMessageChange () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                this.changeisLogin(false)
+                this.$router.push('/index')
+                return
+            }
+            this.messageBoxJBMaskShow = false
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id,
+                comment_id: this.userMessageCommentId
+            }
+            ajaxHttp.reportMessageFeath(data).then(res => {
+                this.$Message.error('举报成功')
+                this.getCommentList()
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        tohideMessageBoxJB () {
+            this.messageBoxJBMaskShow = false
         },
         ...mapMutations([
             'checkRoutePath'

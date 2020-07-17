@@ -6,7 +6,7 @@
                 <div class="trem_box" v-for="(item, index) in searchData.list" :key="index" @click="setDeviceInfo(item)">
                     <div class="img_header" :style="{height: imgHeight + 'px'}">
                         <img :src="item.img" alt="" :style="{height: imgHeight + 'px', width: item.type === 'player' ? '100%' : imgWidths + 'px'}" ref="peoplerefbox">
-                        <div class="top_name">CS GO</div>
+                        <div class="top_name">CS:GO</div>
                     </div>
                     <div class="c_box">
                         <div class="zd_name">{{item.title}}</div>
