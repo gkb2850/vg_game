@@ -11,6 +11,10 @@
         </div>
         <div class="foot_message_box">
             <div class="js_message_box">
+                <img src="../assets/images/guohui.png" alt="">
+                <a target="_blank" href="http://www.beian.miit.gov.cn" class="txt">苏ICP备20031555号-2</a>
+            </div>
+            <div class="js_message_box">
                 <img src="../assets/images/guihui.png" alt="">
                 <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32011302320986" class="txt">苏公网安备 32011302320986号</a>
             </div>
@@ -65,7 +69,7 @@ export default {
                 ],
                 [
                     {
-                        txt:'最新装备',
+                        txt:'最佳装备',
                         path: '/index'
                     },
                     {
@@ -154,8 +158,8 @@ export default {
             background: #191320;
             height: 65px;
             display: flex;
-            flex-direction: column;
             justify-content: center;
+            align-items: center;
             .js_message {
                 height: 20px;
                 line-height: 20px;
@@ -167,7 +171,7 @@ export default {
             }
             .js_message_box {
                 height: 30px;
-                display: flex;
+                display: inline-flex;
                 align-items: center;
                 justify-content: center;
                 img {
@@ -189,6 +193,9 @@ export default {
                     background: #fff;
                     margin: 0 10px;
                 }
+            }
+            .js_message_box:first-child {
+                margin-right: 10px;
             }
         }
         
