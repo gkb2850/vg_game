@@ -64,10 +64,10 @@
                         <div class="line"></div>
                         <input type="number" placeholder="手机号" class="input_txt" v-model="registerData.phone" @change="registerPhoneInput" @keydown="handleRegisterPhoneInput">
                     </div>
-                    <!-- <div class="item_box">
-                        <input type="text" placeholder="请输入6位短信验证码" class="input_txt">
-                        <button>获取短信验证码</button>
-                    </div> -->
+                    <div class="item_box">
+                        <input type="text" placeholder="请输入6位短信验证码" class="input_txt" v-model="registerData.yzCode">
+                        <button @click="getRegisterCode">获取短信验证码</button>
+                    </div>
                     <div class="item_box">
                         <input type="password" placeholder="8-20位密码" class="input_txt" v-model="registerData.pass" @change="registerPassInput">
                     </div>
@@ -87,19 +87,19 @@
             <div class="mask_bg"></div>
             <div class="cont_box">
                 <div class="title_box">
-                    <!-- <a href="javascript:;" class="item_box">
-                        <div class="txt">免密码登录</div>
-                        <div class="line"></div>
-                    </a> -->
-                    <a href="javascript:;" class="item_box">
-                        <div class="txt active">密码登录</div>
-                        <div class="line"></div>
+                    <a href="javascript:;" class="item_box" @click="ChangeloginType(0)">
+                        <div :class="{txt: true, active: loginType === 0}">免密码登录</div>
+                        <div class="line" v-if="loginType === 0"></div>
+                    </a>
+                    <a href="javascript:;" class="item_box" @click="ChangeloginType(1)">
+                        <div :class="{txt: true, active: loginType === 1}">密码登录</div>
+                        <div class="line" v-if="loginType === 1"></div>
                     </a>
                     <a href="javascript:;" class="del_btn"  @click="loginBoxShow('hide')">
                         <img src="../assets/images/del_icon.png" alt="">
                     </a>
                 </div>
-                <div class="c_box" v-if="true">
+                <div class="c_box" v-if="loginType === 1">
                     <div class="c_trem_box">
                         <input type="number" placeholder="手机号" class="input_txt" v-model="loginData.phone" @blur="loginPhoneChange" @keydown="handleLoginPhoneInput">
                     </div>
@@ -114,11 +114,11 @@
                     <div class="phone_box">
                         <div class="h_txt">中国 +86</div>
                         <div class="line"></div>
-                        <input type="number" placeholder="手机号" class="input_txt">
+                        <input type="number" placeholder="手机号" class="input_txt" v-model="loginData.phone" @blur="loginPhoneChange" @keydown="handleLoginPhoneInput">
                     </div>
                     <div class="item_box">
-                        <input type="password" placeholder="请输入6位短信验证码" class="input_txt">
-                        <button>获取短信验证码</button>
+                        <input type="text" placeholder="请输入6位短信验证码" class="input_txt" v-model="loginData.yzCode">
+                        <button @click="togetMessgeCode">获取短信验证码</button>
                     </div>
                     <div class="other_item">
                         <div class="txt">社交账号登录</div>
@@ -182,13 +182,15 @@ export default {
             registerData: {
                 phone: '',
                 pass:'',
-                title: ''
+                title: '',
+                yzCode: ''
             },
             loginBoxShowStutas: false,
             registerBoxShowStutas: false,
             loginData: {
                 phone:'',
-                pass:''
+                pass:'',
+                yzCode: ''
             },
             deiceListData: [],
             llabelIndex: 0,
@@ -199,7 +201,8 @@ export default {
             navIndexTopMove: -1,
             userName: '',
             loginOutBoxShow: false,
-            specificMessageShow: false
+            specificMessageShow: false,
+            loginType: 0
         }
     },
     created () {
@@ -275,6 +278,10 @@ export default {
                 this.$Message.warning('请输入手机号!')
                 return
             }
+            if (this.registerData.yzCode === '') {
+                this.$Message.warning('请输入验证码!')
+                return
+            }
             if (this.registerData.pass === '') {
                 this.$Message.warning('请填写密码!')
                 return
@@ -282,7 +289,9 @@ export default {
             let data = {
                 mobile: this.registerData.phone,
                 title: this.registerData.title,
-                passwd: this.registerData.pass
+                passwd: this.registerData.pass,
+                type: 1,
+                code: this.registerData.yzCode
             }
             ajaxHttp.registerFeath(data).then(res => {
                 this.$Message.success('注册成功')
@@ -312,30 +321,93 @@ export default {
                 this.registerData.pass = ''
             }
         },
-        toLogin () {
+        getRegisterCode () {
+            if (this.registerData.phone === '') {
+                this.$Message.warning('请输入手机号!')
+                return
+            }
+            let data = {
+                mobile: this.registerData.phone
+            }
+            ajaxHttp.getMessageCodeFeath(data).then(res => {
+                console.log(res)
+                this.$Message.error('发送成功')
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
+        togetMessgeCode () {
             if (this.loginData.phone === '') {
                 this.$Message.warning('请输入手机号!')
                 return
             }
-            if (this.loginData.pass === '') {
-                this.$Message.warning('请填写密码!')
-                return
-            }
             let data = {
-                mobile: this.loginData.phone,
-                passwd: this.loginData.pass
+                mobile: this.loginData.phone
             }
-            ajaxHttp.loginFeath(data).then(res => {
-                this.$Message.success('登录成功')
-                localStorage.setItem('userInfo', JSON.stringify(res.data))
-                this.loginBoxShowStutas = false
-                this.changeisLogin(true)
-                this.changeUserInfo(res.data)
-                this.getUserInfoToHttp()
+            ajaxHttp.getMessageCodeFeath(data).then(res => {
+                console.log(res)
+                this.$Message.error('发送成功')
             }).catch(err => {
                 this.$Message.error(err.message)
-                
             })
+        },
+        ChangeloginType (index) {
+            this.loginType = index
+            this.loginData.phone = ''
+        },
+        toLogin () {
+            if (this.loginType === 0) {
+                if (this.loginData.phone === '') {
+                    this.$Message.warning('请输入手机号!')
+                    return
+                }
+                if (this.loginData.yzCode === '') {
+                    this.$Message.warning('请填写验证码!')
+                    return
+                }
+                let data = {
+                    mobile: this.loginData.phone,
+                    passwd:'',
+                    type: 1,
+                    code: thsi.loginData.yzCode
+                }
+                ajaxHttp.loginFeath(data).then(res => {
+                    this.$Message.success('登录成功')
+                    localStorage.setItem('userInfo', JSON.stringify(res.data))
+                    this.loginBoxShowStutas = false
+                    this.changeisLogin(true)
+                    this.changeUserInfo(res.data)
+                    this.getUserInfoToHttp()
+                }).catch(err => {
+                    this.$Message.error(err.message)
+                })
+
+            } else {
+                if (this.loginData.phone === '') {
+                    this.$Message.warning('请输入手机号!')
+                    return
+                }
+                if (this.loginData.pass === '') {
+                    this.$Message.warning('请填写密码!')
+                    return
+                }
+                let data = {
+                    mobile: this.loginData.phone,
+                    passwd: this.loginData.pass,
+                    type: 0,
+                    code: ''
+                }
+                ajaxHttp.loginFeath(data).then(res => {
+                    this.$Message.success('登录成功')
+                    localStorage.setItem('userInfo', JSON.stringify(res.data))
+                    this.loginBoxShowStutas = false
+                    this.changeisLogin(true)
+                    this.changeUserInfo(res.data)
+                    this.getUserInfoToHttp()
+                }).catch(err => {
+                    this.$Message.error(err.message)
+                })
+            }
         },
         toMyPage () {
             let path = this.$route.path
@@ -1027,7 +1099,7 @@ export default {
                         display: flex;
                         justify-content: flex-end;
                         align-items: center;
-                        padding-top: 6px;
+                        padding-top: 15px;
                         .txta {
                             height:25px;
                             font-size:18px;

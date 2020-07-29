@@ -31,4 +31,6 @@ export default {
     loginOutFeath: (data) => apiAxios('POST', '/api/user/login_out', data),//注销token
     getReplyListFeath: (data) => apiAxios('POST', '/api/comment/get_reply_list', data),//回复列
     reportMessageFeath: (data) => apiAxios('POST', '/api/comment/report', data),//举报评论
+    submitFeedbackFeath: (data) => apiAxios('POST', '/api/user/feedback', data),//反馈
+    getMessageCodeFeath: (data) => apiAxios('POST', '/api/user/codeSend', data),//验证码发送
 }
