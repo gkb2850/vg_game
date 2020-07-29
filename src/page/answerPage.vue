@@ -6,7 +6,7 @@
                 <a :class="{trem_box:true, moveActive: itemBoxIndex === index}" v-for="(item, index) in questionList" :key="index" @click="toSeeQuestionInfo(item)" @mousemove="toSeeQuestionMove(index)" @mouseleave="toSeeQuestionMove(-1)">
                     <div class="title">{{item.title}}</div>
                     <div class="c_box">
-                        <div class="c_txt">{{item.content}}</div>
+                        <div class="c_txt">{{item.simple_content}}</div>
                         <div class="bot_box">
                             <div class="txt">{{item.add_time}}</div>
                             <div class="line"></div>

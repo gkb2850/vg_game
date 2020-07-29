@@ -7,5 +7,5 @@ module.exports = merge(prodEnv, {
   ENV_CONFIG:"'dev'",
   HOST:'"http://www.baidu   .com"',
   // API_ROOT:'"https://game.njjhy.tech/"',
-  API_ROOT:'"https://njjhy.tech/game_console/public/index.php"'
+  API_ROOT:'"https://gamecfg.com/game_console/public/index.php"'
 })

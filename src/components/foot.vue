@@ -123,19 +123,19 @@ export default {
             padding-bottom: 10px;
             box-sizing: border-box;
             background: #281C34;
-            padding: 40px 150px;
+            padding: 50px 150px;
             display: flex;
             .item_box {
                 flex: 1;
                 overflow: hidden;
                 .foot_nav {
-                    height: 40px;
-                    margin-bottom: 5px;
+                    height: 17px;
+                    margin-bottom: 15px;
                     .nav_link {
                         text-decoration: none;
                         span {
                             height: 100%;
-                            line-height: 40px;
+                            line-height: 17px;
                             font-size:12px;
                             font-family:PingFangSC-Medium,PingFang SC;
                             font-weight:500;
@@ -147,7 +147,12 @@ export default {
                     }
                 }
                 .foot_nav:first-child {
-                    margin-bottom: 15px;
+                    margin-bottom: 20px;
+                    height: 20px;
+                    span {
+                        font-size: 14px;
+                        line-height: 20px;
+                    }
                 }
             }
             .item_box:last-child {
@@ -156,7 +161,7 @@ export default {
         }
         .foot_message_box {
             background: #191320;
-            height: 65px;
+            height: 68px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -175,14 +180,14 @@ export default {
                 align-items: center;
                 justify-content: center;
                 img {
-                    height: 15px;
-                    width: 15px;
+                    height: 25px;
+                    width: 28px;
                     margin-right: 5px;
                 }
                 .txt {
                     height: 20px;
                     line-height: 20px;
-                    font-size:12px;
+                    font-size:14px;
                     font-family:PingFangSC-Medium,PingFang SC;
                     font-weight:500;
                     color:rgba(255,255,255,1);
@@ -191,7 +196,7 @@ export default {
                     height: 14px;
                     width: 1px;
                     background: #fff;
-                    margin: 0 10px;
+                    margin: 0 11px;
                 }
             }
             .js_message_box:first-child {

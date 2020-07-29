@@ -1,7 +1,7 @@
 <template>
     <div class="index_container">
         <div class="title_box">
-            <img class="t_img" src="../assets/images/title_img.jpg" alt="">
+            <img class="t_img" src="../assets/images/title_img_index.jpg" alt="">
         </div>
         <div class="top_f_box">
             <div class="item_f_box">
