@@ -33,7 +33,7 @@
                             <img class="samll_img" src="../assets/images/yx_icon_bg.png" alt="">
                             <div class="txt_box">
                                 <div class="f_txt">选择自己喜欢的</div>
-                                <div class="s_txt">职业选手用的装备</div>
+                                <div class="s_txt">职业选手用的装备不会差</div>
                             </div>
                         </div>
                     </div>
@@ -65,12 +65,12 @@
                 <div class="main_f_txtbox">
                     <div class="trem_box">
                         <div class="f_txt">共有</div>
-                        <div class="s_txt">399</div>
-                        <div class="t_txt">名职业玩家</div>
+                        <div class="s_txt">431</div>
+                        <div class="t_txt">名职业选手</div>
                     </div>
                     <div class="trem_box">
                         <div class="f_txt">共有</div>
-                        <div class="s_txt">100</div>
+                        <div class="s_txt">107</div>
                         <div class="t_txt">支战队</div>
                     </div>
                     <div class="trem_box">
@@ -88,13 +88,13 @@
                     </div>
                     <div class="r_box">
                         <div class="trem_box">
-                            <div class="title_txt">CS:GO 数据指南</div>
+                            <div class="title_txt">CS:GO 数据</div>
                             <a href="javascript:;" :class="{txt: true, active: lookIndexItem === 0}" @click="toSeeSJInfo" @mousemove="lookItemZNInfo(0)" @mouseleave="lookItemZNInfo(-1)">CS:GO 数据列表</a>
-                            <div class="title_txt">CS:GO 选手指南</div>
+                            <div class="title_txt">CS:GO 选手</div>
                             <a href="javascript:;" :class="{txt: true, active: lookIndexItem === 1}" v-if="gameGuideData.player_list && gameGuideData.player_list.length" @click="toSeePeopleInfo(gameGuideData.player_list[0])" @mousemove="lookItemZNInfo(1)" @mouseleave="lookItemZNInfo(-1)">{{gameGuideData.player_list[0].name}}</a>
                         </div>
                         <div class="trem_box" v-if="gamedevice_listF.length">
-                            <div class="title_txt">CS:GO 装备</div>
+                            <div class="title_txt">CS:GO 设备</div>
                             <a href="javascript:;" @click="toSeeDeciveInfo(item)" @mousemove="lookItemZNInfo(index + 2)" @mouseleave="lookItemZNInfo(-1)" :class="{txt: true, active: lookIndexItem === index + 2}" v-for="(item, index) in gamedevice_listF" :key="index">{{item.title}}</a>
                         </div>
                         <div class="trem_box" v-if="gamedevice_listS.length">
@@ -105,7 +105,7 @@
                 </div>
             </div>
             <div class="main_t_box" v-if="playeImgListData.length"> 
-                <div class="title">热门CS:GO 队员</div>
+                <div class="title">热门 CS:GO 选手</div>
                 <div class="cont">
                     <div :class="{trem_box: true, moveholtActive: playerholtBoxIndex === index}" v-for="(item, index) in playeImgListData" :key="index" @click="seePlayeInfo(item)" @mousemove="seePlayeholtMove(index)" @mouseleave="seePlayeholtMove(999)">
                         <img class="top_img_p" :src="item.img" alt="" :style="{height: imgHeighthotsspeople + 'px'}" ref="hotsspeoplerefbox">
@@ -114,7 +114,7 @@
                 </div>
             </div>
             <div class="main_ff_box" v-if="holdProListData.length">
-                <div class="title">热门CS:GO设备</div>
+                <div class="title">热门 CS:GO 设备</div>
                 <div class="cont">
                     <div :class="{trem_box: true, moveholtProActive: proholtBoxIndex === index}" v-for="(item, index) in holdProListData" :key="index" @click="seeAssessInfo(item)" @mousemove="seeProholtMove(index)" @mouseleave="seeProholtMove(999)">
                         <img class="img_product" :src="item.img" alt="" :style="{height: imgHeighthotssdevice + 'px'}" ref="hotssdevicerefbox">
@@ -123,7 +123,6 @@
                 </div>
             </div>
             <div class="main_fs_box">
-                <div class="title">常见问题</div>
                 <div class="cont">
                     <div class="txt_box">
                         <div class="tit_box">
@@ -214,14 +213,9 @@ export default {
         },
         getHFNumFeach () {
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
-            if (!userInfo) {
-                this.$Message.error('用户状态失效，请重新登录')
-                this.changeisLogin(false)
-                return
-            }
             let data = {
-                token: userInfo.token,
-                user_id: userInfo.user_id
+                token: userInfo ? userInfo.token : '',
+                user_id: userInfo ? userInfo.user_id : ''
             }
             ajaxHttp.getReplyNumFeath(data).then(res => {
                 this.changeReplyNum(res.data.reply_num)

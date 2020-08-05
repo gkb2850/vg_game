@@ -37,22 +37,37 @@
                     </div>
                 </div>
                 <div class="game_sz_info">
-                    <div class="table_info_st">
+                    <div class="table_info_st" v-if="setTabelTitleFirst.length">
                         <div class="title">鼠标设置– ZOWIE FK1 + DIVINA EDITION</div>
-                        <div class="table_title">
-                            <div class="txt" v-for="(item, index) in setTabelTitleFirst.title" :key="index">{{item}}</div>
-                        </div>
-                        <div class="table_cont_txt">
-                            <div class="txt" v-for="(item, index) in setTabelTitleFirst.conttxt" :key="index">{{item}}</div>
+                        <div class="cont_st_box">
+                            <div class="item_box" v-for="(item, index) in setTabelTitleFirst" :key="index">
+                                <div class="t_txt">{{item.title}}</div>
+                                <div class="b_txt">{{item.txt}}</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="table_info_st">
+                    <div class="table_info_st" v-if="setTabelTitleSecond.length">
                         <div class="title">显示器设置– BENQ XL2540</div>
-                        <div class="table_title">
-                            <div class="txt" v-for="(item, index) in setTabelTitleSecond.title" :key="index">{{item}}</div>
+                        <div class="cont_st_box">
+                            <div class="item_box" v-for="(item, index) in setTabelTitleSecond" :key="index">
+                                <div class="t_txt">{{item.title}}</div>
+                                <div class="b_txt">{{item.txt}}</div>
+                            </div>
                         </div>
-                        <div class="table_cont_txt">
-                            <div class="txt" v-for="(item, index) in setTabelTitleSecond.conttxt" :key="index">{{item}}</div>
+                    </div>
+                    <div class="table_info_sts" v-if="setTabelTitleThird.length">
+                        <div class="title">显卡设置</div>
+                        <div class="cont_box_sts">
+                            <div class="small_title">
+                                <!-- <div class="l_txt">高级视频>></div>    
+                                <div class="r_txt">本Qxl6567</div>     -->
+                            </div>
+                            <div class="sts_tabel_box">
+                                <div class="item_txt" v-for="(item, index) in setTabelTitleThird" :key="index">
+                                    <div class="t_txt">{{item.title}}</div>
+                                    <div class="b_txt">{{item.txt}}</div>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                     <div class="str_info_st" v-if="playerInfoData && playerInfoData.info.crosshair">
@@ -80,15 +95,17 @@
                 <div class="first_box" v-if="playerInfoData && playerInfoData.device_list.length">
                     <div class="title">他的设备</div>
                     <div class="cont_box">
-                        <div :class="{trem_box: true, moveDeviceActive: deviceBoxIndex === index}" v-for="(item, index) in playerInfoData.device_list" :key="index" @click="toSeeDeviceInfo(item)" @mousemove="toSeeDeviceInfoMove(index)" @mouseleave="toSeeDeviceInfoMove(999)">
-                            <img class="product_img" :src="item.img" alt="" :style="{height: imgHeight + 'px'}" ref="devicerefbox">
-                            <div class="name_box">
-                                <div class="line"></div>
-                                <div class="txt">{{item.category}}</div>
-                                <div class="line"></div>
-                            </div>
-                            <div class="name_info_box">
-                                <span>{{item.title}}</span>
+                        <div :class="{trem_box: true}" v-for="(item, index) in playerInfoData.device_list" :key="index" @click="toSeeDeviceInfo(item)" @mousemove="toSeeDeviceInfoMove(index)" @mouseleave="toSeeDeviceInfoMove(999)">
+                            <div :class="{item_boxs: true, moveDeviceActive: deviceBoxIndex === index}">
+                                <img class="product_img" :src="item.img" alt="" :style="{height: imgHeight + 'px'}" ref="devicerefbox">
+                                <div class="name_box">
+                                    <div class="line"></div>
+                                    <div class="txt">{{item.category}}</div>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="name_info_box">
+                                    <span>{{item.title}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,9 +113,11 @@
                 <div class="second_box" v-if="playerInfoData && playerInfoData.player_list.length">
                     <div class="title">他的队友</div>
                     <div class="cont_box">
-                        <div :class="{trem_box: true, movePlayerActive: playerBoxIndex === index}" v-for="(item, index) in playerInfoData.player_list" :key="index" @click="toSeePlayerInfo(item)" @mousemove="toSeePlayerInfoMove(index)" @mouseleave="toSeePlayerInfoMove(999)">
-                            <img class="people_img" :src="item.img" alt="" :style="{height: imgHeight + 'px'}" ref="peoplerefbox">
-                            <div class="name">{{item.name}}</div>
+                        <div :class="{trem_box: true}" v-for="(item, index) in playerInfoData.player_list" :key="index" @click="toSeePlayerInfo(item)" @mousemove="toSeePlayerInfoMove(index)" @mouseleave="toSeePlayerInfoMove(999)">
+                            <div :class="{item_boxs: true, movePlayerActive: playerBoxIndex === index}">
+                                <img class="people_img" :src="item.img" alt="" :style="{height: imgHeights + 'px'}" ref="peoplerefbox">
+                                <div class="name">{{item.name}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,14 +191,9 @@ export default {
         return {
             jbBtnImgActive: require('../assets/images/jt_tobot_active_icon.png'),
             jbBtnImg: require('../assets/images/jt_tobot_icon.png'),
-            setTabelTitleFirst: {
-                title: [],
-                conttxt: []
-            },
-            setTabelTitleSecond: {
-                title: [],
-                conttxt: []
-            },
+            setTabelTitleFirst: [],
+            setTabelTitleSecond: [],
+            setTabelTitleThird: [],
             pageNumData:[],
             playerId: '',
             playerInfoData: '',
@@ -223,24 +237,37 @@ export default {
             ajaxHttp.seePlayerInfoFeath(data).then(res => {
                 this.playerInfoData = res.data
                 res.data.mouse
-                let firstTitleF = []
-                let firstTitleS = []
+                let firstArr = []
                 for (let i in res.data.info.mouse) {
-                    firstTitleF.push(i)
-                    firstTitleS.push(res.data.info.mouse[i])
+                    let obj = {
+                        title: i,
+                        txt: res.data.info.mouse[i]
+                    }
+                    firstArr.push(obj)
                 }
-                this.setTabelTitleFirst.title = firstTitleF
-                this.setTabelTitleFirst.conttxt = firstTitleS
-                let secondTitleF = []
-                let secondTitleS = []
+                this.setTabelTitleFirst = firstArr
+                let secondArr = []
                 for (let i in res.data.info.keyboard) {
-                    secondTitleF.push(i)
-                    secondTitleS.push(res.data.info.keyboard[i])
+                    let obj = {
+                        title: i,
+                        txt: res.data.info.keyboard[i]
+                    }
+                    secondArr.push(obj)
                 }
-                this.setTabelTitleSecond.title = secondTitleF
-                this.setTabelTitleSecond.conttxt = secondTitleS
+                this.setTabelTitleSecond = secondArr
+
+                let thirdArr = []
+                for (let i in res.data.info.video) {
+                    let obj = {
+                        title: i,
+                        txt: res.data.info.video[i]
+                    }
+                    thirdArr.push(obj)
+                }
+                this.setTabelTitleThird = thirdArr
                 this.$nextTick(() => {
                         if (this.$refs.devicerefbox) {
+                            console.log(this.$refs.devicerefbox)
                             this.imgHeight = (this.$refs.devicerefbox[0].offsetWidth) * 3 / 4
                         }
                         if (this.$refs.peoplerefbox) {

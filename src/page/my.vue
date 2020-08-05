@@ -28,7 +28,7 @@
                                     <div class="l_label_box">
                                         <div class="h_txt">手机号</div>
                                         <div class="h_info_txt" v-if="userPhoneShow">{{userInfoTxt.mobile}}</div>
-                                        <input type="number" class="h_info_input" v-else v-model="userInfoEdit.phone" @keydown="changeSecondPhoneInput">
+                                        <input type="text" class="h_info_input" v-else v-model="userInfoEdit.phone" @keydown="changeSecondPhoneInput">
                                     </div>
                                     <div class="btn_a_box">
                                         <a class="r_txt" @click="editUserInfo('phone')">编辑</a>

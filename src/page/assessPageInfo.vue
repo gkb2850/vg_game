@@ -68,7 +68,7 @@
                         </div>
                     </Col>
                     <Col span="10">
-                        <div class="right-img">
+                        <div class="right-img" style="height: 100%;">
                             <img src="https://gamecfg-test.oss-cn-shanghai.aliyuncs.com/Gears/Monitor/BENQ%20ZOWIE%20XL2540.png" alt />
                         </div>
                     </Col>

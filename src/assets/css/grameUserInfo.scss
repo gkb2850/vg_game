@@ -14,7 +14,7 @@
                 border: 1px solid #4D3662;
                 .img_user {
                     width: 100%;
-                    height: 278px;
+                    height: 327px;
                     display: block;
                 }
                 .cont_box_people {
@@ -102,38 +102,103 @@
                         font-weight:600;
                         color:rgba(255,255,255,1);
                     }
-                    .table_title {
-                        padding-left: 21px;
-                        box-sizing: border-box;
-                        height: 30px;
+                    .cont_st_box {
                         display: flex;
-                        margin-top: 9px;
-                        .txt {
+                        flex-wrap: wrap;
+                        padding: 12px 21px 17px;
+                        box-sizing: border-box;
+                        .item_box {
                             width: 12.5%;
-                            font-size:14px;
-                            font-family:PingFangSC-Semibold,PingFang SC;
-                            font-weight:600;
-                            color:rgba(77,54,98,1);
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
+                            .t_txt {
+                                width: 100%;
+                                font-size:14px;
+                                font-family:PingFangSC-Semibold,PingFang SC;
+                                font-weight:600;
+                                color:rgba(77,54,98,1);
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                margin-bottom: 10px;
+                            }
+                            .b_txt {
+                                width: 100%;
+                                font-size:14px;
+                                font-family:PingFangSC-Regular,PingFang SC;
+                                font-weight:400;
+                                color:rgba(77,54,98,1);
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                margin-bottom: 10px;
+                            }
                         }
                     }
-                    .table_cont_txt {
-                        height: 30px;
-                        display: flex;
-                        margin-bottom: 22px;
+                }
+                .table_info_sts {
+                    .title {
                         padding-left: 21px;
+                        line-height: 68px;
+                        height: 68px;
+                        background: #4D3662;
+                        font-size:16px;
+                        font-family:PingFangSC-Semibold,PingFang SC;
+                        font-weight:600;
+                        color:rgba(255,255,255,1);
+                    }
+                    .cont_box_sts {
+                        padding: 0 18px 24px;
                         box-sizing: border-box;
-                        .txt {
-                            width: 12.5%;
-                            font-size:14px;
-                            font-family:PingFangSC-Regular,PingFang SC;
-                            font-weight:400;
-                            color:rgba(77,54,98,1);
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
+                        background: #fff;
+                        .small_title {
+                            display: flex;
+                            height: 22px;
+                            // padding: 20px 0 13px;
+                            box-sizing: content-box;
+                            .l_txt {
+                                height:22px;
+                                font-size:16px;
+                                font-family:PingFangSC-Semibold,PingFang SC;
+                                font-weight:600;
+                                color:#4D3662;
+                                line-height:22px;
+                            }
+                            .r_txt {
+                                height:22px;
+                                font-size:16px;
+                                font-family:PingFangSC-Semibold,PingFang SC;
+                                font-weight:600;
+                                color:#894FA0;
+                                line-height:22px;
+                            }
+                        }
+                        .sts_tabel_box {
+                            display: flex;
+                            flex-wrap: wrap;
+                            background: #EDEBEF;
+                            border: 1px solid #C9C2D0;
+                            box-sizing: border-box;
+                            padding: 11px 12px 0;
+                            .item_txt {
+                                width: 25%;
+                                .t_txt {
+                                    height:20px;
+                                    font-size:14px;
+                                    font-family:PingFangSC-Semibold,PingFang SC;
+                                    font-weight:600;
+                                    color:rgba(77,54,98,1);
+                                    line-height:20px;
+                                    margin-bottom: 12px;
+                                }
+                                .b_txt {
+                                    height:20px;
+                                    font-size:14px;
+                                    font-family:PingFangSC-Regular,PingFang SC;
+                                    font-weight:400;
+                                    color:rgba(77,54,98,1);
+                                    line-height:20px;
+                                    margin-bottom: 14px;
+                                }
+                            }
                         }
                     }
                 }
@@ -209,11 +274,15 @@
                 }
                 .cont_box {
                     display: flex;
+                    flex-wrap: wrap;
                     .trem_box {
-                        flex: 1;
-                        margin-right: 30px;
-                        border:1px solid rgba(212,212,212,1);
+                        width: 20%;
                         cursor: pointer;
+                        .item_boxs {
+                            margin-right: 30px;
+                            border:1px solid rgba(212,212,212,1);
+                            box-sizing: border-box;
+                        }
                         .product_img {
                             height: 204px;
                             display: block;
@@ -267,6 +336,9 @@
                     .trem_box:last-child {
                         margin-right: 0;
                     }
+                    .trem_box:nth-child(4+4n) {
+                        margin-top: 20px;
+                    }
                 }
             }
             .second_box {
@@ -282,11 +354,15 @@
                 }
                 .cont_box {
                     display: flex;
+                    flex-wrap: wrap;
                     .trem_box {
-                        flex: 1;
-                        margin-right: 33px;
-                        border:1px solid rgba(77,47,93,1);
+                        width: 25%;
                         cursor: pointer;
+                        .item_boxs {
+                            margin-right: 33px;
+                            border:1px solid rgba(77,47,93,1);
+                            box-sizing: border-box;
+                        }
                         .people_img {
                             height: 298px;
                             width: 100%;
@@ -313,6 +389,9 @@
                     }
                     .trem_box:last-child {
                         margin-right: 0;
+                    }
+                    .trem_box:nth-child(4 + 4n) {
+                        margin-top: 20px;
                     }
                 }
             }
