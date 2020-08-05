@@ -20,7 +20,7 @@
                     <div class="bot_box">
                         <div class="txt">{{item.add_time}}</div>
                         <div class="line"></div>
-                        <div class="txt">{{item.comment > 0 ? item.comment + '条评论' : '暂无评论'}}</div>
+                        <div class="txts">{{item.comment > 0 ? item.comment + '条评论' : '暂无评论'}}</div>
                     </div>
                 </div>
             </div>

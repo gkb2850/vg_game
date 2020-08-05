@@ -88,13 +88,13 @@
                     </div>
                     <div class="r_box">
                         <div class="trem_box">
-                            <div class="title_txt">CS:GO 数据</div>
+                            <router-link to="/deviceOrSet" class="title_txt">CS:GO 数据</router-link>
                             <a href="javascript:;" :class="{txt: true, active: lookIndexItem === 0}" @click="toSeeSJInfo" @mousemove="lookItemZNInfo(0)" @mouseleave="lookItemZNInfo(-1)">CS:GO 数据列表</a>
-                            <div class="title_txt">CS:GO 选手</div>
+                            <router-link to="/gamePlayer" class="title_txt">CS:GO 选手</router-link>
                             <a href="javascript:;" :class="{txt: true, active: lookIndexItem === 1}" v-if="gameGuideData.player_list && gameGuideData.player_list.length" @click="toSeePeopleInfo(gameGuideData.player_list[0])" @mousemove="lookItemZNInfo(1)" @mouseleave="lookItemZNInfo(-1)">{{gameGuideData.player_list[0].name}}</a>
                         </div>
                         <div class="trem_box" v-if="gamedevice_listF.length">
-                            <div class="title_txt">CS:GO 设备</div>
+                            <router-link to="/assessPage" class="title_txt">CS:GO 设备</router-link>
                             <a href="javascript:;" @click="toSeeDeciveInfo(item)" @mousemove="lookItemZNInfo(index + 2)" @mouseleave="lookItemZNInfo(-1)" :class="{txt: true, active: lookIndexItem === index + 2}" v-for="(item, index) in gamedevice_listF" :key="index">{{item.title}}</a>
                         </div>
                         <div class="trem_box" v-if="gamedevice_listS.length">
@@ -302,7 +302,7 @@ export default {
         },
         toSeeDeciveInfo (item) {
             this.$router.push({
-                path: '/assessPageInfo',
+                path: '/productPageInfo',
                 query: {
                     id: item.device_id
                 }

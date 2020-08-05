@@ -3,8 +3,8 @@
         <deviceOrSet title="反馈"></deviceOrSet>
         <div class="main_cont_box">
             <div class="user_info_box">
-                <img src="../assets/images/title_img.jpg" alt="">
-                <div class="name">滴滴滴</div>
+                <img :src="userInfoTxt.avatar" alt="">
+                <div class="name">{{userInfoTxt.title}}</div>
             </div>
             <textarea class="textarea_txt" placeholder="友善、描述精准的问题，更快得到解答" v-model="submitTxt"></textarea>
             <input class="input_txt" type="text" placeholder="请输入你的账号、昵称*" v-model="name">
@@ -29,7 +29,8 @@ export default {
     data () {
         return {
             submitTxt: '',
-            name: ''
+            name: '',
+            userInfoTxt: ''
         }
     },
     created() {
@@ -37,6 +38,9 @@ export default {
     },
     components: {
         deviceOrSet
+    },
+    mounted () {
+        this.getUserInfoToHttp()
     },
     methods: {
         ...mapMutations([
@@ -63,7 +67,24 @@ export default {
                 this.$Spin.hide();
                 this.$Message.error(err.message)
             })
-        }
+        },
+        getUserInfoToHttp () {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (!userInfo) {
+                this.$Message.error('用户状态失效，请重新登录')
+                this.$router.push('/index')
+                return
+            }
+            let data = {
+                token: userInfo.token,
+                user_id: userInfo.user_id
+            }
+            ajaxHttp.getUserInfoFeath(data).then(res => {
+                this.userInfoTxt = res.data.user_info
+            }).catch(err => {
+                this.$Message.error(err.message)
+            })
+        },
     }
 }
 </script>

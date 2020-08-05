@@ -44,21 +44,43 @@
                     min-height: 50px;
                     word-wrap: break-word;
                 }
-
-                .time_txt {
+                .txt_box {
                     border-top: 1px solid #C9C2D0;
                     height: 40px;
-                    line-height: 40px;
+                    display: flex;
+                    align-items: center;
                     padding: 0 12px;
                     box-sizing: border-box;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    width: 100%;
-                    font-size: 13px;
-                    font-family: PingFangSC-Regular, PingFang SC;
-                    font-weight: 400;
-                    color: rgba(77, 54, 98, 1);
+                    .time_txt {
+                        height: 40px;
+                        line-height: 40px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        width: 60%;
+                        font-size: 13px;
+                        font-family: PingFangSC-Regular, PingFang SC;
+                        font-weight: 400;
+                        color: rgba(77, 54, 98, 1);
+                    }
+                    .line_txt {
+                        height: 14px;
+                        width: 1px;
+                        background: #8C6F9A;
+                        margin: 0 5px;
+                    }
+                    .message_txt {
+                        height: 40px;
+                        line-height: 40px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        width: 40%;
+                        font-size: 13px;
+                        font-family: PingFangSC-Regular, PingFang SC;
+                        font-weight: 400;
+                        color: rgba(77, 54, 98, 1);
+                    }
                 }
             }
 

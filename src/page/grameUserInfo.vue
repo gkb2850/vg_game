@@ -38,7 +38,7 @@
                 </div>
                 <div class="game_sz_info">
                     <div class="table_info_st" v-if="setTabelTitleFirst.length">
-                        <div class="title">鼠标设置– ZOWIE FK1 + DIVINA EDITION</div>
+                        <div class="title">鼠标设置– {{playerInfoData.info.use_mouse}}</div>
                         <div class="cont_st_box">
                             <div class="item_box" v-for="(item, index) in setTabelTitleFirst" :key="index">
                                 <div class="t_txt">{{item.title}}</div>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="table_info_st" v-if="setTabelTitleSecond.length">
-                        <div class="title">显示器设置– BENQ XL2540</div>
+                        <div class="title">显示器设置– {{playerInfoData.info.use_monitor}}</div>
                         <div class="cont_st_box">
                             <div class="item_box" v-for="(item, index) in setTabelTitleSecond" :key="index">
                                 <div class="t_txt">{{item.title}}</div>

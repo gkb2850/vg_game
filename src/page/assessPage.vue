@@ -6,7 +6,11 @@
                 <div :class="{trem_box: true, moveProActive: deviceBoxIndex === index}" v-for="(item, index) in deviceListData" :key="index" @click="toSeeAssessInfo(item)" @mousemove="toSeeAssessInfoMove(index)" @mouseleave="toSeeAssessInfoMove(999)">
                     <div class="device-img" :style="{height: imgHeight + 'px'}" ref="devicerefbox"><img :src="item.img" alt=""></div>
                     <div class="pc_name">{{item.title}}</div>
-                    <div class="time_txt">{{item.add_time}}</div>
+                    <div class="txt_box">
+                        <div class="time_txt">{{item.add_time}}</div>
+                        <div class="line_txt"></div>
+                        <div class="message_txt">{{item.comment !== 0 ? item.comment + '条评论' : '暂无评论'}}</div>
+                    </div>
                 </div>
             </div>
         </div>

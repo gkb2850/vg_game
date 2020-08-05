@@ -89,6 +89,7 @@
                     padding: 0 14px;
                     box-sizing: border-box;
                     .txt {
+                        width: 60%;
                         height: 18px;
                         line-height: 18px;
                         font-size:13px;
@@ -104,6 +105,18 @@
                         width: 1px;
                         background: #8C6F9A;
                         margin: 0 5px;
+                    }
+                    .txts {
+                        width: 40%;
+                        height: 18px;
+                        line-height: 18px;
+                        font-size:13px;
+                        font-family:PingFangSC-Regular,PingFang SC;
+                        font-weight:400;
+                        color:#8C6F9A;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                     }
                 }
             }
