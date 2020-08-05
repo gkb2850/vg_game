@@ -62,7 +62,7 @@
                     <div class="phone_box">
                         <div class="h_txt">中国 +86</div>
                         <div class="line"></div>
-                        <input type="number" placeholder="手机号" class="input_txt" v-model="registerData.phone" @change="registerPhoneInput" @keydown="handleRegisterPhoneInput">
+                        <input type="text" placeholder="手机号" class="input_txt" v-model="registerData.phone" @change="registerPhoneInput" @keydown="handleRegisterPhoneInput">
                     </div>
                     <div class="item_box">
                         <input type="text" placeholder="请输入6位短信验证码" class="input_txt" v-model="registerData.yzCode">
@@ -101,7 +101,7 @@
                 </div>
                 <div class="c_box" v-if="loginType === 1">
                     <div class="c_trem_box">
-                        <input type="number" placeholder="手机号" class="input_txt" v-model="loginData.phone" @blur="loginPhoneChange" @keydown="handleLoginPhoneInput">
+                        <input type="text" placeholder="手机号" class="input_txt" v-model="loginData.phone" @blur="loginPhoneChange" @keydown="handleLoginPhoneInput">
                     </div>
                     <div class="c_trem_box">
                         <input type="password" placeholder="密码" class="input_txt" v-model="loginData.pass">
@@ -114,7 +114,7 @@
                     <div class="phone_box">
                         <div class="h_txt">中国 +86</div>
                         <div class="line"></div>
-                        <input type="number" placeholder="手机号" class="input_txt" v-model="loginData.phone" @blur="loginPhoneChange" @keydown="handleLoginPhoneInput">
+                        <input type="text" placeholder="手机号" class="input_txt" v-model="loginData.phone" @blur="loginPhoneChange" @keydown="handleLoginPhoneInput">
                     </div>
                     <div class="item_box">
                         <input type="text" placeholder="请输入6位短信验证码" class="input_txt" v-model="loginData.yzCode">
@@ -122,14 +122,20 @@
                     </div>
                     <div class="other_item">
                         <div class="txt">社交账号登录</div>
-                        <div class="wx_box">
+                        <a href="javascript:;" class="wx_box" @click="setWxerwma">
                             <img src="../assets/images/wx_icon.png" alt="">
                             <div>微信</div>
-                        </div>
+                        </a>
                         <a href="javascript:;" @click="registerBoxShow('show')" class="txt">注册账号</a>
                     </div>
                 </div>
                 <a href="javascript:;" class="submit_btn" @click="toLogin">登陆</a>
+                <div class="codeBox" v-if="codeShowNow">
+                    <a href="javascript:;" class="img_btn" @click="toCodeNo">
+                        <img src="../assets/images/del_icon.png" alt="">
+                    </a>
+                    <div id="wxCodeBox"></div>
+                </div>
             </div>
         </div>
         <div class="message_mask_loginout_box" @mousewheel.prevent v-if="loginOutBoxShow">
@@ -202,7 +208,8 @@ export default {
             userName: '',
             loginOutBoxShow: false,
             specificMessageShow: false,
-            loginType: 0
+            loginType: 0,
+            codeShowNow: false
         }
     },
     created () {
@@ -565,6 +572,27 @@ export default {
         },
         tohideLoginOutBox () {
             this.loginOutBoxShow = false
+        },
+        setWxerwma () {
+          this.codeShowNow = true
+          const s = document.createElement('script')
+          s.type = 'text/javascript'
+          s.src = 'https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js'
+          const wxElement = document.body.appendChild(s)
+          wxElement.onload = function () {
+            var obj = new WxLogin({
+              id: 'wxCodeBox', // 需要显示的容器id
+              appid: 'wx7f090bd80e32c221', // 公众号appid wx*******
+              scope: 'snsapi_login', // 网页默认即可
+              redirect_uri: encodeURIComponent('https://gamecfg.com/#/wxLoginPage'), // 授权成功后回调的url
+              state: Math.ceil(Math.random() * 1000), // 可设置为简单的随机数加session用来校验
+              style: 'black', // 提供"black"、"white"可选。二维码的样式
+              href: '' // 外部css文件url，需要https
+            })
+          }
+        },
+        toCodeNo () {
+            this.codeShowNow = false
         },
         ...mapMutations([
             'changeSearchData',
@@ -1203,6 +1231,7 @@ export default {
                             font-weight:500;
                             color:rgba(77,54,98,1);
                             line-height:25px;
+                            margin-left: auto;
                         }
                         .wx_box {
                             margin-left: 28px;
@@ -1236,6 +1265,25 @@ export default {
                     font-weight:500;
                     color:rgba(255,255,255,1);
                     line-height: 50px;
+                }
+                .codeBox {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 66;
+                    background: #FFF;
+                    .img_btn {
+                        display: flex;
+                        justify-content: flex-end;
+                        padding: 3px 3px 10px;
+                        img {
+                            height: 24px;
+                            width: 24px;
+                            padding: 10px;
+                            box-sizing: content-box;
+                        }
+                    }
                 }
             }
         }

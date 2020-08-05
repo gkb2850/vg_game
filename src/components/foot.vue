@@ -3,9 +3,10 @@
         <div class="foot_box">
             <div class="item_box" v-for="(item, index) in footNavData" :key="index">
                 <div class="foot_nav" v-for="(items, indexs) in item" :key="indexs">
-                   <router-link class="nav_link" :to="items.path">
+                   <router-link class="nav_link" :to="items.path" v-if="items.path">
                         <span>{{items.txt}}</span>
                    </router-link>
+                    <span v-else class="other_txt">{{items.txt}}</span>
                 </div>
             </div>
         </div>
@@ -35,8 +36,7 @@ export default {
             footNavData: [
                 [
                     {
-                        txt:'首页',
-                        path: '/index'
+                        txt:'首页'
                     },
                     {
                         txt:'设备评测',
@@ -49,8 +49,7 @@ export default {
                 ],
                 [
                     {
-                        txt:'设备与设置',
-                        path: '/deviceOrSet'
+                        txt:'设备与设置'
                     },
                     {
                         txt:'CS:GO',
@@ -59,8 +58,7 @@ export default {
                 ],
                 [
                     {
-                        txt:'选手',
-                        path: '/gamePlayer'
+                        txt:'选手'
                     },
                     {
                         txt:'CS:GO',
@@ -69,8 +67,7 @@ export default {
                 ],
                 [
                     {
-                        txt:'最佳装备',
-                        path: '/index'
+                        txt:'最佳装备'
                     },
                     {
                         txt:'最佳鼠标',
@@ -95,16 +92,15 @@ export default {
                 ],
                 [
                     {
-                        txt:'法律信息',
-                        path: '/privacyPage'
+                        txt:'法律信息'
                     },
                     {
                         txt:'隐私政策',
-                        path: '/lawMessagePage'
+                        path: '/privacyPage'
                     },
                     {
                         txt:'法律声明',
-                        path: '/privacyPage'
+                        path: '/lawMessagePage'
                     },
                     {
                         txt:'联系我们',
@@ -145,6 +141,16 @@ export default {
                             text-align: left;
                         }
                     }
+                    .other_txt {
+                        line-height: 17px;
+                        font-size:12px;
+                        font-family:PingFangSC-Medium,PingFang SC;
+                        font-weight:500;
+                        color:rgba(255,255,255,1);
+                        width: 100%;
+                        display: block;
+                        text-align: left;
+                    }
                 }
                 .foot_nav:first-child {
                     margin-bottom: 20px;
@@ -180,14 +186,14 @@ export default {
                 align-items: center;
                 justify-content: center;
                 img {
-                    height: 25px;
-                    width: 28px;
+                    height: 12px;
+                    width: 12px;
                     margin-right: 5px;
                 }
                 .txt {
                     height: 20px;
                     line-height: 20px;
-                    font-size:14px;
+                    font-size:12px;
                     font-family:PingFangSC-Medium,PingFang SC;
                     font-weight:500;
                     color:rgba(255,255,255,1);
