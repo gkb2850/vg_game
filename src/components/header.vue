@@ -455,24 +455,13 @@ export default {
         toSeeDevicInfo (item, index) {
             this.navIndexShow = false
             this.secondLabelIndex = index
-            if (this.$route.path !== '/productPageInfo') {
+                this.changeDeviceId(item.id)
                 this.$router.push({
                     path: '/productPageInfo',
                     query: {
                         id: item.id
                     }
                 })
-            } else {
-                this.$router.push('/index')
-                setTimeout(() => {
-                    this.$router.push({
-                        path: '/productPageInfo',
-                        query: {
-                            id: item.id
-                        }
-                    })
-                }, 50)
-            }
             
         },
         loginPhoneChange () {
@@ -599,7 +588,8 @@ export default {
             'changeSearchPage',
             'changeSearchTxt',
             'changeUserInfo',
-            'changeisLogin'
+            'changeisLogin',
+            'changeDeviceId'
         ])
     },
     computed: {

@@ -2,8 +2,8 @@
     <div class="assessPageInfo_container">
         <deviceOrSet title="设备评测"></deviceOrSet>
         <div class="main_box">
-            <!-- <div class="cont_product_box" v-html="assessmentData && assessmentData.assessment"></div> -->
-            <div class="cont_product_box">
+            <div class="cont_product_box" v-html="assessmentData && assessmentData.assessment"></div>
+            <!-- <div class="cont_product_box">
                 <Row :gutter="35" type="flex">
                     <div class="intro-box">
                         <Col span="16">
@@ -105,7 +105,7 @@
                         <p>我个人等不及无线的DeathAdder Ultimate。如果他们设法减轻重量，并提供与此处提供的质量相同的质量，那将是我本年度个人最喜欢的鼠标的有力竞争者，即使一月份还没有结束。</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="comment_message_box">
                 <div v-if="messageTotal > 0">
                     <div class="title">关于CS:GO设备与设置的评论 ({{messageTotal}}条)</div>
@@ -209,12 +209,24 @@ export default {
             let data = {
                 device_id: this.deviceId
             };
+            this.$Spin.show();
             ajaxHttp
                 .proDeviceInfoFeath(data)
                 .then(res => {
+                    this.$Spin.hide();
+                    if (!res.data.info.assessment) {
+                        this.$router.push({
+                            path: '/otherMessagePage',
+                            query: {
+                                type: 'pz'
+                            }
+                        })
+                        return
+                    }
                     this.assessmentData = res.data.info;
                 })
                 .catch(err => {
+                    this.$Spin.hide();
                     this.$Message.error(err.message);
                 });
         },

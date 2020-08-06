@@ -28,7 +28,7 @@
                             <span>{{index + 1}}.{{item.title}}</span>
                         </div>
                     </div>
-                </div>
+                </div>jingyin
             </div>
             <div v-html="deviceInfoData.content"></div>
         </div>
@@ -38,12 +38,11 @@
 <script>
 import deviceOrSet from "@/components/topImgItem.vue";
 import ajaxHttp from "@/api/index";
-import {mapMutations} from 'vuex'
+import {mapMutations, mapGetters} from 'vuex'
 
 export default {
     data() {
         return {
-            baseId: "",
             deviceInfoData: ""
         };
     },
@@ -54,27 +53,31 @@ export default {
         deviceOrSet
     },
     mounted() {
-        if (this.$route.query.id) {
-            this.baseId = this.$route.query.id;
-            this.getBasDevInfo();
-        } else {
-            this.$router.push({
-                path: "/index"
-            });
-        }
+        this.getBasDevInfo();
     },
     methods: {
         getBasDevInfo() {
             let data = {
                 base_id: this.baseId
             };
-
+            this.$Spin.show();
             ajaxHttp
                 .bastDeviceInfoFeath(data)
                 .then(res => {
+                    this.$Spin.hide();
+                    if (!res.data.content) {
+                        this.$router.push({
+                            path: '/otherMessagePage',
+                            query: {
+                                type: 'zj'
+                            }
+                        })
+                        return
+                    }
                     this.deviceInfoData = res.data;
                 })
                 .catch(err => {
+                    this.$Spin.hide();
                     this.$Message.error(err.message);
                 });
         },
@@ -89,7 +92,17 @@ export default {
         ...mapMutations([
             'checkRoutePath'
         ])
-    }
+    },
+    computed: {
+        ...mapGetters({
+            'baseId': 'bestDeviceId'
+        })
+    },
+    watch: {
+        baseId (val) {
+            this.getBasDevInfo()
+        }
+    },
 };
 </script>
 

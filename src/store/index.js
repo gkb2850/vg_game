@@ -11,7 +11,8 @@ export default new Vuex.Store({
         searchTxt: '',
         userInfo: '',
         isLogin: false,
-        replyNum: 0
+        replyNum: 0,
+        bestDeviceId: ''
     },
     mutations: {
         checkRoutePath (state, path) {
@@ -46,6 +47,9 @@ export default new Vuex.Store({
         },
         changeReplyNum (state, str) {
             state.replyNum = str
+        },
+        changeDeviceId (state, str) {
+            state.bestDeviceId = str
         }
     },
     getters: {
@@ -54,6 +58,9 @@ export default new Vuex.Store({
         },
         searchPageNum: (state) => {
             return state.searchPageNum
+        },
+        bestDeviceId: (state) => {
+            return state.bestDeviceId
         }
     }
 })

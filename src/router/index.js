@@ -15,6 +15,7 @@ import searchPage from '@/page/searchPage'
 import privacyPage from '@/page/privacyPage'
 import lawMessagePage from '@/page/lawMessagePage'
 import wxLoginPage from '@/page/wxLoginPage'
+import otherMessagePage from '@/page/otherMessagePage'
 
 Vue.use(Router)
 
@@ -104,6 +105,11 @@ const router = new Router({
       path: '/wxLoginPage',
       name: 'wxLoginPage',
       component: wxLoginPage
+    },
+    {
+      path: '/otherMessagePage',
+      name: 'otherMessagePage',
+      component: otherMessagePage
     }
   ],
   scrollBehavior (to, from, savedPosition) {
