@@ -573,7 +573,7 @@ export default {
               id: 'wxCodeBox', // 需要显示的容器id
               appid: 'wx7f090bd80e32c221', // 公众号appid wx*******
               scope: 'snsapi_login', // 网页默认即可
-              redirect_uri: encodeURIComponent('https://gamecfg.com/#/wxLoginPage'), // 授权成功后回调的url
+              redirect_uri: 'https://gamecfg.com/game_console/public/index.php/api/user/oauth', // 授权成功后回调的url
               state: Math.ceil(Math.random() * 1000), // 可设置为简单的随机数加session用来校验
               style: 'black', // 提供"black"、"white"可选。二维码的样式
               href: '' // 外部css文件url，需要https
