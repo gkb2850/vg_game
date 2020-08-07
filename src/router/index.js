@@ -1,21 +1,24 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/page/index'
-import deviceOrSet from '@/page/deviceOrSet'
-import gamePlayer from '@/page/gamePlayer'
-import grameUserInfo from '@/page/grameUserInfo'
-import assessPage from '@/page/assessPage'
-import assessPageInfo from '@/page/assessPageInfo'
-import answerPage from '@/page/answerPage'
-import my from '@/page/my'
-import feedback from '@/page/feedback'
-import productPageInfo from '@/page/productPageInfo'
-import answerInfoPage from '@/page/answerInfoPage'
-import searchPage from '@/page/searchPage'
-import privacyPage from '@/page/privacyPage'
-import lawMessagePage from '@/page/lawMessagePage'
-import wxLoginPage from '@/page/wxLoginPage'
-import otherMessagePage from '@/page/otherMessagePage'
+
+
+const index = resolve => require(['@/page/index'], resolve);//首页
+const deviceOrSet = resolve => require(['@/page/deviceOrSet'], resolve);//数据页
+const gamePlayer = resolve => require(['@/page/gamePlayer'], resolve);//玩家列表页
+const grameUserInfo = resolve => require(['@/page/grameUserInfo'], resolve);//玩家详情页
+const assessPage = resolve => require(['@/page/assessPage'], resolve);//设备列表页
+const assessPageInfo = resolve => require(['@/page/assessPageInfo'], resolve);//设备详情页
+const answerPage = resolve => require(['@/page/answerPage'], resolve);//问答页
+const my = resolve => require(['@/page/my'], resolve);//我的
+const feedback = resolve => require(['@/page/feedback'], resolve);//反馈页
+const productPageInfo = resolve => require(['@/page/productPageInfo'], resolve);//最佳设备详情页
+const answerInfoPage = resolve => require(['@/page/answerInfoPage'], resolve);//问答详情页
+const searchPage = resolve => require(['@/page/searchPage'], resolve);//搜索页
+const privacyPage = resolve => require(['@/page/privacyPage'], resolve);//隐私页
+const lawMessagePage = resolve => require(['@/page/lawMessagePage'], resolve);//法律声明
+const wxLoginPage = resolve => require(['@/page/wxLoginPage'], resolve);//二维码接收页
+const otherMessagePage = resolve => require(['@/page/otherMessagePage'], resolve);//暂无详情页
+
 
 Vue.use(Router)
 

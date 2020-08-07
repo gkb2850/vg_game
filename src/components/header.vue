@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <a href="javascript:;" class="submit_btn" @click="toLogin">登陆</a>
-                <div class="codeBox" :style="{visibility: (codeShowNow ? 'none' : '')}">
+                <div class="codeBox" v-if="codeShowNow">
                     <a href="javascript:;" class="img_btn" @click="toCodeNo">
                         <img src="../assets/images/del_icon.png" alt="">
                     </a>
@@ -226,7 +226,6 @@ export default {
     },
     mounted () {
         this.getDevListData()
-        this.setWxerwma()
     },
     methods: {
         getDevListData () {
