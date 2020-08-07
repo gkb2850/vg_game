@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <a href="javascript:;" class="submit_btn" @click="toLogin">登陆</a>
-                <div class="codeBox" v-if="codeShowNow">
+                <div class="codeBox" :style="{visibility: (codeShowNow ? 'none' : '')}">
                     <a href="javascript:;" class="img_btn" @click="toCodeNo">
                         <img src="../assets/images/del_icon.png" alt="">
                     </a>
@@ -153,6 +153,7 @@
 <script>
 import ajaxHttp from '@/api/index.js'
 import searchPage from '../page/searchPage.vue'
+import util from '@/util/util'
 import {mapMutations, mapState} from 'vuex'
 var content = searchPage
 export default {
@@ -225,6 +226,7 @@ export default {
     },
     mounted () {
         this.getDevListData()
+        this.setWxerwma()
     },
     methods: {
         getDevListData () {
@@ -564,11 +566,12 @@ export default {
         },
         setWxerwma () {
           this.codeShowNow = true
-          const s = document.createElement('script')
-          s.type = 'text/javascript'
-          s.src = 'https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js'
-          const wxElement = document.body.appendChild(s)
-          wxElement.onload = function () {
+          util.wxCodeFeach()
+        //   const s = document.createElement('script')
+        //   s.type = 'text/javascript'
+        //   s.src = 'https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js'
+        //   const wxElement = document.body.appendChild(s)
+        //   wxElement.onload = function () {
             var obj = new WxLogin({
               id: 'wxCodeBox', // 需要显示的容器id
               appid: 'wx7f090bd80e32c221', // 公众号appid wx*******
@@ -578,7 +581,7 @@ export default {
               style: 'black', // 提供"black"、"white"可选。二维码的样式
               href: '' // 外部css文件url，需要https
             })
-          }
+        //   }
         },
         toCodeNo () {
             this.codeShowNow = false
